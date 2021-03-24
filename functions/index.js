@@ -45,7 +45,6 @@ app.post("/createScream", (req, res) => {
       res.json({ message: `document ${doc.id} create successfully` });
     })
     .catch((err) => {
-      res.status(500).json({ error: `${err} is error` });
       console.error(err);
     });
 });
