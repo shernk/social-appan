@@ -49,16 +49,4 @@ app.post("/createScream", (req, res) => {
     });
 });
 
-// delete doc
-app.delete("/deleteScream", (req, res) => {
-  admin
-    .firestore()
-    .collection("Screams")
-    .delete()
-    .then(() => {
-      res.json({ message: `document deleted successfully` });
-    })
-    .catch((err) => console.error(err));
-});
-
 exports.api = functions.https.onRequest(app);
