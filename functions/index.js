@@ -1,15 +1,20 @@
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+
 const express = require("express");
 const app = express();
 
+const admin = require("firebase-admin");
 admin.initializeApp();
+
+const firebaseConfig = require("../config");
+const firebase = require("firebase");
+firebase.initializeApp(firebaseConfig);
 
 app.get("/screams", (req, res) => {
   admin
     .firestore()
     .collection("Screams")
-    .orderBy('createdAt', 'desc')
+    .orderBy("createdAt", "desc")
     .get()
     .then((data) => {
       let screams = [];
@@ -46,6 +51,31 @@ app.post("/createScream", (req, res) => {
     })
     .catch((err) => {
       console.error(err);
+    });
+});
+
+//signup route
+app.post("/signup", (res, req) => {
+  const newUser = {
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword,
+    handle: req.body.handle,
+  };
+
+  //TODO: validate data
+
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(newUser.email, newUSer.password)
+    .then((data) => {
+      return res
+        .status(201)
+        .json({ message: `user ${data.user.uid} signed up successfully` });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ error: err.code });
     });
 });
 
