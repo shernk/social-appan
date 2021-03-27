@@ -11,8 +11,10 @@ exports.signUp = (res, req) => {
     handle: req.body.handle,
   };
 
-  let token, userId;
-  db.doc(`/User/${newUser.handle}`)
+  const token, userId;
+  const dbDoc = db.doc(`/User/${newUser.handle}`);
+
+  dbDoc
     .get()
     .then((doc) => {
       if (doc.exists) {
@@ -34,7 +36,7 @@ exports.signUp = (res, req) => {
         handle: user.handle,
         createAt: new Date().toISOString(),
       };
-      return db.doc(`/Users/${newUser.handle}`).set(userCredential);
+      return dbDoc.set(userCredential);
     })
     .then(() => {
       res.status(201).json({ token });
