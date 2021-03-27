@@ -8,4 +8,12 @@ let schema = {
       commentCount: 2,
     },
   ],
+  users: [
+    {
+      user: "user",
+      passWord: "pass",
+      confirmPassword: "pass",
+      handler: 'admin',
+    },
+  ],
 };

@@ -5,7 +5,13 @@ const app = express();
 
 const { getAllScreams, postOneScream } = require("./handles/screams/screamsControllers");
 
+const {signUp} = require('./handles/users/userControllers')
+
+// Scream routes
 app.get("/screams", getAllScreams);
 app.post('/createScream', postOneScream);
+
+// Users routes
+app.post('/signUp', signUp);
 
 exports.api = functions.https.onRequest(app);
