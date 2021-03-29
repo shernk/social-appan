@@ -10,10 +10,10 @@ let schema = {
   ],
   users: [
     {
-      user: "user",
+      email: "user@gmail.com",
       passWord: "pass",
       confirmPassword: "pass",
-      handler: 'admin',
+      handler: "admin",
     },
   ],
 };

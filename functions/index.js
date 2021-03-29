@@ -7,7 +7,7 @@ const { getAllScreams, postOneScream } = require("./handles/screams/screamsContr
 
 const {signUp} = require('./handles/users/userControllers')
 
-// Scream routes
+// Screams routes
 app.get("/screams", getAllScreams);
 app.post('/createScream', postOneScream);
 
