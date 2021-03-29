@@ -8,6 +8,7 @@ const {validateSignUp} = require('./validation')
 exports.signUp = (req, res) => {
   const newUser = {
     email: req.body.email,
+    // make strong password default by firebase
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
     handle: req.body.handle,
@@ -27,7 +28,7 @@ exports.signUp = (req, res) => {
       } else {
         return firebase
           .auth()
-          .createUserWithEmailAndPassword(newUser.email, newUSer.password);
+          .createUserWithEmailAndPassword(newUser.email, newUser.password);
       }
     })
     .then((data) => {
@@ -36,13 +37,10 @@ exports.signUp = (req, res) => {
     })
     .then((idToken) => {
       token = idToken;
-      return token;
-    })
-    .then(() => {
       const userCredential = {
         userId,
-        email: user.email,
-        handle: user.handle,
+        email: newUser.email,
+        handle: newUser.handle,
         createAt: new Date().toISOString(),
       };
 
