@@ -1,5 +1,5 @@
-const isEmpty = (data) => {
-  if (data.trim() === "") return true;
+const isEmpty = (signup) => {
+  if (signup.trim() === "") return true;
   else return false;
 };
 
@@ -9,25 +9,37 @@ const isEmail = (email) => {
   else return false;
 };
 
-exports.validateSignUp = (data) => {
+exports.validateSignUp = (signup) => {
   let errors = {};
 
-  if (isEmpty(data.email)) {
+  if (isEmpty(signup.email)) {
     errors.email = "Email is must not be empty";
-  } else if (!isEmail(data.email)) {
+  } else if (!isEmail(signup.email)) {
     errors.email = "Must be a valid email address";
   }
 
-  if (isEmpty(data.password)) {
+  if (isEmpty(signup.password)) {
     errors.password = "Must be not be Empty";
-  } else if (data.password !== data.confirmPassword) {
+  } else if (signup.password !== signup.confirmPassword) {
     errors.confirmPassword = "Password must be match";
   }
 
-  if (isEmpty(data.handle)) errors.handle = "Must be not be Empty";
+  if (isEmpty(signup.handle)) errors.handle = "Must be not be Empty";
 
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,
   };
 };
+
+exports.validateSignIn = (signin) => {
+  let errors = {};
+
+  if (isEmpty(signin.email)) errors.email = "Must not be empty";
+  if (isEmpty(signin.password)) errors.password = "Must not be empty";
+
+  return {
+    errors,
+    valid: Object.keys(errors).length === 0 ? true : false,
+  };
+}
