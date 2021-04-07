@@ -1,3 +1,5 @@
+const { database } = require("firebase-admin");
+
 const isEmpty = (signup) => {
   if (signup.trim() === "") return true;
   else return false;
@@ -42,4 +44,19 @@ exports.validateSignIn = (signin) => {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,
   };
+}
+
+exports.reduceUserInfo = (userData) => {
+  let userInfo = {};
+
+  if(!isEmpty(userData.bio.trim())) userInfo.bio = userData.bio;
+  if(!isEmpty(userData.website.trim())) {
+    // https://website.com
+    if(userData.website.trim().substring(0, 4) !== 'http') {
+      userInfo.website = `http://${userData.website.trim()}`;
+    } else userInfo.website = userData.website;
+  }
+  if(!isEmpty(userData.location.trim())) userInfo.location = userData.location;
+
+  return userInfo;
 }

@@ -5,7 +5,11 @@ const firebaseConfig = require("../../../config");
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
-const { validateSignUp, validateSignIn } = require("./validation");
+const {
+  validateSignUp,
+  validateSignIn,
+  reduceUserInfo,
+} = require("./validation");
 
 exports.signUp = (req, res) => {
   const newUser = {
@@ -165,4 +169,44 @@ exports.uploadImage = (req, res) => {
   // The raw bytes of the upload will be in req.rawBody.
   // Send it to busboy, and get a callback when it's finished.
   busboy.end(req.rawBody);
+};
+
+exports.getAllUserInfo = (req, res) => {
+  db.collection("Users")
+    .orderBy("createAt", "desc")
+    .get()
+    .then((data) => {
+      let users = [];
+      data.forEach((doc) => {
+        users.push({
+          userId: doc.id,
+          email: doc.data().email,
+          imageUrl: doc.data().imageUrl,
+          bio: doc.data().bio,
+          website: doc.data().website,
+          location: doc.data().location,
+          handle: doc.data().handle,
+          createdAt: doc.data().createdAt,
+        });
+      });
+      return res.json(users);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err.code });
+    });
+};
+
+exports.addUserInfo = (req, res) => {
+  let userInfo = reduceUserInfo(req.body);
+
+  db.doc(`/users/${req.users.handle}`)
+    .update(userInfo)
+    .then(() => {
+      return res.status(200).json({ message: "Info added successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ error: err.code });
+    });
 };
