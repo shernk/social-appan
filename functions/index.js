@@ -13,7 +13,7 @@ const {
   signIn,
   uploadImage,
   getAllUserInfo,
-  addUserInfo,
+  addUserDetails,
 } = require("./handles/users/userControllers");
 
 const fbAuth = require("./util/fbAuth");
@@ -23,11 +23,10 @@ app.get("/screams", getAllScreams);
 app.post('/createScream', fbAuth ,postOneScream);
 
 // Users routes
-app.get('/users/', getAllUserInfo);
-// app.get('/user/', getUserInfo);
+app.get('/users', getAllUserInfo);
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post('/user/image', fbAuth, uploadImage);
-app.post('/user/', fbAuth, addUserInfo);
+app.post('/user/:userId', fbAuth, addUserDetails);
 
 exports.api = functions.https.onRequest(app);

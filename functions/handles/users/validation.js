@@ -46,7 +46,7 @@ exports.validateSignIn = (signin) => {
   };
 }
 
-exports.reduceUserInfo = (userData) => {
+exports.reduceUserDetails = (userData) => {
   let userInfo = {};
 
   if(!isEmpty(userData.bio.trim())) userInfo.bio = userData.bio;

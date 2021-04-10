@@ -8,7 +8,7 @@ firebase.initializeApp(firebaseConfig);
 const {
   validateSignUp,
   validateSignIn,
-  reduceUserInfo,
+  reduceUserDetails,
 } = require("./validation");
 
 exports.signUp = (req, res) => {
@@ -18,6 +18,7 @@ exports.signUp = (req, res) => {
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
     handle: req.body.handle,
+    createAt: new Date().toISOString(),
   };
 
   const noImg = "no-img.png";
@@ -176,7 +177,7 @@ exports.getAllUserInfo = (req, res) => {
     .orderBy("createAt", "desc")
     .get()
     .then((data) => {
-      let users = [];
+      let users = []; 
       data.forEach((doc) => {
         users.push({
           userId: doc.id,
@@ -186,10 +187,12 @@ exports.getAllUserInfo = (req, res) => {
           website: doc.data().website,
           location: doc.data().location,
           handle: doc.data().handle,
-          createdAt: doc.data().createdAt,
+          createdAt: doc.data().createAt,
         });
       });
-      return res.json(users);
+      return users !== []
+        ? res.json(users)
+        : res.json({ message: "No document" });
     })
     .catch((err) => {
       console.log(err);
@@ -197,16 +200,16 @@ exports.getAllUserInfo = (req, res) => {
     });
 };
 
-exports.addUserInfo = (req, res) => {
-  let userInfo = reduceUserInfo(req.body);
+exports.addUserDetails = (req, res) => {
+  let userDetails = reduceUserDetails(req.body);
 
-  db.doc(`/users/${req.users.handle}`)
-    .update(userInfo)
+  db.doc(`/Users/${req.user.handle}`)
+    .update(userDetails)
     .then(() => {
       return res.status(200).json({ message: "Info added successfully" });
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err );
       return res.status(500).json({ error: err.code });
     });
 };
