@@ -27,6 +27,6 @@ app.get('/users', getAllUserInfo);
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post('/user/image', fbAuth, uploadImage);
-app.post('/user/:userId', fbAuth, addUserDetails);
+app.post('/user', fbAuth, addUserDetails);
 
 exports.api = functions.https.onRequest(app);
