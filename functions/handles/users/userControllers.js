@@ -95,12 +95,8 @@ exports.signIn = (req, res) => {
         err.code = "wrong password";
       } else if (err.code === "auth/user-not-found") {
         err.code = "user not found";
-      } else if (err.code === "auth/too-many-requests") {
-        err.code = "too many requests";
-      } else if (err.code === "auth/id-token-expired") {
-        err.code = "id token expired";
       }
-      return res.status(403).json({ error: err.code + " , please try again" });
+      return res.status(403).json({ error: err.code + ", please try again" });
     });
 };
 
@@ -177,7 +173,7 @@ exports.getAllUserInfo = (req, res) => {
     .orderBy("createAt", "desc")
     .get()
     .then((data) => {
-      let users = []; 
+      let users = [];
       data.forEach((doc) => {
         users.push({
           userId: doc.id,
@@ -209,7 +205,6 @@ exports.addUserDetails = (req, res) => {
       return res.status(200).json({ message: "Info added successfully" });
     })
     .catch((err) => {
-      console.log(err );
       return res.status(500).json({ error: err.code });
     });
 };

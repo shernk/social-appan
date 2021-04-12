@@ -47,16 +47,16 @@ exports.validateSignIn = (signin) => {
 }
 
 exports.reduceUserDetails = (userData) => {
-  let userInfo = {};
+  let userDetails = {};
 
-  if(!isEmpty(userData.bio.trim())) userInfo.bio = userData.bio;
+  if(!isEmpty(userData.bio.trim())) userDetails.bio = userData.bio;
   if(!isEmpty(userData.website.trim())) {
     // https://website.com
     if(userData.website.trim().substring(0, 4) !== 'http') {
-      userInfo.website = `http://${userData.website.trim()}`;
-    } else userInfo.website = userData.website;
+      userDetails.website = `https://${userData.website.trim()}`;
+    } else userDetails.website = userData.website;
   }
-  if(!isEmpty(userData.location.trim())) userInfo.location = userData.location;
+  if(!isEmpty(userData.location.trim())) userDetails.location = userData.location;
 
-  return userInfo;
+  return userDetails;
 }

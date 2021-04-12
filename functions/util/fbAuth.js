@@ -24,12 +24,12 @@ module.exports = (req, res, next) => {
         .get();
     })
     .then((data) => {
-      console.log(data);
       req.user.handle = data.docs[0].data().handle;
       return next();
     })
     .catch((err) => {
-      console.error("Error while verifying token ", err);
+      console.error("Error while verifying token,", err);
       return res.status(403).json(err);
     });
+  
 };
