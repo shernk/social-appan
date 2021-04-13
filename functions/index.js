@@ -5,6 +5,7 @@ const app = express();
 
 const {
   getAllScreams,
+  getScream,
   postOneScream,
 } = require("./handles/screams/screamsControllers");
 
@@ -21,6 +22,7 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
+app.get('/scream/:screamId', getScream);
 app.post('/createScream', fbAuth ,postOneScream);
 
 // Users routes
