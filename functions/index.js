@@ -14,6 +14,7 @@ const {
   uploadImage,
   getAllUserInfo,
   addUserDetails,
+  getAuthenticatedUser,
 } = require("./handles/users/userControllers");
 
 const fbAuth = require("./util/fbAuth");
@@ -24,6 +25,7 @@ app.post('/createScream', fbAuth ,postOneScream);
 
 // Users routes
 app.get('/users', getAllUserInfo);
+app.get('/user/authenticated', fbAuth, getAuthenticatedUser);
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post('/user/image', fbAuth, uploadImage);
