@@ -57,8 +57,11 @@ exports.postOneScream = (req, res) => {
 
   const newScream = {
     body: req.body.body,
-    userHandle: req.body.userHandle,
+    userHandle: req.user.userHandle,
+    userImageUrl: req.user.imageUrl,
     createdAt: new Date().toISOString(),
+    likeCount: 0,
+    commentCount: 0,
   };
 
   db.collection("Screams")
@@ -69,5 +72,36 @@ exports.postOneScream = (req, res) => {
     .catch((err) => {
       console.error(err);
       res.status(500).json({ message: `${err}` });
+    });
+};
+
+exports.commentOnScream = (req, res) => {
+  if (req.body.body.trim() === "")
+    return res.status(400).json({ comment: "Must not be empty" });
+
+  const newComment = {
+    screamId: req.params.screamId,
+    userId: req.user.userId,
+    body: req.body.body,
+    userHandle: req.user.handle,
+    userImage: req.user.imageUrl,
+    createdAt: new Date().toISOString(),
+  };
+
+  db.doc(`Screams/${req.params.screamId}`)
+    .get()
+    .then((doc) => {
+      if (req.params.userId !== newComment.userId)
+        return res.status(404).json({ error: "userId not found" });
+      else if (!doc.exists)
+        return res.status(404).json({ error: "Scream not found" });
+      return db.collection("Comments").add(newComment);
+    })
+    .then(() => {
+      res.json(newComment);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
     });
 };
