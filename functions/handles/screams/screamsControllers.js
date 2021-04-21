@@ -24,9 +24,12 @@ exports.getAllScreams = (req, res) => {
 
 exports.getScream = (req, res) => {
   let screamData = {};
+
   db.doc(`/Screams/${req.params.screamId}`)
     .get()
     .then((doc) => {
+      if (req.params.userId !== req.user.userId)
+        return res.status(404).json({ error: "userId not found" });
       if (!doc.exists)
         return res.status(404).json({ message: "scream not found" });
       screamData = doc.data();

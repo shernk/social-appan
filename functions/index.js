@@ -23,7 +23,7 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get('/scream/:screamId', getScream);
+app.get("/scream/:userId/:screamId", fbAuth, getScream);
 app.post('/createScream', fbAuth ,postOneScream);
 app.post("/scream/:userId/:screamId/comment", fbAuth, commentOnScream);
 
