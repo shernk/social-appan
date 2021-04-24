@@ -9,7 +9,8 @@ const {
   postOneScream,
   commentOnScream,
   likeScream,
-  unlikeScream
+  unlikeScream,
+  deleleScream
 } = require("./handles/screams/screamsControllers");
 
 const {
@@ -25,11 +26,12 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:userId/:screamId", fbAuth, getScream);
+app.get("/scream/:screamId", fbAuth, getScream);
+app.get('/scream/:screamId/like', fbAuth, likeScream);
+app.get('/scream/:screamId/unlike', fbAuth, unlikeScream);
 app.post('/createScream', fbAuth ,postOneScream);
-app.post("/scream/:userId/:screamId/comment", fbAuth, commentOnScream);
-app.post('/scream/:screamId/like', fbAuth, likeScream);
-app.post('/scream/:screamId/unlike', fbAuth, unlikeScream);
+app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
+app.delete('/scream/:screamId/delete', fbAuth, deleleScream);
 
 // Users routes
 app.get('/users', getAllUserInfo);
