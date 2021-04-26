@@ -6,11 +6,11 @@ const app = express();
 const {
   getAllScreams,
   getScream,
-  postOneScream,
+  createScream,
   commentOnScream,
   likeScream,
   unlikeScream,
-  deleleScream
+  deleteScream
 } = require("./handles/screams/screamsControllers");
 
 const {
@@ -29,9 +29,9 @@ app.get("/screams", getAllScreams);
 app.get("/scream/:screamId", fbAuth, getScream);
 app.get('/scream/:screamId/like', fbAuth, likeScream);
 app.get('/scream/:screamId/unlike', fbAuth, unlikeScream);
-app.post('/createScream', fbAuth ,postOneScream);
+app.post('/createScream', fbAuth , createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
-app.delete('/scream/:screamId/delete', fbAuth, deleleScream);
+app.delete('/scream/:screamId', fbAuth, deleteScream);
 
 // Users routes
 app.get('/users', getAllUserInfo);
