@@ -13,8 +13,8 @@ exports.getAllScreams = (req, res) => {
           userHandle: doc.data().userHandle,
           createdAt: doc.data().createdAt,
           userImageUrl: doc.data().userImageUrl,
-          likeCount: doc.data().likeCount,
-          commentCount: doc.data().commentCount,
+          likeScreamCount: doc.data().likeScreamCount,
+          commentScreamCount: doc.data().commentScreamCount,
         });
       });
       return res.json(screams);
@@ -63,9 +63,9 @@ exports.createScream = (req, res) => {
     body: req.body.body,
     userHandle: req.user.handle,
     userImageUrl: req.user.imageUrl,
+    likeScreamCount: 0,
+    commentScreamCount: 0,
     createdAt: new Date().toISOString(),
-    likeCount: 0,
-    commentCount: 0,
   };
 
   db.collection("Screams")
@@ -89,22 +89,31 @@ exports.commentOnScream = (req, res) => {
     body: req.body.body,
     userHandle: req.user.handle,
     userImage: req.user.imageUrl,
+    likeCommentCount: 0,
     createdAt: new Date().toISOString(),
   };
 
-  db.doc(`Screams/${req.params.screamId}`)
+  const scream = db.doc(`Screams/${req.params.screamId}`);
+
+  scream
     .get()
     .then((doc) => {
       if (!doc.exists)
         return res.status(404).json({ error: "Scream not found" });
+      let commentScreamCount = ++doc.data().commentScreamCount;
+      return scream.update({
+        commentScreamCount: commentScreamCount,
+      });
+    })
+    .then(() => {
       return db.collection("Comments").add(newComment);
     })
     .then(() => {
-      res.json(newComment);
+      return res.json(newComment);
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({ error: err });
+      return res.status(500).json({ error: err });
     });
 };
 
@@ -138,9 +147,15 @@ exports.likeScream = (req, res) => {
             userHandle: req.user.handle,
           })
           .then(() => {
-            screamData.likeCount = 1;
+            if (
+              screamData.likeScreamCount === null ||
+              screamData.likeScreamCount !== NaN
+            ) {
+              screamData.likeScreamCount = 0;
+            }
+            let likeScreamCount = ++screamData.likeScreamCount;
             return screamDocument.update({
-              likeCount: screamData.likeCount,
+              likeScreamCount: likeScreamCount,
             });
           })
           .then(() => {
@@ -185,9 +200,18 @@ exports.unlikeScream = (req, res) => {
           .doc(`/Likes/${data.docs[0].id}`)
           .delete()
           .then(() => {
-            screamData.likeCount = 0;
+            console.log("100000110101010100110");
+            console.log(screamData.likeScreamCount);
+            if (
+              screamData.likeScreamCount === null ||
+              screamData.likeScreamCount !== NaN
+            ) {
+              screamData.likeScreamCount = 0;
+            } else {
+              --screamData.likeScreamCount;
+            }
             return screamDocument.update({
-              likeCount: screamData.likeCount,
+              likeScreamCount: screamData.likeScreamCount,
             });
           })
           .then(() => {
@@ -210,12 +234,12 @@ exports.deleteScream = (req, res) => {
       if (!doc.exists) {
         return res.status(404).json({ message: "Scream not found" });
       }
-      if(doc.data().userHandle !== req.user.handle){
-        return res.status(403).json({error: 'Unauthorized'})
+      if (doc.data().userHandle !== req.user.handle) {
+        return res.status(403).json({ error: "Unauthorized" });
       }
       return document.delete();
     })
-    .then(() => { 
+    .then(() => {
       return this.getAllScreams(req, res);
     })
     .catch((err) => {
