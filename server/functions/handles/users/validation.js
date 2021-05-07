@@ -1,5 +1,3 @@
-const { database } = require("firebase-admin");
-
 const isEmpty = (signup) => {
   if (signup.trim() === "") return true;
   else return false;
