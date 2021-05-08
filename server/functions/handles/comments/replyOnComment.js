@@ -19,18 +19,18 @@ exports.replyOnComment = (req, res) => {
 
   comment
     .get()
-    .then((doc) => {
-      if (!doc.exists)
+    // .then((doc) => {
+    //   if (!doc.exists)
+    //     return res.status(404).json({ error: "Comment not found" });
+    //   let likeReplyCount = ++doc.data().likeReplyCount;
+    //   return comment.update({
+    //     likeReplyCount: likeReplyCount,
+    //   });
+    // })
+    .then((commentDoc) => {
+      if (!commentDoc.exists)
         return res.status(404).json({ error: "Comment not found" });
-      let likeReplyCount = ++doc.data().likeReplyCount;
-      return comment.update({
-        likeReplyCount: likeReplyCount,
-      });
-    })
-    .then((comments) => {
-      if (!comments.exists)
-        return res.status(404).json({ error: "Comment not found" });
-      let replyCommentCount = ++comments.data().replyCommentCount;
+      let replyCommentCount = ++commentDoc.data().replyCommentCount;
       return comment.update({replyCommentCount : replyCommentCount})
     })
     .then(() => {

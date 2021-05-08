@@ -16,11 +16,11 @@ exports.getAllComments = (req, res) => {
           replyCommentCount: comment.data().replyCommentCount,
           createdAt: comment.data().createdAt,
         });
-        return res.json(comments);
       });
-      res.status(500).json({ error: err.code });
+      return res.json(comments);
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).json({ error: err.code });
     });
 };
