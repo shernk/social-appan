@@ -3,17 +3,19 @@ const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
 
+// Screams
+const { getAllScreams } = require("./handles/screams/getAllScream");
+const { getScream } = require("./handles/screams/getScream");
+const { createScream } = require("./handles/screams/createScream");
+const { commentOnScream } = require("./handles/comments/commentOnScream");
 const {
-  getAllScreams,
-  getScream,
-  createScream,
-  commentOnScream,
   likeScream,
   unlikeScream,
   deleteScream,
   deleteComment
 } = require("./handles/screams/screamsControllers");
 
+// Users
 const {
   signUp,
   signIn,
@@ -24,6 +26,12 @@ const {
 } = require("./handles/users/userControllers");
 
 const fbAuth = require("./util/fbAuth");
+
+// Comments
+const { getAllComments } = require("./handles/comments/getAllComment");
+
+// Comments routes
+app.get('/comments', getAllComments);
 
 // Screams routes
 app.get("/screams", getAllScreams);
