@@ -11,6 +11,7 @@ const { commentOnScream } = require("./handles/comments/commentOnScream");
 const { deleteScream } = require("./handles/screams/deleteScream");
 const { likeScream } = require("./handles/screams/likeScream");
 const { unlikeScream } = require("./handles/screams/unlikeScream");
+const { deleteAllScreams } = require("./handles/screams/deleteAllScreams");
 
 // Users
 const {
@@ -41,6 +42,7 @@ app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
+app.delete('/screams',fbAuth, deleteAllScreams);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Users routes

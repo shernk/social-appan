@@ -1,4 +1,4 @@
-const db = require('../admin-db');
+const {db} = require('../admin-db');
 
 exports.createScream = (req, res) => {
   if (req.method !== "POST") {
