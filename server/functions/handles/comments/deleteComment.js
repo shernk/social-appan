@@ -15,7 +15,7 @@ exports.deleteComment = (req, res) => {
       return document.delete();
     })
     .then(() => {
-      res
+      return res
         .status(200)
         .json({ message: `delete ${req.params.commentId} successfully` });
     })

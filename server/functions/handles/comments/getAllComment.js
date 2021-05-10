@@ -4,8 +4,15 @@ exports.getAllComments = (req, res) => {
   db.collection("Comments")
     .get()
     .then((data) => {
+      if (data === null) {
+        return res.status(404).json({ message: "Do not have any comments" });
+      }
       let comments = [];
       data.forEach((comment) => {
+        if (comment === null) {
+          return res.status(404).json({ message: "Do not have any comment" });
+        }
+        
         comments.push({
           commentId: comment.id,
           screamId: comment.data().screamId,
