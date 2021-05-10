@@ -24,9 +24,15 @@ const {
 
 // Comments
 const { getAllComments } = require("./handles/comments/getAllComment");
+const { getComment } = require("./handles/comments/getComment");
+const { replyOnComment } = require("./handles/comments/replyOnComment");
+const { deleteAllComments } = require("./handles/comments/deleteAllComments");
 const { deleteComment } = require("./handles/comments/deleteComment");
 
+// Auth
 const fbAuth = require("./util/fbAuth");
+
+//------------------------------------------------//
 
 // Screams routes
 app.get("/screams", getAllScreams);
@@ -36,7 +42,6 @@ app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
-app.delete("/comment/:commentId", fbAuth, deleteComment);
 
 // Users routes
 app.get("/users", getAllUserInfo);
@@ -48,5 +53,9 @@ app.post("/user", fbAuth, addUserDetails);
 
 // Comments routes
 app.get("/comments", getAllComments);
+app.get("/comment/:commentId", fbAuth, getComment);
+app.post("/comment/:commentId", fbAuth, replyOnComment);
+app.delete('/comments', fbAuth, deleteAllComments);
+app.delete("/comment/:commentId", fbAuth, deleteComment);
 
 exports.api = functions.https.onRequest(app);

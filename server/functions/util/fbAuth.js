@@ -3,13 +3,13 @@ const { admin, db } = require("../handles/admin-db");
 module.exports = (req, res, next) => {
   let idToken;
   const authHeaders = req.headers.authorization;
-  const Bearer = 'Bearer ';
+  const Bearer = "Bearer ";
 
-  if ( authHeaders && authHeaders.startsWith(Bearer)) {
+  if (authHeaders && authHeaders.startsWith(Bearer)) {
     idToken = authHeaders.split(Bearer)[1];
   } else {
     console.error("No Token Found");
-    return res.status(403).json({ error: "Unauthorized" });
+    return res.status(403).json({ error: "No Token Found" });
   }
 
   admin
@@ -34,5 +34,4 @@ module.exports = (req, res, next) => {
       console.error("Error while verifying token,", err);
       return res.status(403).json(err);
     });
-  
 };
