@@ -1,5 +1,6 @@
 const { db } = require("../admin-db");
 
+//TODO: delete scream which is must async delete both its comments and likes
 exports.deleteScream = (req, res) => {
   const document = db.doc(`Screams/${req.params.screamId}`);
 

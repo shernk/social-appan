@@ -1,10 +1,6 @@
 const {db} = require('../admin-db');
 
 exports.createScream = (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(400).json({ error: "Method not allowed" });
-  }
-
   const newScream = {
     body: req.body.body,
     userHandle: req.user.handle,
@@ -21,6 +17,6 @@ exports.createScream = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ message: `${err}` });
+      res.status(500).json({ error: err.code });
     });
 };

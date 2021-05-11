@@ -1,5 +1,6 @@
 const { db } = require("../admin-db");
 
+//? what the fuck the functions its do
 exports.getAuthenticatedUser = (req, res) => {
   let userData = {};
   db.doc(`/Users/${req.user.handle}`)
