@@ -1,14 +1,14 @@
 const { db } = require("../admin-db");
 
-exports.likeScream = (req, res) => {
+exports.unlikeScream = (req, res) => {
   let screamData;
   const likeDocument = db
     .collection("Likes")
-    .where("userHandle", "==", req.user.handle)
     .where("screamId", "==", req.params.screamId)
+    .where("userHandle", "==", req.user.handle)
     .limit(1);
 
-  const screamDocument = db.doc(`/Screams/${req.params.screamId}`);
+  const screamDocument = db.doc(`Screams/${req.params.screamId}`);
 
   screamDocument
     .get()
@@ -23,33 +23,31 @@ exports.likeScream = (req, res) => {
     })
     .then((data) => {
       if (data.empty) {
+        return res.status(400).json({ message: "Scream haven't like" });
+      } else {
         return db
-          .collection("Likes")
-          .add({
-            screamId: req.params.screamId,
-            userHandle: req.user.handle,
-          })
+          .doc(`/Likes/${data.docs[0].id}`)
+          .delete()
           .then(() => {
             if (
               screamData.likeScreamCount === null ||
               screamData.likeScreamCount !== NaN
             ) {
               screamData.likeScreamCount = 0;
+            } else {
+              --screamData.likeScreamCount;
             }
-            let likeScreamCount = ++screamData.likeScreamCount;
             return screamDocument.update({
-              likeScreamCount: likeScreamCount,
+              likeScreamCount: screamData.likeScreamCount,
             });
           })
           .then(() => {
             return res.json(screamData);
           });
-      } else {
-        return res.status(400).json({ message: "Scream already like" });
       }
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({ error: err.code });
+      return res.status(500).json({ erorr: err.code });
     });
 };

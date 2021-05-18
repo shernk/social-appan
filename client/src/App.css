@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(245, 245, 245);
 }
 
 .container {
@@ -16,4 +17,12 @@ body {
 .nav-container {
   margin: auto;
   text-transform: uppercase;
+}
+
+.nav-container svg {
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
 }

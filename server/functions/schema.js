@@ -51,9 +51,21 @@ const userInfo = {
     website: "https://user.com",
     location: "Lonodn, UK",
   },
+  screams: [
+    {
+      userId: "N43KJ5H43KJHREW4J5H3JWMERHB",
+      screamId: "hh7O5oWfWucVzGbHH2pa",
+      userHandle: "user",
+    },
+    {
+      userId: "N43KJ5H43KJHREW4J5H3FGTGHYH",
+      screamId: "3IOnFoQexRcofs5OhBXO",
+      userHandle: "user2",
+    },
+  ],
   likes: [
     {
-      userHandle: "user",
+      userHandle: "user2",
       screamId: "hh7O5oWfWucVzGbHH2pa",
     },
     {

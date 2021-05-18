@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
 import URL from "../../api";
+import Scream from "../../components/scream/scream";
 
 function Home() {
   const [screams, setScreams] = React.useState([]);
@@ -18,7 +19,7 @@ function Home() {
   }, [setScreams]);
 
   let recentScream = screams ? (
-    screams.map((scream) => <p key={scream.screamId}>{scream.body}</p>)
+    screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
   ) : (
     <p>Loading...</p>
   );
