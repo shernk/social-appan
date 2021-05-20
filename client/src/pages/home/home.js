@@ -19,7 +19,7 @@ function Home() {
   }, [setScreams]);
 
   let recentScream = screams ? (
-    screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+    screams.map((scream) => <Scream key={scream.screamId} screams={scream} />)
   ) : (
     <p>Loading...</p>
   );

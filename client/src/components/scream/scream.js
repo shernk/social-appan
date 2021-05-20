@@ -1,15 +1,15 @@
 import React from "react";
-import Link from "react-router-dom/Link";
+import {Link} from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import styles from "./styles/screamStyles";
+import screamStyles from "./styles/screamStyles";
 
 function Scream({
   classes,
-  scream: { userImage, userHandle, createdAt, body },
+  screams: { userImage, userHandle, createdAt, body },
 }) {
   return (
     <Card className={classes.card}>
@@ -36,4 +36,4 @@ function Scream({
   );
 }
 
-export default withStyles(styles)(Scream);
+export default withStyles(screamStyles)(Scream);
