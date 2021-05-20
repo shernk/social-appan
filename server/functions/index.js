@@ -9,13 +9,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const firebaseConfig = require('../config');
+const firebaseConfig = require("../config");
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
 // Screams
 const { getAllScreams } = require("./handles/screams/getAllScream");
-const { getScream } = require("./handles/screams/getScream");
+const {
+  getScreamWithComments,
+} = require("./handles/screams/getScreamWithComments");
+const { getScreamWithLikes } = require("./handles/screams/getScreamWithLikes");
 const { createScream } = require("./handles/screams/createScream");
 const { commentOnScream } = require("./handles/comments/commentOnScream");
 const { deleteScream } = require("./handles/screams/deleteScream");
@@ -29,9 +32,7 @@ const { signIn } = require("./handles/users/signIn");
 const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
 const { uploadImage } = require("./handles/users/uploadImage");
 const { addUserDetails } = require("./handles/users/addUserDetails");
-const {
-  getUserDetails,
-} = require("./handles/users/getUserDetails");
+const { getUserDetails } = require("./handles/users/getUserDetails");
 
 // Comments
 const { getAllComments } = require("./handles/comments/getAllComment");
@@ -50,7 +51,8 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:screamId", /* fbAuth, */ getScream);
+app.get("/scream/:screamId/scream-comment", fbAuth, getScreamWithComments);
+app.get("/scream/:screamId/scream-like", fbAuth, getScreamWithLikes);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
@@ -59,7 +61,7 @@ app.delete("/screams", fbAuth, deleteAllScreams);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes
-app.delete('/likes', deleteAllLikes);
+app.delete("/likes", deleteAllLikes);
 
 // Users routes
 app.get("/users", getAllUserInfo);

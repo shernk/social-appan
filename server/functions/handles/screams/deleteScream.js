@@ -31,6 +31,9 @@ exports.deleteScream = (req, res) => {
     .then(() => {
       return likeDocument.get();
     })
+    .then(() => {
+      return commentDocument.get();
+    })
     .then((data) => {
       if (data.empty) {
         return res.status(400).json({ message: "Scream haven't like" });
