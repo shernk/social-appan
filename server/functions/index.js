@@ -21,7 +21,7 @@ const {
 const { getScreamWithLikes } = require("./handles/screams/getScreamWithLikes");
 const { createScream } = require("./handles/screams/createScream");
 const { commentOnScream } = require("./handles/comments/commentOnScream");
-const { deleteScream } = require("./handles/screams/deleteScream");
+const { deleteScreamWithItsComments } = require("./handles/screams/deleteScreamWithItsComments");
 const { likeScream } = require("./handles/likes/likeScream");
 const { unlikeScream } = require("./handles/likes/unlikeScream");
 const { deleteAllScreams } = require("./handles/screams/deleteAllScreams");
@@ -58,7 +58,7 @@ app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
 app.delete("/screams", fbAuth, deleteAllScreams);
-app.delete("/scream/:screamId", fbAuth, deleteScream);
+app.delete("/scream/:screamId/scream-comment", fbAuth, deleteScreamWithItsComments);
 
 // Likes
 app.delete("/likes", deleteAllLikes);
