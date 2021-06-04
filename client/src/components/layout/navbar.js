@@ -10,8 +10,9 @@ function NavBar() {
     <AppBar>
       <ToolBar className="nav-container">
         <Button component={Link} to='/'>home</Button>
-        <Button component={Link} to='/login'>login</Button>
-        <Button component={Link} to='/logout'>logout</Button>
+        <Button component={Link} to='/signin'>signin</Button>
+        <Button component={Link} to='/signup'>signup</Button>
+        <Button component={Link} to='/signout'>signout</Button>
       </ToolBar>
     </AppBar>
   );
