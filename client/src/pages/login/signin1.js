@@ -4,14 +4,17 @@ import PropTypes from "prop-types";
 import AppIcon from "../../images/icon.png";
 import { Link } from "react-router-dom";
 
-// MUI Stuff
+// redux
+import { connect } from "react-redux";
+import signInUser from "../../redux/actions/user-actions/user-signin";
+
+// MUIs
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axios from "axios";
-import theme from "../../theme/theme";
+import theme from "../../themes/theme";
 
 class login extends Component {
   constructor() {
@@ -25,6 +28,7 @@ class login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
     this.setState({
       loading: true,
     });
@@ -32,19 +36,8 @@ class login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    // this.props.User(userData, this.props.history);
-    axios
-      .post(
-        "http://localhost:5000/social-appan/us-central1/api/signIn",
-        userData
-      )
-      .then((res) => {
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        this.setState({
-          loading: false,
-        });
-        this.props.history.push("/");
-      });
+
+    this.props.signInUser(userData, this.props.history);
   };
 
   handleChange = (event) => {
@@ -54,7 +47,10 @@ class login extends Component {
   };
 
   render() {
-    const { classes, loading } = this.props;
+    const {
+      classes,
+      UI: { loading },
+    } = this.props;
     const { errors } = this.state;
 
     return (
@@ -121,7 +117,19 @@ class login extends Component {
 
 login.propTypes = {
   classes: PropTypes.object.isRequired,
-  // loginUser: PropTypes.func.isRequired,
+  signInUser: PropTypes.func.isRequired,
+  user: PropTypes.func.isRequired,
+  UI: PropTypes.func.isRequired,
 };
 
-export default withStyles(theme.styles)(login);
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = { signInUser };
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(theme.styles)(login));

@@ -11,7 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
-import theme from "../../theme/theme";
+import theme from "../../themes/theme";
 
 class signUp extends Component {
   constructor() {

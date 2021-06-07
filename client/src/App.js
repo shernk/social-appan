@@ -1,11 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import theme from './theme';
+import theme from "./themes/theme";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
+// Redux
+import { Provider } from "react-redux";
+import store from "./redux/stores";
+
+// Utils
+import AuthRoute from "./utils/auth-route";
+import authenticated from "./utils/authenticated";
+
 // Components
-import NavBar from "./components/layout/navbar";
+import NavBar from "./components/layouts/navbar";
 
 // Pages
 import Home from "./pages/home/home";
@@ -17,18 +25,30 @@ import User from "./pages/user/user";
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <Router>
-        <NavBar />
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/" component={SignOut} />
-            <Route exact path="/user" component={User} />
-          </Switch>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <NavBar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <AuthRoute
+                exact
+                path="/signin"
+                component={SignIn}
+                authenticated={authenticated}
+              />
+              <AuthRoute
+                exact
+                path="/signup"
+                component={SignUp}
+                authenticated={authenticated}
+              />
+              <Route exact path="/" component={SignOut} />
+              <Route exact path="/user" component={User} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
     </MuiThemeProvider>
   );
 }
