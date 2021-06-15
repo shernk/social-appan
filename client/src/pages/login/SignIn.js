@@ -1,46 +1,37 @@
 import React from "react";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
+
+// MUIs
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import loginStyles from "./styles/loginStyles";
-import AppIcon from "../images/icon.png";
-import URL from "../../api";
 
-function SignIn({ classes, loading }) {
-  const history = useHistory();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [errors, setErrors] = React.useState({});
+// theme
+import theme from "../../themes/theme";
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const url = `${URL}/signIn`;
-    // setLoading({ loading: true });
-    const userData = { email: email, password: password };
+//image
+import AppIcon from "../../images/icon.png";
 
-    axios
-      .post(url, userData)
-      .then((res) => {
-        
-        loading = true;
-        // return to the Home Page
-        history.push("/");
-        // classes.history.push("/");
-      })
-      .catch((err) => {
-        setErrors({
-          errors: err.response.data,
-          loading: false,
-        });
-      });
-  };
+// custom hook
+import useUserSignIn from "./handle/user-signin";
+
+// redux
+import { connect } from "react-redux";
+import signInUserAction from "../../redux/actions/user-actions/user-signin";
+
+const SignIn = ({ classes, UI: { loading } }) => {
+  const {
+    email,
+    password,
+    errors,
+    handleSubmit,
+    handleChangeEmail,
+    handleChangePassword,
+  } = useUserSignIn();
 
   return (
     <Grid container className={classes.form}>
@@ -52,34 +43,31 @@ function SignIn({ classes, loading }) {
         </Typography>
         <form noValidate onSubmit={handleSubmit}>
           <TextField
-            id="email"
             name="email"
+            id="email"
             type="email"
             label="Email"
             className={classes.textField}
             helperText={errors.email}
             error={errors.email ? true : false}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChangeEmail}
             fullWidth
           />
           <TextField
-            id="password"
             name="password"
+            id="password"
             type="password"
             label="Password"
             className={classes.textField}
             helperText={errors.password}
             error={errors.password ? true : false}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChangePassword}
             fullWidth
           />
           {errors.error && (
-            <Typography
-              variant="body2"
-              className={classes.loginErrors}
-            >
+            <Typography variant="body2" className={classes.customError}>
               {errors.error}
             </Typography>
           )}
@@ -104,10 +92,23 @@ function SignIn({ classes, loading }) {
       <Grid item sm />
     </Grid>
   );
-}
+};
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
+  signInUserAction: PropTypes.func.isRequired,
+  user: PropTypes.func.isRequired,
+  UI: PropTypes.func.isRequired,
 };
 
-export default withStyles(loginStyles)(SignIn);
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = { signInUserAction };
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(theme.styles)(SignIn));

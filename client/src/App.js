@@ -17,7 +17,7 @@ import NavBar from "./components/layouts/navbar";
 
 // Pages
 import Home from "./pages/home/home";
-import SignIn from "./pages/login/signin1";
+import SignIn from "./pages/login/signin";
 import SignOut from "./pages/signout/signout";
 import SignUp from "./pages/signup/signup";
 import User from "./pages/user/user";
