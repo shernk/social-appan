@@ -4,7 +4,7 @@ import URL from "../../../api";
 import setAuthorizationHeader from "./authorization-header/authorization-header";
 import GetUserDataAction from "./user-getdata";
 
-const signInUserAction = (userData, history) => (dispatch) => {
+const useSignInUserAction = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
 
   axios
@@ -24,4 +24,4 @@ const signInUserAction = (userData, history) => (dispatch) => {
     });
 };
 
-export default signInUserAction;
+export default useSignInUserAction;

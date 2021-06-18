@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
 
 // MUIs
 import { Grid } from "@material-ui/core";
+import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -21,7 +21,7 @@ import useUserSignIn from "./handle/user-signin";
 
 // redux
 import { connect } from "react-redux";
-import signInUserAction from "../../redux/actions/user-actions/user-signin";
+import useSignInUserAction from "../../redux/actions/user-actions/user-signin";
 
 const SignIn = ({ classes, UI: { loading } }) => {
   const {
@@ -96,7 +96,7 @@ const SignIn = ({ classes, UI: { loading } }) => {
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
-  signInUserAction: PropTypes.func.isRequired,
+  useSignInUserAction: PropTypes.func.isRequired,
   user: PropTypes.func.isRequired,
   UI: PropTypes.func.isRequired,
 };
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-const mapActionsToProps = { signInUserAction };
+const mapActionsToProps = { useSignInUserAction };
 
 export default connect(
   mapStateToProps,

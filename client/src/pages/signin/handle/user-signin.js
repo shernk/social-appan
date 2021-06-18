@@ -9,6 +9,7 @@ const useUserSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     componentWillReceiveProps(errors);
@@ -16,6 +17,8 @@ const useUserSignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    setLoading(true);
 
     const userData = { email: email, password: password };
     signInUserAction(userData, history);
@@ -40,6 +43,7 @@ const useUserSignIn = () => {
     email,
     password,
     errors,
+    loading,
     handleSubmit,
     handleChangeEmail,
     handleChangePassword,

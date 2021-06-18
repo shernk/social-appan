@@ -17,7 +17,7 @@ import NavBar from "./components/layouts/navbar";
 
 // Pages
 import Home from "./pages/home/home";
-import SignIn from "./pages/login/signin";
+import SignIn from "./pages/signin/signin";
 import SignOut from "./pages/signout/signout";
 import SignUp from "./pages/signup/signup";
 import User from "./pages/user/user";
@@ -30,7 +30,7 @@ function App() {
           <NavBar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path={["/", "/home"]} component={Home} />
               <AuthRoute
                 exact
                 path="/signin"
