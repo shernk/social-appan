@@ -4,7 +4,8 @@ const isEmpty = (signup) => {
 };
 
 const isEmail = (email) => {
-  const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const regEx =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (email.match(regEx)) return true;
   else return false;
 };
@@ -35,26 +36,36 @@ exports.validateSignUp = (signup) => {
 exports.validateSignIn = (signin) => {
   let errors = {};
 
-  if (isEmpty(signin.email)) errors.email = "Must not be empty";
-  if (isEmpty(signin.password)) errors.password = "Must not be empty";
+  if (isEmpty(signin.email)) {
+    errors.email = "Must not be empty";
+  } else if (!/\S+@\S+\.\S+/.test(signin.email)) {
+    errors.email = "Email address is invalid";
+  }
+
+  if (isEmpty(signin.password)) {
+    errors.password = "Must not be empty";
+  } else if (signin.password.length < 8) {
+    errors.password = "Password must be 8 or more characters";
+  }
 
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,
   };
-}
+};
 
 exports.reduceUserDetails = (userData) => {
   let userDetails = {};
 
-  if(!isEmpty(userData.bio.trim())) userDetails.bio = userData.bio;
-  if(!isEmpty(userData.website.trim())) {
+  if (!isEmpty(userData.bio.trim())) userDetails.bio = userData.bio;
+  if (!isEmpty(userData.website.trim())) {
     // https://website.com
-    if(userData.website.trim().substring(0, 4) !== 'http') {
+    if (userData.website.trim().substring(0, 4) !== "http") {
       userDetails.website = `https://${userData.website.trim()}`;
     } else userDetails.website = userData.website;
   }
-  if(!isEmpty(userData.location.trim())) userDetails.location = userData.location;
+  if (!isEmpty(userData.location.trim()))
+    userDetails.location = userData.location;
 
   return userDetails;
-}
+};

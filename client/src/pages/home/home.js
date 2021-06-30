@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
-import URL from "../../api";
 import Scream from "../../components/scream/scream";
 
 function Home() {
@@ -9,7 +8,7 @@ function Home() {
 
   React.useEffect(() => {
     async function getScreams() {
-      const url = await `${URL}/screams`;
+      const url = await `/screams`;
       axios.get(url).then((res) => {
         setScreams(res.data);
       });

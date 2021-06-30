@@ -73,7 +73,7 @@ const SignUp = ({ classes, UI: { loading } }) => {
           <TextField
             id="confirmPassword"
             name="confirmPassword"
-            type="confirmPassword"
+            type="password"
             label="Confirm Password"
             className={classes.textField}
             helperText={errors.confirmPassword}
@@ -85,7 +85,7 @@ const SignUp = ({ classes, UI: { loading } }) => {
           <TextField
             id="handle"
             name="handle"
-            type="handle"
+            type="text"
             label="Handle"
             className={classes.textField}
             helperText={errors.handle}

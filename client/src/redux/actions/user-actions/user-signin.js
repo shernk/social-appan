@@ -1,14 +1,14 @@
 import { LOADING_UI, SET_ERRORS, CLEAR_ERRORS } from "../../types";
 import axios from "axios";
-import URL from "../../../api";
 import setAuthorizationHeader from "./authorization-header/authorization-header";
 import GetUserDataAction from "./user-getdata";
 
-const useSignInUserAction = (userData, history) => (dispatch) => {
+const signInUserAction = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
+  console.log("useSignInUserAction");
 
   axios
-    .post(`${URL}/signIn`, userData)
+    .post(`/signIn`, userData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(GetUserDataAction());
@@ -17,6 +17,8 @@ const useSignInUserAction = (userData, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
+      console.log("11111111111");
+      console.log(err.response.data);
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,
@@ -24,4 +26,4 @@ const useSignInUserAction = (userData, history) => (dispatch) => {
     });
 };
 
-export default useSignInUserAction;
+export default signInUserAction;

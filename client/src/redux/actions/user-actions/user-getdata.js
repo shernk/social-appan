@@ -1,10 +1,9 @@
 import axios from "axios";
-import URL from "../../../api";
 import { SET_USER } from "../../types";
 
 const getUserDataAction = () => (dispatch) => {
   axios
-    .get(`${URL}/user/details`)
+    .get(`/user/details`)
     .then((res) => {
       dispatch({
         type: SET_USER,

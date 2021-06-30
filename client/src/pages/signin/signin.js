@@ -13,7 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // theme
 import theme from "../../themes/theme";
 
-//image
+// image
 import AppIcon from "../../images/icon.png";
 
 // custom hook
@@ -66,6 +66,10 @@ const SignIn = ({ classes, UI: { loading } }) => {
             onChange={handleChangePassword}
             fullWidth
           />
+          {console.log("222222222222222")}
+          {console.log(errors.error)}
+          {console.log(errors.email)}
+          {console.log(errors.password)}
           {errors.error && (
             <Typography variant="body2" className={classes.customError}>
               {errors.error}
@@ -97,8 +101,8 @@ const SignIn = ({ classes, UI: { loading } }) => {
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
   useSignInUserAction: PropTypes.func.isRequired,
-  user: PropTypes.func.isRequired,
-  UI: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -106,9 +110,9 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-const mapActionsToProps = { useSignInUserAction };
+const mapDispatchToProps = { useSignInUserAction };
 
 export default connect(
   mapStateToProps,
-  mapActionsToProps
+  mapDispatchToProps
 )(withStyles(theme.styles)(SignIn));
