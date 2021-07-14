@@ -26,12 +26,15 @@ const userReducers = (state = initialState, action) => {
     case SET_UNAUTHENTICATED:
       return initialState;
     case SET_USER:
+      console.log('SET_USER');
       return {
         authenticated: true,
         loading: false,
         ...action.payload,
       };
     case LOADING_USER:
+      console.log('LOADING_USER');
+      console.log(...state);
       return {
         ...state,
         loading: true,

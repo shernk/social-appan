@@ -1,9 +1,11 @@
 import axios from "axios";
-import { SET_USER } from "../../types";
+import { LOADING_USER, SET_USER } from "../../types";
 
 const getUserDataAction = () => (dispatch) => {
+  dispatch({ type: LOADING_USER });
+
   axios
-    .get(`/user/details`)
+    .get("/user/details")
     .then((res) => {
       dispatch({
         type: SET_USER,

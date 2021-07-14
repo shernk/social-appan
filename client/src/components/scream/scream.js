@@ -1,20 +1,22 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import screamStyles from "./styles/screamStyles";
+
+// MUIs
 import withStyles from "@material-ui/core/styles/withStyles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import screamStyles from "./styles/screamStyles";
 
 function Scream({
   classes,
-  screams: { userImage, userHandle, createdAt, body },
+  screams: { userImageUrl, userHandle, createdAt, body },
 }) {
   return (
     <Card className={classes.card}>
       <CardMedia
-        image={userImage}
+        image={userImageUrl}
         title="Profile image"
         className={classes.image}
       />

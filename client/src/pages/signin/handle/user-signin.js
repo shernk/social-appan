@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 // User Action
 import signInUserAction from "../../../redux/actions/user-actions/user-signin";
 
-const useUserSignIn = () => {
+const useUserSignIn = (UI) => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const userData = { email: email, password: password };
-    signInUserAction(userData, history);
-  };
+  const [err, setErrors] = useState({});
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -25,16 +18,29 @@ const useUserSignIn = () => {
     setPassword(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    console.log("handleSubmit");
+    event.preventDefault();
+
+    const userData = { email, password };
+    signInUserAction(userData, history);
+  };
+
   useEffect(() => {
-    return () => {
-      setErrors(errors);
+    console.log("useEffect");
+    const componentWillReceiveProps = (nextProps) => {
+      if (nextProps.errors) {
+        setErrors(nextProps.errors);
+      }
     };
-  }, [errors]);
+
+    componentWillReceiveProps(UI);
+  }, [UI]);
 
   return {
     email,
     password,
-    errors,
+    err,
     handleSubmit,
     handleChangeEmail,
     handleChangePassword,

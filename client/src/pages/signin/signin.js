@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+// NavBar
+import NavBar from "../../components/layouts/navbar";
+
 // MUIs
 import { Grid } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -21,96 +24,108 @@ import useUserSignIn from "./handle/user-signin";
 
 // redux
 import { connect } from "react-redux";
-import useSignInUserAction from "../../redux/actions/user-actions/user-signin";
+import signInUserAction from "../../redux/actions/user-actions/user-signin";
 
-const SignIn = ({ classes, UI: { loading } }) => {
+const SignIn = ({ classes, UI }) => {
   const {
     email,
     password,
-    errors,
+    err,
     handleSubmit,
     handleChangeEmail,
     handleChangePassword,
-  } = useUserSignIn();
+  } = useUserSignIn(UI);
 
   return (
-    <Grid container className={classes.form}>
-      <Grid item sm />
-      <Grid item sm>
-        <img src={AppIcon} alt="monkey" className={classes.image} />
-        <Typography variant="h2" className={classes.pageTitle}>
-          SignIn
-        </Typography>
-        <form noValidate onSubmit={handleSubmit}>
-          <TextField
-            name="email"
-            id="email"
-            type="email"
-            label="Email"
-            className={classes.textField}
-            helperText={errors.email}
-            error={errors.email ? true : false}
-            value={email}
-            onChange={handleChangeEmail}
-            fullWidth
-          />
-          <TextField
-            name="password"
-            id="password"
-            type="password"
-            label="Password"
-            className={classes.textField}
-            helperText={errors.password}
-            error={errors.password ? true : false}
-            value={password}
-            onChange={handleChangePassword}
-            fullWidth
-          />
-          {console.log("222222222222222")}
-          {console.log(errors.error)}
-          {console.log(errors.email)}
-          {console.log(errors.password)}
-          {errors.error && (
-            <Typography variant="body2" className={classes.customError}>
-              {errors.error}
-            </Typography>
-          )}
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            disable={loading}
-          >
+    <>
+      <NavBar>
+        <Button component={Link} to="/home">
+          signout
+        </Button>
+      </NavBar>
+      <Grid container className={classes.form}>
+        <Grid item sm />
+        <Grid item sm>
+          <img src={AppIcon} alt="monkey" className={classes.image} />
+          <Typography variant="h2" className={classes.pageTitle}>
             SignIn
-            {loading && (
-              <CircularProgress className={classes.progress} size={30} />
+          </Typography>
+          <form noValidate onSubmit={handleSubmit}>
+            <TextField
+              id="email"
+              name="email"
+              type="email"
+              label="Email"
+              className={classes.textField}
+              helperText={err.email}
+              error={err.email ? true : false}
+              value={email}
+              onChange={handleChangeEmail}
+              fullWidth
+            />
+            <TextField
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
+              className={classes.textField}
+              helperText={err.password}
+              error={err.password ? true : false}
+              value={password}
+              onChange={handleChangePassword}
+              fullWidth
+            />
+            {console.log("222222222222222")}
+            {console.log(err.error)}
+            {console.log(err.email)}
+            {console.log(err.password)}
+            {err.error && (
+              <Typography variant="body2" className={classes.customError}>
+                {err.error}
+              </Typography>
             )}
-          </Button>
-          <br />
-          <small>
-            Don't have an account? Sign Up <Link to="/signUp">here</Link>
-          </small>
-        </form>
+            {console.log("2321312")}
+            {console.log(UI.loading)}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              disable={UI.loading}
+            >
+              SignIn
+              {UI.loading && (
+                <CircularProgress className={classes.progress} size={30} />
+              )}
+            </Button>
+            <br />
+            <small>
+              Don't have an account? Sign Up <Link to="/signUp">here</Link>
+            </small>
+          </form>
+        </Grid>
+        <Grid item sm />
       </Grid>
-      <Grid item sm />
-    </Grid>
+    </>
   );
 };
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
-  useSignInUserAction: PropTypes.func.isRequired,
+  signInUserAction: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-  UI: state.UI,
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    user: state.user,
+    UI: state.UI,
+  };
+};
 
-const mapDispatchToProps = { useSignInUserAction };
+const mapDispatchToProps = { signInUserAction };
 
 export default connect(
   mapStateToProps,

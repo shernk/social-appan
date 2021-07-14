@@ -1,21 +1,31 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
+
+// MUIs
 import { Grid } from "@material-ui/core";
+
+// Components
 import Scream from "../../components/scream/scream";
+import Profile from "../../components/profiles/profile/profile";
+
+// Redux
+import { connect } from "react-redux";
+import getScreamsAction from "../../redux/actions/data-actions/data-getscream";
 
 function Home() {
-  const [screams, setScreams] = React.useState([]);
+  const [screams, setScreams] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function getScreams() {
-      const url = await `/screams`;
+      const url = await "/screams";
       axios.get(url).then((res) => {
         setScreams(res.data);
       });
     }
 
     getScreams();
-  }, [setScreams]);
+  }, [screams]);
 
   let recentScream = screams ? (
     screams.map((scream) => <Scream key={scream.screamId} screams={scream} />)
@@ -24,15 +34,24 @@ function Home() {
   );
 
   return (
-    <Grid container>
+    <Grid container spacing={16}>
       <Grid item sm={8} xs={12}>
         <div>{recentScream}</div>
       </Grid>
       <Grid item sm={4} xs={12}>
-        <div>profile</div>
+        <Profile />
       </Grid>
     </Grid>
   );
 }
 
-export default Home;
+Home.propTypes = {
+  getScreams: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps, { getScreamsAction })(Home);

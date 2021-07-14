@@ -12,7 +12,6 @@ function NavBar() {
         <Button component={Link} to='/'>home</Button>
         <Button component={Link} to='/signin'>signin</Button>
         <Button component={Link} to='/signup'>signup</Button>
-        <Button component={Link} to='/signout'>signout</Button>
       </ToolBar>
     </AppBar>
   );

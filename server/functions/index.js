@@ -51,7 +51,7 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:screamId", /* fbAuth, */ getScream);
+app.get("/scream/:screamId",  fbAuth, getScream);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);

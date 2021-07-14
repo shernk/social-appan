@@ -1,6 +1,6 @@
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
-const theme = createMuiTheme({
+const color = createMuiTheme({
   palettes: {
     primary: {
       light: "#33c9dc",
@@ -15,6 +15,10 @@ const theme = createMuiTheme({
       contrastText: "#fff",
     },
   },
+});
+
+const theme = createMuiTheme({
+  ...color,
   styles: {
     typography: {
       useNextVariants: true,
@@ -98,7 +102,27 @@ const theme = createMuiTheme({
         margin: "20px 10px",
       },
     },
-  }
+  },
+  profilesskeletion: {
+    handle: {
+      height: 20,
+      backgroundColor: color.palette.primary.main,
+      width: 60,
+      margin: "0 auto 7px auto",
+    },
+    fullLine: {
+      height: 15,
+      backgroundColor: "rgba(0,0,0,0.6)",
+      width: "100%",
+      marginBottom: 10,
+    },
+    halfLine: {
+      height: 15,
+      backgroundColor: "rgba(0,0,0,0.6)",
+      width: "50%",
+      marginBottom: 10,
+    },
+  },
 });
 
 export default theme;
