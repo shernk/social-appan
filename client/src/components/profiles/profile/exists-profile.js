@@ -15,10 +15,12 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // Profiles
 import EditDetails from "../edit-detail";
+import { Tooltip } from "@material-ui/core";
 
 const ExistsProfile = ({
   classes,
@@ -93,6 +95,11 @@ const ExistsProfile = ({
         </MyButton>
         <EditDetails classes={classes} credentials={credentials} />
       </div>
+      <Tooltip title="SignOut" placement="top">
+        <IconButton onClick={handleSignout}>
+          <KeyboardReturn color="primary"></KeyboardReturn>
+        </IconButton>
+      </Tooltip>
     </Paper>
   );
 };

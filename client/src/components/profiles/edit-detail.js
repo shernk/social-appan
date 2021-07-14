@@ -6,7 +6,7 @@ import MyButton from "../../utils/mybutton";
 
 // redux
 import { connect } from "react-redux";
-import { default as editUserDetailsAction } from "../../redux/actions/user-actions/user-editdetails";
+import editUserDetailsAction from "../../redux/actions/user-actions/user-editdetails";
 
 // MUIs
 import withStyles from "@material-ui/core/styles/withStyles";

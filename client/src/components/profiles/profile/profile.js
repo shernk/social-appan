@@ -12,8 +12,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 //Redux
 import { connect } from "react-redux";
-import { default as signOutUserAction } from "../../../redux/actions/user-actions/user-signout";
-import { default as uploadImageAction } from "../../../redux/actions/user-actions/user-uploadimage";
+import signOutUserAction from "../../../redux/actions/user-actions/user-signout";
+import uploadImageAction from "../../../redux/actions/user-actions/user-uploadimage";
 
 // Profiles
 import ExistsProfile from "./exists-profile";

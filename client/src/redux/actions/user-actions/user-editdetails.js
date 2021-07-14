@@ -1,10 +1,10 @@
 import { LOADING_USER } from "../../types";
 import axios from "axios";
-import {default as getUserDataAction} from "./user-getdata";
+import getUserDataAction from "./user-getdata";
 
 const editUserDetailsAction = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
-  
+
   axios
     .post("/user", userDetails)
     .then(() => {
