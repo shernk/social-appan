@@ -4,7 +4,6 @@ import setAuthorizationHeader from "./authorization-header/authorization-header"
 import getUserDataAction from "./user-getdata";
 
 const signInUserAction = (userData, history) => (dispatch) => {
-  console.log("useSignInUserAction");
   dispatch({ type: LOADING_UI });
 
   axios
@@ -17,11 +16,10 @@ const signInUserAction = (userData, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
-      console.log("11111111111");
       console.log(err.response.data);
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data || err.response,
+        payload: err.response.data,
       });
     });
 };

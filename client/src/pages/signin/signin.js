@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 // NavBar
 import NavBar from "../../components/layouts/navbar";
@@ -10,7 +11,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // theme
@@ -26,15 +26,15 @@ import useUserSignIn from "./handle/user-signin";
 import { connect } from "react-redux";
 import signInUserAction from "../../redux/actions/user-actions/user-signin";
 
-const SignIn = ({ classes, UI }) => {
+const SignIn = ({ classes, signInUserAction, UI }) => {
   const {
     email,
     password,
-    err,
+    errors,
     handleSubmit,
     handleChangeEmail,
     handleChangePassword,
-  } = useUserSignIn(UI);
+  } = useUserSignIn(signInUserAction, UI);
 
   return (
     <>
@@ -57,8 +57,8 @@ const SignIn = ({ classes, UI }) => {
               type="email"
               label="Email"
               className={classes.textField}
-              helperText={err.email}
-              error={err.email ? true : false}
+              helperText={errors.email}
+              error={errors.email ? true : false}
               value={email}
               onChange={handleChangeEmail}
               fullWidth
@@ -69,23 +69,19 @@ const SignIn = ({ classes, UI }) => {
               type="password"
               label="Password"
               className={classes.textField}
-              helperText={err.password}
-              error={err.password ? true : false}
+              helperText={errors.password}
+              error={errors.password ? true : false}
               value={password}
               onChange={handleChangePassword}
               fullWidth
             />
-            {console.log("222222222222222")}
-            {console.log(err.error)}
-            {console.log(err.email)}
-            {console.log(err.password)}
-            {err.error && (
+
+            {errors.error && (
               <Typography variant="body2" className={classes.customError}>
-                {err.error}
+                {errors.error}
               </Typography>
             )}
-            {console.log("2321312")}
-            {console.log(UI.loading)}
+
             <Button
               type="submit"
               variant="contained"
@@ -117,13 +113,10 @@ SignIn.propTypes = {
   UI: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    user: state.user,
-    UI: state.UI,
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
 
 const mapDispatchToProps = { signInUserAction };
 

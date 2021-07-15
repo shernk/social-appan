@@ -1,9 +1,9 @@
 import { SET_SCREAMS, LOADING_DATA } from "../../types";
 import axios from "axios";
 
-// Get all screams
 const getScreamsAction = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
+
   axios
     .get("/screams")
     .then((res) => {
