@@ -16,7 +16,6 @@ const signInUserAction = (userData, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
-      console.log(err.response.data);
       dispatch({
         type: SET_ERRORS,
         payload: err.response.data,

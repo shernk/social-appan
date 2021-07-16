@@ -1,31 +1,27 @@
-const isEmpty = (signup) => {
-  if (signup.trim() === "") return true;
-  else return false;
-};
-
-const isEmail = (email) => {
-  const regEx =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (email.match(regEx)) return true;
-  else return false;
-};
+const { isEmpty, isEmail, isEmailValidated } = require("./isvalidated");
 
 exports.validateSignUp = (signup) => {
   let errors = {};
 
   if (isEmpty(signup.email)) {
-    errors.email = "Email is must not be empty";
+    errors.email = "Must not be empty";
   } else if (!isEmail(signup.email)) {
-    errors.email = "Must be a valid email address";
+    errors.email = "Email address is invalid";
   }
 
   if (isEmpty(signup.password)) {
-    errors.password = "Must be not be Empty";
-  } else if (signup.password !== signup.confirmPassword) {
-    errors.confirmPassword = "Password must be match";
+    errors.password = "Must be not be empty & have 8 or more characters";
+  } else if (signup.password.length < 8) {
+    errors.password = "Must be have 8 or more characters";
   }
 
-  if (isEmpty(signup.handle)) errors.handle = "Must be not be Empty";
+  if (isEmpty(signup.confirmPassword)) {
+    errors.confirmPassword = "Must be not be empty";
+  } else if (signup.confirmPassword !== signup.password) {
+    errors.confirmPassword = "Do not match";
+  }
+
+  if (isEmpty(signup.handle)) errors.handle = "Must be not be empty";
 
   return {
     errors,
@@ -38,14 +34,14 @@ exports.validateSignIn = (signin) => {
 
   if (isEmpty(signin.email)) {
     errors.email = "Must not be empty";
-  } else if (!/\S+@\S+\.\S+/.test(signin.email)) {
+  } else if (!isEmail(signin.email)) {
     errors.email = "Email address is invalid";
   }
 
   if (isEmpty(signin.password)) {
-    errors.password = "Must not be empty";
+    errors.password = "Must be not be empty & have 8 or more characters";
   } else if (signin.password.length < 8) {
-    errors.password = "Password must be 8 or more characters";
+    errors.password = "Must be have 8 or more characters";
   }
 
   return {

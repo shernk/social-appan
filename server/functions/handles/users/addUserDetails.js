@@ -1,5 +1,5 @@
 const { db } = require("../admin-db");
-const { reduceUserDetails } = require("./validation");
+const { reduceUserDetails } = require("./validate/validation");
 
 exports.addUserDetails = (req, res) => {
   let userDetails = reduceUserDetails(req.body);

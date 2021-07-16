@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { Link } from "react-router-dom";
 
 // MUIs
+import withStyles from "@material-ui/core/styles/withStyles";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // theme
@@ -21,9 +21,9 @@ import useUserSignUp from "./handle/user-signup";
 
 // redux
 import { connect } from "react-redux";
-import signUpUserAction from "../../redux/actions/user-actions/user-signin";
+import signUpUserAction from "../../redux/actions/user-actions/user-signup";
 
-const SignUp = ({ classes, UI: { loading } }) => {
+const SignUp = ({ signUpUserAction, classes, UI }) => {
   const {
     email,
     password,
@@ -34,8 +34,8 @@ const SignUp = ({ classes, UI: { loading } }) => {
     handleChangeEmail,
     handleChangePassword,
     handleChangeConfirmPassword,
-    handleChangeHandle
-  } = useUserSignUp();
+    handleChangeHandle,
+  } = useUserSignUp(signUpUserAction, UI);
 
   return (
     <Grid container className={classes.form}>
@@ -106,10 +106,10 @@ const SignUp = ({ classes, UI: { loading } }) => {
             variant="contained"
             color="primary"
             className={classes.button}
-            disabled={loading}
+            disabled={UI.loading}
           >
             SignUp
-            {loading && (
+            {UI.loading && (
               <CircularProgress size={30} className={classes.progress} />
             )}
           </Button>

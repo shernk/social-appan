@@ -40,7 +40,7 @@ const SignIn = ({ classes, signInUserAction, UI }) => {
     <>
       <NavBar>
         <Button component={Link} to="/home">
-          signout
+          SignOut
         </Button>
       </NavBar>
       <Grid container className={classes.form}>

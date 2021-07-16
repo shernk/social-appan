@@ -1,5 +1,5 @@
-const { validateSignIn } = require("./validation");
 const firebase = require("firebase");
+const { validateSignIn } = require("./validate/validation");
 
 exports.signIn = (req, res) => {
   const user = {
