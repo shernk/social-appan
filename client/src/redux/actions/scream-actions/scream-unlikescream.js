@@ -11,10 +11,7 @@ const unlikeScreamAction = (screamId) => (dispatch) => {
       });
     })
     .catch((err) => {
-      dispatch({
-        type: UNLIKE_SCREAM,
-        payload: [],
-      });
+      console.log(err);
     });
 };
 

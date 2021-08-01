@@ -5,16 +5,15 @@ const likeScreamAction = (screamId) => (dispatch) => {
   axios
     .get(`/scream/${screamId}/like`)
     .then((res) => {
+      console.log('likescreamAction');
+      console.log(res)
       dispatch({
         type: LIKE_SCREAM,
         payload: res.data,
       });
     })
     .catch((err) => {
-      dispatch({
-        type: LIKE_SCREAM,
-        payload: [],
-      });
+      console.log(err);
     });
 };
 

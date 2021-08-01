@@ -7,7 +7,8 @@ exports.likeScream = (req, res) => {
     .collection("Likes")
     .where("userHandle", "==", req.user.handle)
     .where("screamId", "==", req.params.screamId)
-    .limit(1);
+    .limit(1)
+    .get();
 
   const screamDocument = db.doc(`/Screams/${req.params.screamId}`);
 
@@ -17,7 +18,8 @@ exports.likeScream = (req, res) => {
       if (doc.exists) {
         screamData = doc.data();
         screamData.screamId = doc.id;
-        return likeDocument.get();
+
+        return likeDocument;
       } else {
         return res.status(404).json({ message: "Scream not found" });
       }
@@ -34,11 +36,13 @@ exports.likeScream = (req, res) => {
           .then(() => {
             if (
               screamData.likeScreamCount === null ||
-              screamData.likeScreamCount !== NaN
+              screamData.likeScreamCount === NaN
             ) {
-              screamData.likeScreamCount = 0;
+              return screamData.likeScreamCount = 0;
             }
-            let likeScreamCount = ++screamData.likeScreamCount;
+
+            let likeScreamCount = screamData.likeScreamCount + 1;
+
             return screamDocument.update({
               likeScreamCount: likeScreamCount,
             });
@@ -47,7 +51,7 @@ exports.likeScream = (req, res) => {
             return res.json(screamData);
           });
       } else {
-        return res.status(400).json({ message: "Scream already like" });
+        return res.status(400).json({ message: "Scream already like", screamData });
       }
     })
     .catch((err) => {

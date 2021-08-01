@@ -1,5 +1,6 @@
 const { admin } = require("../admin-db");
 const { v4: uuidv4 } = require("uuid");
+const { config } = require("process");
 uuidv4();
 
 exports.uploadImage = (req, res) => {
@@ -25,7 +26,8 @@ exports.uploadImage = (req, res) => {
     // my.image.png => ['my', 'image', 'png']
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
 
-    // random name of an image created 32756238461724837.png
+    // random name of an image created 
+    // Ex: 32756238461724837.png
     imageFileName = `${Math.round(
       Math.random() * 1000000000000
     ).toString()}.${imageExtension}`;
@@ -39,7 +41,7 @@ exports.uploadImage = (req, res) => {
   busboy.on("finish", () => {
     admin
       .storage()
-      .bucket()
+      .bucket(config.storageBucket)
       .upload(imageToBeUploaded.filepath, {
         resumable: false,
         metadata: {

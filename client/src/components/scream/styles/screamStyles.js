@@ -1,7 +1,7 @@
 const screamStyles = {
   card: {
     display: "flex",
-    position: 'relative',
+    position: "relative",
     marginBottom: 15,
   },
   image: {
@@ -10,6 +10,9 @@ const screamStyles = {
   content: {
     padding: 25,
     objectFit: "cover",
+  },
+  inline: {
+    display: "inline-flex",
   },
 };
 

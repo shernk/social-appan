@@ -1,5 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+// theme
 import screamStyles from "./styles/screamStyles";
 
 // MUIs
@@ -9,10 +14,37 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
-function Scream({
+// Icons
+import ChatIcon from "@material-ui/icons/Chat";
+
+// redux
+import { connect } from "react-redux";
+
+// utils
+import MyButton from "../../utils/mybutton";
+
+// like scream
+import LikeScream from "./likescream/handles/like/like-button";
+
+const Scream = ({
   classes,
-  screams: { userImageUrl, userHandle, createdAt, body },
-}) {
+  scream: {
+    screamId,
+    body,
+    createdAt,
+    userImageUrl,
+    userHandle,
+    likeScreamCount,
+    commentScreamCount,
+  },
+  // user: {
+  //   authenticated,
+  //   credentials: { handle },
+  // },
+}) => {
+  // calculate time
+  dayjs.extend(relativeTime);
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -21,21 +53,55 @@ function Scream({
         className={classes.image}
       />
       <CardContent className={classes.content}>
-        <Typography
-          variant="h5"
-          color="primary"
-          component={Link}
-          to={`/user/${userHandle}`}
-        >
-          {userHandle}
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          {createdAt}
-        </Typography>
-        <Typography variant="body1">{body}</Typography>
+        <div>
+          <Typography
+            variant="h5"
+            color="primary"
+            component={Link}
+            to={`/user/${userHandle}`}
+          >
+            {userHandle}
+          </Typography>
+        </div>
+        <div>
+          <Typography variant="body2" color="textSecondary">
+            {dayjs(createdAt).fromNow()}
+          </Typography>
+          <Typography variant="body1">{body}</Typography>
+        </div>
+        <div className={classes.inline}>
+          <div>
+            <LikeScream screamId={screamId} />
+            {likeScreamCount <= 1 ? (
+              <span>{likeScreamCount} Like</span>
+            ) : (
+              <span>{likeScreamCount} Likes</span>
+            )}
+          </div>
+          <div>
+            <MyButton tip="comments">
+              <ChatIcon color="primary" />
+            </MyButton>
+            {commentScreamCount <= 1 ? (
+              <span>{commentScreamCount} Comment</span>
+            ) : (
+              <span>{commentScreamCount} Comments</span>
+            )}
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
-}
+};
 
-export default withStyles(screamStyles)(Scream);
+Scream.propTypes = {
+  classes: PropTypes.object.isRequired,
+  // user: PropTypes.object.isRequired,
+  scream: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.state,
+});
+
+export default connect(mapStateToProps)(withStyles(screamStyles)(Scream));

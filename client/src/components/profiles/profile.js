@@ -2,22 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Themes
-import theme from "../../../themes/theme";
+import theme from "../../themes/theme";
 
 // Utils
-import ProfileSkeleton from "../../../utils/profileskeleton";
+import ProfileSkeleton from "../../utils/profileskeleton";
 
 // MUIs
 import withStyles from "@material-ui/core/styles/withStyles";
 
 //Redux
 import { connect } from "react-redux";
-import signOutUserAction from "../../../redux/actions/user-actions/user-signout";
-import uploadImageAction from "../../../redux/actions/user-actions/user-uploadimage";
+import signOutUserAction from "../../redux/actions/user-actions/user-signout";
+import uploadImageAction from "../../redux/actions/user-actions/user-uploadimage";
 
 // Profiles
-import ExistsProfile from "./exists-profile";
-import NoneProfile from "./none-profile";
+import ExistsProfile from "./profile/exists-profile";
+import NoneProfile from "./profile/none-profile";
 
 const Profile = ({
   classes,
@@ -26,6 +26,8 @@ const Profile = ({
     loading,
     authenticated,
   },
+  signOutUserAction,
+  uploadImageAction,
 }) => {
   const credential = { handle, createdAt, imageUrl, bio, website, location };
   const handleImageChange = (event) => {
@@ -43,7 +45,7 @@ const Profile = ({
   const handleSignout = () => {
     signOutUserAction();
   };
-  
+
   return !loading ? (
     authenticated ? (
       <ExistsProfile

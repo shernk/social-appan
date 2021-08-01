@@ -32,6 +32,8 @@ exports.signUp = (req, res) => {
       }
     })
     .then((data) => {
+      console.log('signup');
+      console.log(data.user);
       userId = data.user.uid;
       return data.user.getIdToken();
     })

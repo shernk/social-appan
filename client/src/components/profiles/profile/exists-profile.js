@@ -19,7 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // Profiles
-import EditDetails from "../edit-detail";
+import EditDetails from "./edit-detail";
 import { Tooltip } from "@material-ui/core";
 
 const ExistsProfile = ({

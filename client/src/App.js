@@ -43,8 +43,13 @@ function App() {
                 component={SignUp}
                 authenticated={authenticated}
               />
-              <Route exact path="/home" component={SignOut} />
-              <Route exact path="/user" component={User} />
+              {/* <Route exact path="/home" component={SignOut} /> */}
+              <Route exact path="/users/:handle" component={User} />
+              <Route
+                exact
+                path="/users/:handle/scream/:screamId"
+                component={User}
+              />
             </Switch>
           </div>
         </Router>

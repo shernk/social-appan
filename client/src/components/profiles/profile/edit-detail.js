@@ -2,11 +2,11 @@ import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 // util
-import MyButton from "../../utils/mybutton";
+import MyButton from "../../../utils/mybutton";
 
 // redux
 import { connect } from "react-redux";
-import editUserDetailsAction from "../../redux/actions/user-actions/user-editdetails";
+import editUserDetailsAction from "../../../redux/actions/user-actions/user-editdetails";
 
 // MUIs
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -19,7 +19,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 
 // theme
-import theme from "../../themes/theme";
+import theme from "../../../themes/theme";
 
 const EditDetails = ({ classes, credentials }) => {
   const [states, setStates] = useState({ bio: "", website: "", location: "" });

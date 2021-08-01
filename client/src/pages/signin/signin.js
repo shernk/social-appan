@@ -38,11 +38,6 @@ const SignIn = ({ classes, signInUserAction, UI }) => {
 
   return (
     <>
-      <NavBar>
-        <Button component={Link} to="/home">
-          SignOut
-        </Button>
-      </NavBar>
       <Grid container className={classes.form}>
         <Grid item sm />
         <Grid item sm>
