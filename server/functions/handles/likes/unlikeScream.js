@@ -32,29 +32,24 @@ exports.unlikeScream = (req, res) => {
           .doc(`/Likes/${data.docs[0].id}`)
           .delete()
           .then(() => {
-            let likeScreamCount;
+            let likedScreamCount = screamData.likeScreamCount;
 
             if (
               screamData.likeScreamCount === null ||
               screamData.likeScreamCount === NaN ||
               screamData.likeScreamCount <= 0
             ) {
-              likeScreamCount = screamData.likeScreamCount = 0;
+              likedScreamCount = 0;
 
               return screamDocument.update({
-                likeScreamCount: likeScreamCount,
+                likeScreamCount: likedScreamCount,
               });
             }
 
-            likeScreamCount = screamData.likeScreamCount - 1;
-
-            screamData.likes = [];
-            data.forEach((doc) => {
-              screamData.likes.push(doc.data());
-            });
+            likedScreamCount = --screamData.likeScreamCount;
 
             return screamDocument.update({
-              likeScreamCount: likeScreamCount,
+              likeScreamCount: likedScreamCount,
             });
           })
           .then(() => {

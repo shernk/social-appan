@@ -34,24 +34,24 @@ exports.likeScream = (req, res) => {
             createdAt: new Date().toISOString(),
           })
           .then(() => {
-            let likeScreamCount;
+            let likedScreamCount = screamData.likeScreamCount;
 
             if (
               screamData.likeScreamCount === null ||
               screamData.likeScreamCount === NaN ||
               screamData.likeScreamCount < 0
             ) {
-              likeScreamCount = screamData.likeScreamCount = 0;
+              likedScreamCount = 0;
 
               return screamDocument.update({
-                likeScreamCount: likeScreamCount,
+                likeScreamCount: likedScreamCount,
               });
             }
 
-            likeScreamCount = screamData.likeScreamCount + 1;
+            likedScreamCount = ++screamData.likeScreamCount;
 
             return screamDocument.update({
-              likeScreamCount: likeScreamCount,
+              likeScreamCount: likedScreamCount,
             });
           })
           .then(() => {
