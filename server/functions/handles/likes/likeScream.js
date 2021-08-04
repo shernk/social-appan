@@ -1,7 +1,7 @@
 const { db } = require("../admin-db");
 
 exports.likeScream = (req, res) => {
-  let screamData;
+  let screamData = {};
 
   const likeDocument = db
     .collection("Likes")
@@ -34,24 +34,31 @@ exports.likeScream = (req, res) => {
             createdAt: new Date().toISOString(),
           })
           .then(() => {
+            let likeScreamCount;
+
             if (
               screamData.likeScreamCount === null ||
-              screamData.likeScreamCount === NaN
+              screamData.likeScreamCount === NaN ||
+              screamData.likeScreamCount < 0
             ) {
-              return screamData.likeScreamCount = 0;
+              likeScreamCount = screamData.likeScreamCount = 0;
+
+              return screamDocument.update({
+                likeScreamCount: likeScreamCount,
+              });
             }
 
-            let likeScreamCount = screamData.likeScreamCount + 1;
+            likeScreamCount = screamData.likeScreamCount + 1;
 
             return screamDocument.update({
               likeScreamCount: likeScreamCount,
             });
           })
           .then(() => {
-            return res.json(screamData);
+            return res.status(200).json(screamData);
           });
       } else {
-        return res.status(400).json({ message: "Scream already like", screamData });
+        return res.status(400).json({ message: "Scream already like" });
       }
     })
     .catch((err) => {

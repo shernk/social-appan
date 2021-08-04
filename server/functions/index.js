@@ -60,7 +60,7 @@ app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
-app.delete("/screams", fbAuth, deleteAllScreams);
+app.delete("/screams", /* fbAuth, */ deleteAllScreams);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes

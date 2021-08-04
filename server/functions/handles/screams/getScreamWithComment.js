@@ -7,7 +7,7 @@ exports.getScreamWithComment = (req, res) => {
     .collection("Comments")
     .orderBy("createdAt", "desc")
     .where("screamId", "==", req.params.screamId)
-    .get();  
+    .get();
 
   db.doc(`/Screams/${req.params.screamId}`)
     .get()
