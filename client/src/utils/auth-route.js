@@ -8,6 +8,6 @@ const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
       authenticated === true ? <Redirect to="/" /> : <Component {...props} />
     }
   />
-);
+)
 
 export default AuthRoute;

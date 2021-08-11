@@ -2,9 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-// NavBar
-import NavBar from "../../components/layouts/navbar";
-
 // MUIs
 import { Grid } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";

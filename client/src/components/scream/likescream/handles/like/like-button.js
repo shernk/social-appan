@@ -23,7 +23,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const LikeScream = ({
   screamId,
-  user: { authenticated , likes },
+  user: { authenticated, likes },
   likeScreamAction,
   unlikeScreamAction,
 }) => {
@@ -35,27 +35,23 @@ const LikeScream = ({
   // );
 
   const likedScream = () => {
-    if (likes && likes.find((like) => like.screamId === screamId))
-      return true;
+    if (likes && likes.find((like) => like.screamId === screamId)) return true;
     else return false;
   };
 
-  console.log('222222222222222');
-  console.log(authenticated);
-  console.log(likes);
-  // console.log(likedScream());
+  console.log("222222222222222");
+  console.log(likedScream());
 
   const likeScream = () => {
     likeScreamAction(screamId);
   };
 
-  // console.log(likeScream());
+  console.log("1111111111111");
+  console.log(likeScream());
 
   const unlikeScream = () => {
     unlikeScreamAction(screamId);
   };
-
-  // console.log(unlikeScream());
 
   /*  const likedOrUnliked = likedScream ? (
     <Unlike screamId={screamId} />
