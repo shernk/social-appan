@@ -24,7 +24,10 @@ import { connect } from "react-redux";
 import MyButton from "../../utils/mybutton";
 
 // like scream
-import LikeScream from "./likescream/handles/like/like-button";
+import LikeScream from "./likescream/like-button";
+
+// delete scream
+import DeleteScream from "./deletescream/delete-scream";
 
 const Scream = ({
   classes,
@@ -37,13 +40,18 @@ const Scream = ({
     likeScreamCount,
     commentScreamCount,
   },
-  // user: {
-  //   authenticated,
-  //   credentials: { handle },
-  // },
+  user: {
+    authenticated,
+    credentials: { handle },
+  },
 }) => {
   // calculate time
   dayjs.extend(relativeTime);
+
+  const deleteButton =
+    authenticated && userHandle === handle ? (
+      <DeleteScream screamId={screamId}></DeleteScream>
+    ) : null;
 
   return (
     <Card className={classes.card}>
@@ -62,6 +70,7 @@ const Scream = ({
           >
             {userHandle}
           </Typography>
+          {deleteButton}
         </div>
         <div>
           <Typography variant="body2" color="textSecondary">
@@ -96,12 +105,12 @@ const Scream = ({
 
 Scream.propTypes = {
   classes: PropTypes.object.isRequired,
-  // user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   scream: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.state,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(withStyles(screamStyles)(Scream));

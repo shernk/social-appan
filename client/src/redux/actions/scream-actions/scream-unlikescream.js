@@ -1,5 +1,5 @@
-import axios from "axios";
 import { UNLIKE_SCREAM } from "../../types";
+import axios from "axios";
 
 const unlikeScreamAction = (screamId) => (dispatch) => {
   axios

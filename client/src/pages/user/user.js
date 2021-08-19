@@ -19,11 +19,11 @@ import { connect } from "react-redux";
 import getUserDataHandleAction from "../../redux/actions/user-actions/user-getdatauserhandle";
 import UserHandle from "./handle/user-handle";
 
-const User = ({ data: { loading, screams }, getUserDataHandleAction,props }) => {
-
-  console.log("loading: " + loading);
-  console.log("screams: ", JSON.stringify(screams, null, 2));
-
+const User = ({
+  data: { loading, screams },
+  getUserDataHandleAction,
+  props,
+}) => {
   const { screamIdParam, profile } = UserHandle(props, getUserDataHandleAction);
 
   const screamCard = !screamIdParam

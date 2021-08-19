@@ -1,5 +1,5 @@
-import axios from "axios";
 import { LIKE_SCREAM } from "../../types";
+import axios from "axios";
 
 const likeScreamAction = (screamId) => (dispatch) => {
   console.log('likeScreamAction');

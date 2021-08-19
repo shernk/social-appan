@@ -2,20 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-/* // like handle
-import likeHandle from "./handle/likehandle";
-
-// like handle actions
-import Unauthenticated from "./handle/actions/unauthenticated";
-import Like from "./handle/actions/like";
-import Unlike from "./handle/actions/unlike"; */
-
-import MyButton from "../../../../../utils/mybutton";
+import MyButton from "../../../utils/mybutton";
 
 // Redux
 import { connect } from "react-redux";
-import likeScreamAction from "../../../../../redux/actions/scream-actions/scream-likescream";
-import unlikeScreamAction from "../../../../../redux/actions/scream-actions/scream-unlikescream";
+import likeScreamAction from "../../../redux/actions/scream-actions/scream-likescream";
+import unlikeScreamAction from "../../../redux/actions/scream-actions/scream-unlikescream";
 
 // Icons
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -27,13 +19,6 @@ const LikeScream = ({
   likeScreamAction,
   unlikeScreamAction,
 }) => {
-  // const { likeScream, unlikeScream, likedScream } = likeHandle(
-  //   screamId,
-  //   likes,
-  //   likeScreamAction,
-  //   unlikeScreamAction
-  // );
-
   const likedScream = () => {
     if (likes && likes.find((like) => like.screamId === screamId)) return true;
     else return false;
@@ -53,12 +38,6 @@ const LikeScream = ({
     unlikeScreamAction(screamId);
   };
 
-  /*  const likedOrUnliked = likedScream ? (
-    <Unlike screamId={screamId} />
-  ) : (
-    <Like screamId={screamId} />
-  );
-  return !authenticated ? <Unauthenticated /> : likedOrUnliked; */
   return !authenticated ? (
     <Link to="/signIn">
       <MyButton tip="Like">

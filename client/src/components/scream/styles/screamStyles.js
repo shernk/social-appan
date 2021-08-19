@@ -14,6 +14,11 @@ const screamStyles = {
   inline: {
     display: "inline-flex",
   },
+  deleteButton: {
+    position: "absolute",
+    left: "90%",
+    top: "10%",
+  },
 };
 
 export default screamStyles;
