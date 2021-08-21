@@ -1,3 +1,5 @@
+import theme from "../../../themes/theme";
+
 const screamStyles = {
   card: {
     display: "flex",
@@ -18,6 +20,22 @@ const screamStyles = {
     position: "absolute",
     left: "90%",
     top: "10%",
+  },
+  screamPost: {
+    ...theme,
+    submitButton: {
+      position: "relative",
+      float: "right",
+      marginTop: 10,
+    },
+    progressSpinner: {
+      position: "absolute",
+    },
+    closeButton: {
+      position: "absolute",
+      left: "91%",
+      top: "6%",
+    },
   },
 };
 
