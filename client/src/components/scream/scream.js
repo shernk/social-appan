@@ -23,14 +23,14 @@ import { connect } from "react-redux";
 // utils
 import MyButton from "../../utils/mybutton";
 
-// like scream
+// component
 import LikeScream from "./likescream/like-button";
-
-// delete scream
 import DeleteScream from "./deletescream/delete-scream";
+import ScreamDialog from './screamdialog/scream-dialog'
 
 const Scream = ({
   classes,
+  openDialog,
   scream: {
     screamId,
     body,
@@ -97,6 +97,11 @@ const Scream = ({
               <span>{commentScreamCount} Comments</span>
             )}
           </div>
+            <ScreamDialog
+              screamId={screamId}
+              userHandle={userHandle}
+              openDialog={openDialog}
+            />
         </div>
       </CardContent>
     </Card>
@@ -107,6 +112,7 @@ Scream.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   scream: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

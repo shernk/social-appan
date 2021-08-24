@@ -13,7 +13,6 @@ const initialState = {
 const uiReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_ERRORS:
-      console.log("SET_ERRORS");
       return {
         ...state,
         loading: false,
@@ -26,7 +25,6 @@ const uiReducers = (state = initialState, action) => {
         errors: null,
       };
     case LOADING_UI:
-      console.log("LOADING_UI");
       return {
         ...state,
         loading: true,
@@ -37,8 +35,6 @@ const uiReducers = (state = initialState, action) => {
         loading: false,
       };
     default:
-      console.log('state default');
-      console.log(state);
       return state;
   }
 }

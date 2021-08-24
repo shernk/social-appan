@@ -24,15 +24,15 @@ const LikeScream = ({
     else return false;
   };
 
-  console.log("222222222222222");
-  console.log(likedScream());
+  // console.log("222222222222222");
+  // console.log(likedScream());
 
   const likeScream = () => {
     likeScreamAction(screamId);
   };
 
-  console.log("1111111111111");
-  console.log(likeScream());
+  // console.log("1111111111111");
+  // console.log(likeScream());
 
   const unlikeScream = () => {
     unlikeScreamAction(screamId);
