@@ -1,11 +1,11 @@
 import axios from "axios";
 import { LOADING_UI, SET_SCREAM, STOP_LOADING_UI } from "../../types";
 
-const getScreamAction = (screamId) => (dispatch) => {
+const getScreamWithCommentsAction = (screamId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
 
   axios
-    .get(`/scream/${screamId}`)
+    .get(`/scream/${screamId}/withcomment`)
     .then((res) => {
       dispatch({
         type: SET_SCREAM,
@@ -19,4 +19,4 @@ const getScreamAction = (screamId) => (dispatch) => {
     });
 };
 
-export default getScreamAction;
+export default getScreamWithCommentsAction;

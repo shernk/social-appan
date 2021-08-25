@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const useScreamDialog = (screamId, openDialog, getScreamAction) => {
+const useScreamDialog = (screamId, openDialog, getScreamWithCommentsAction) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [oldPath, setOldPath] = useState("");
   // const [newPath, setNewPath] = useState("");
@@ -21,7 +21,7 @@ const useScreamDialog = (screamId, openDialog, getScreamAction) => {
 
   const handleOpen = () => {
     setIsOpen(true);
-    getScreamAction(screamId);
+    getScreamWithCommentsAction(screamId);
   };
 
   const handleClose = () => {

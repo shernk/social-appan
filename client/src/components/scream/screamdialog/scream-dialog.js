@@ -27,11 +27,13 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // Redux
 import { connect } from "react-redux";
-import getScreamAction from "../../../redux/actions/scream-actions/scream-getscream";
+import getScreamWithCommentsAction from "../../../redux/actions/scream-actions/scream-getscreamwithcomments";
 import clearErrorsAction from "../../../redux/actions/scream-actions/scream-clearerror";
 
 // component
 import LikeScream from "../likescream/like-button";
+import Comment from "../comment/comment";
+import CommentForm from "../comment/comment-form";
 
 const ScreamDialog = ({
   classes,
@@ -45,13 +47,33 @@ const ScreamDialog = ({
     commentScreamCount,
     userImageUrl,
     userHandle,
-    // comments,
+    comments,
   },
-  getScreamAction,
+  getScreamWithCommentsAction,
   clearErrorsAction,
 }) => {
-  const { isOpen, /*  oldPath, newPath, */ handleOpen, handleClose } =
-    useScreamDialog(screamId, openDialog, getScreamAction);
+  // const { isOpen, /*  oldPath, newPath, */ handleOpen, handleClose } =
+  //   useScreamDialog(screamId, openDialog,getScreamWithCommentsAction);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const componentDidMount = () => {
+      if (openDialog) {
+        handleOpen();
+      }
+    };
+
+    componentDidMount();
+  });
+
+  const handleOpen = () => {
+    setIsOpen(true);
+    getScreamWithCommentsAction(screamId);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const dialogMarkup = loading ? (
     <div className={classes.spinnerDiv}>
@@ -89,8 +111,8 @@ const ScreamDialog = ({
         <span>{commentScreamCount} comments</span>
       </Grid>
       <hr className={classes.visibleSeparator} />
-      {/* <CommentForm screamId={screamId} />
-      <Comments comments={comments} /> */}
+      <CommentForm screamId={screamId} />
+      <Comment comments={comments} />
     </Grid>
   );
 
@@ -121,7 +143,7 @@ const ScreamDialog = ({
 
 ScreamDialog.propTypes = {
   clearErrorsAction: PropTypes.func.isRequired,
-  getScreamAction: PropTypes.func.isRequired,
+  getScreamWithCommentsAction: PropTypes.func.isRequired,
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   scream: PropTypes.object.isRequired,
@@ -134,7 +156,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  getScreamAction,
+  getScreamWithCommentsAction,
   clearErrorsAction,
 };
 
