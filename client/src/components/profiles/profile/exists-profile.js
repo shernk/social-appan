@@ -9,6 +9,7 @@ import MyButton from "../../../utils/mybutton";
 import Typography from "@material-ui/core/Typography";
 import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
+import { Tooltip } from "@material-ui/core";
 
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
@@ -20,7 +21,6 @@ import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // Profiles
 import EditDetails from "./edit-detail";
-import { Tooltip } from "@material-ui/core";
 
 const ExistsProfile = ({
   classes,

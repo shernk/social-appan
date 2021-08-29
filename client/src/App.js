@@ -44,10 +44,10 @@ function App() {
                 authenticated={authenticated}
               />
               {/* <Route exact path="/home" component={SignOut} /> */}
-              <Route exact path="/users/:handle" component={User} />
+              <Route exact path="/user/:handle" component={User} />
               <Route
                 exact
-                path="/users/:handle/scream/:screamId"
+                path="/user/:handle/scream/:screamId"
                 component={User}
               />
             </Switch>

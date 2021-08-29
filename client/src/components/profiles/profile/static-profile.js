@@ -11,6 +11,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
@@ -18,13 +19,13 @@ import CalendarToday from "@material-ui/icons/CalendarToday";
 
 const StaticProfile = ({
   classes,
-  profile: { handle, createdAt, imageUrl, bio, website, location },
+  profile: { handle, createdAt, userImageUrl, bio, website, location },
 }) => {
   return (
     <Paper className={classes.paper}>
       <div className={classes.profile}>
         <div className="image-wrapper">
-          <img src={imageUrl} alt="profile" className="profile-image" />
+          <img src={userImageUrl} alt="profile" className="profile-image" />
         </div>
         <hr />
         <div className="profile-details">

@@ -17,16 +17,17 @@ import ProfileSkeleton from "../../utils/profileskeleton";
 // redux
 import { connect } from "react-redux";
 import getUserDataHandleAction from "../../redux/actions/user-actions/user-getdatauserhandle";
-import UserHandle from "./handle/user-handle";
+import useUserHandle from "./handle/user-handle";
 
-const User = ({
-  data: { loading, screams },
-  getUserDataHandleAction,
-  props,
-}) => {
-  const { screamIdParam, profile } = UserHandle(props, getUserDataHandleAction);
+const User = ({ data: { loading, screams }, getUserDataHandleAction }) => {
+  const { screamIdParam, profile } = useUserHandle(
+    getUserDataHandleAction
+  );
 
-  const screamCard = !screamIdParam
+  console.log(screamIdParam);
+  console.log(profile);
+
+  const exsistedScream = !screamIdParam
     ? screams.map((scream) => (
         <Scream key={scream.screamId} scream={scream}></Scream>
       ))
@@ -40,14 +41,14 @@ const User = ({
         }
       });
 
-  const noScreamCard = <p>No scream from this user</p>;
+  const noScream = <p>No scream from this user</p>;
 
   const screamsMarkup = loading ? (
     <ScreamSkeleton />
   ) : screams === null ? (
-    noScreamCard
+    noScream
   ) : (
-    screamCard
+    exsistedScream
   );
 
   return (

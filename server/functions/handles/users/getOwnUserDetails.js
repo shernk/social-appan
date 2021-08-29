@@ -1,21 +1,29 @@
 const { db } = require("../admin-db");
 
-exports.getUserDetails = (req, res) => {
+exports.getAuthenticatedUser = (req, res) => {
   let userData = {};
 
   db.doc(`/Users/${req.user.handle}`)
     .get()
     .then((doc) => {
       if (doc.exists) {
-        userData.user = doc.data();
+        userData.credentials = doc.data();
         return db
-          .collection("Screams")
+          .collection("Likes")
           .where("userHandle", "==", req.user.handle)
-          .orderBy("createdAt", "desc")
           .get();
-      } else {
-        return res.status(404).json({ errror: "User not found" });
       }
+    })
+    .then((data) => {
+      userData.likes = [];
+      data.forEach((doc) => {
+        userData.likes.push(doc.data());
+      });
+      return db
+        .collection("Screams")
+        .where("userHandle", "==", req.user.handle)
+        .orderBy("createdAt", "desc")
+        .get();
     })
     .then((data) => {
       userData.screams = [];
@@ -33,6 +41,7 @@ exports.getUserDetails = (req, res) => {
       return res.json(userData);
     })
     .catch((err) => {
-      return res.status(500).json({ error: err });
+      console.error(err);
+      return res.status(500).json({ error: err.code });
     });
 };

@@ -10,13 +10,15 @@ app.use((req, res, next) => {
   next();
 });
 
-const firebaseConfig = require('../config');
+const firebaseConfig = require("../config");
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
 // Screams
 const { getAllScreams } = require("./handles/screams/getAllScream");
-const { getScreamWithComment } = require("./handles/screams/getScreamWithComment");
+const {
+  getScreamWithComment,
+} = require("./handles/screams/getScreamWithComment");
 const { getScreamWithLike } = require("./handles/screams/getScreamWithLike");
 const { createScream } = require("./handles/screams/createScream");
 const { commentOnScream } = require("./handles/comments/commentOnScream");
@@ -31,9 +33,8 @@ const { signIn } = require("./handles/users/signIn");
 const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
 const { uploadImage } = require("./handles/users/uploadImage");
 const { addUserDetails } = require("./handles/users/addUserDetails");
-const {
-  getUserDetails,
-} = require("./handles/users/getUserDetails");
+const { getUserDetails } = require("./handles/users/getUserDetails");
+const { getOwnUserDetails } = require("./handles/users/getOwnUserDetails");
 
 // Comments
 const { getAllComments } = require("./handles/comments/getAllComments");
@@ -54,8 +55,8 @@ const fbAuth = require("./util/fbAuth");
 
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:screamId/withcomment",  fbAuth, getScreamWithComment);
-app.get("/scream/:screamId/withlike",  fbAuth, getScreamWithLike);
+app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment);
+app.get("/scream/:screamId/withlike", fbAuth, getScreamWithLike);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/createScream", fbAuth, createScream);
@@ -64,11 +65,12 @@ app.delete("/screams", /* fbAuth, */ deleteAllScreams);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes
-app.delete('/likes', deleteAllLikes);
+app.delete("/likes", deleteAllLikes);
 
 // Users routes
 app.get("/users", getAllUserInfo);
-app.get("/user/details", fbAuth, getUserDetails);
+app.get("/user/:handle", fbAuth, getUserDetails);
+// app.get("/users/:hanlde/", fbAuth, getOwnUserDetails);
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post("/user/image", fbAuth, uploadImage);

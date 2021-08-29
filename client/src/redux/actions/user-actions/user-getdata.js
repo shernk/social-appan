@@ -5,7 +5,7 @@ const getUserDataAction = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
 
   axios
-    .get("/user/details")
+    .get("/user")
     .then((res) => {
       dispatch({
         type: SET_USER,

@@ -22,14 +22,18 @@ import NoneProfile from "./profile/none-profile";
 const Profile = ({
   classes,
   user: {
-    credentials: { handle, createdAt, imageUrl, bio, website, location },
-    loading,
     authenticated,
+    loading,
+    credentials: { handle, createdAt, userImageUrl, bio, website, location },
   },
   signOutUserAction,
   uploadImageAction,
 }) => {
-  const credential = { handle, createdAt, imageUrl, bio, website, location };
+  const credential = { handle, createdAt, userImageUrl, bio, website, location };
+
+  console.log("credential");
+  console.log(credential);
+  
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     const formData = new FormData();

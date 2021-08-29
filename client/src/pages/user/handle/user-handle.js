@@ -1,23 +1,19 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const UserHandle = (props) => {
+const useUserHandle = (getUserDataHandleAction) => {
   const [screamIdParam, setScreamIdParam] = useState(null);
-
   const [profile, setPofile] = useState(null);
+  const params = useParams();
 
   useEffect(() => {
-    getProfile(props);
-  });
-
-  const getProfile = (props) => {
-    const { handle, screamId } = props.match.params;
-
+    const { screamId, handle } = params;
     if (screamId) {
       setScreamIdParam(screamId);
     }
 
-    props.getUserDataHandleAction(handle);
+    getUserDataHandleAction(handle);
 
     axios
       .get(`/user/${handle}`)
@@ -25,9 +21,9 @@ const UserHandle = (props) => {
         setPofile(res.data.user);
       })
       .catch((err) => console.log(err));
-  };
+  }, [params, getUserDataHandleAction]);
 
   return { screamIdParam, profile };
 };
 
-export default UserHandle;
+export default useUserHandle;
