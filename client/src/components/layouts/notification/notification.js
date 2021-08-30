@@ -9,7 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // Redux
 import { connect } from "react-redux";
-import { markNotificationsRead } from "../../../redux/actions/user-actions/user-markNotificationsRead";
+import markNotificationsRead from "../../../redux/actions/user-actions/user-markNotificationsRead";
 
 // handle
 import useNotificationHandle from "./handle/handle";
@@ -52,6 +52,8 @@ const mapStateToProps = (state) => ({
   notifications: state.user.notifications,
 });
 
-export default connect(mapStateToProps, { markNotificationsRead })(
-  Notifications
-);
+const mapDispatchToProps = {
+  markNotificationsRead,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

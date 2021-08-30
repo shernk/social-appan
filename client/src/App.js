@@ -13,7 +13,7 @@ import AuthRoute from "./utils/auth-route";
 import authenticated from "./utils/authenticated";
 
 // Components
-import NavBar from "./components/layouts/navbar/navbar";
+import Navbar from "./components/layouts/navbar/navbar";
 
 // Pages
 import Home from "./pages/home/home";
@@ -27,7 +27,7 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <Router>
-          <NavBar />
+          <Navbar />
           <div className="container">
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />

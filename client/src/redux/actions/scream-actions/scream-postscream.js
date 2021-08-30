@@ -1,6 +1,8 @@
 import axios from "axios";
 import { LOADING_UI, POST_SCREAM, SET_ERRORS } from "../../types";
-import clearErrorsAction from "./clearerror";
+
+// redux
+import clearErrorsAction from "./scream-clearerror";
 
 const postScreamAction = (newScream) => (dispatch) => {
   dispatch({ type: LOADING_UI });

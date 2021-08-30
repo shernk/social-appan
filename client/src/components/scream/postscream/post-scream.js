@@ -100,4 +100,4 @@ const mapDispatchToProps = { postScreamAction, clearErrorsAction };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(screamStyles.postScream))(PostScream);
+)(withStyles(screamStyles.postScream)(PostScream));
