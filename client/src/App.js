@@ -13,7 +13,7 @@ import AuthRoute from "./utils/auth-route";
 import authenticated from "./utils/authenticated";
 
 // Components
-import NavBar from "./components/layouts/navbar";
+import NavBar from "./components/layouts/navbar/navbar";
 
 // Pages
 import Home from "./pages/home/home";

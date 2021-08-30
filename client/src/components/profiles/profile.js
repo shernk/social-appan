@@ -31,9 +31,6 @@ const Profile = ({
 }) => {
   const credential = { handle, createdAt, userImageUrl, bio, website, location };
 
-  console.log("credential");
-  console.log(credential);
-  
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     const formData = new FormData();
