@@ -27,7 +27,7 @@ const Home = ({ getScreamsAction, data: { screams, loading } }) => {
   const recentScream = !loading ? scream : <ScreamSkeleton />;
 
   return (
-    <Grid container spacing={16}>
+    <Grid container spacing={1}>
       <Grid item sm={8} xs={12}>
         {recentScream}
       </Grid>

@@ -1,6 +1,6 @@
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
-const color = createMuiTheme({
+const color = {
   palettes: {
     primary: {
       light: "#33c9dc",
@@ -15,11 +15,11 @@ const color = createMuiTheme({
       contrastText: "#fff",
     },
   },
-});
+};
 
 const theme = createMuiTheme({
-  ...color,
   styles: {
+    ...color,
     typography: {
       useNextVariants: true,
     },
@@ -104,9 +104,10 @@ const theme = createMuiTheme({
     },
   },
   profilesskeletion: {
+    ...color,
     handle: {
       height: 20,
-      backgroundColor: color.palette.primary.main,
+      backgroundColor: color.palettes.primary.main,
       width: 60,
       margin: "0 auto 7px auto",
     },
@@ -124,6 +125,7 @@ const theme = createMuiTheme({
     },
   },
   screamskeleton: {
+    ...color,
     card: {
       display: "flex",
       marginBottom: 20,
@@ -140,7 +142,7 @@ const theme = createMuiTheme({
     handle: {
       width: 60,
       height: 18,
-      backgroundColor: color.palette.primary.main,
+      backgroundColor: color.palettes.primary.main,
       marginBottom: 7,
     },
     date: {

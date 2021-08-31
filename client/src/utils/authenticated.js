@@ -1,5 +1,9 @@
 import jwtDecode from "jwt-decode";
+
+// redux-types
 import { SET_AUTHENTICATED } from "../redux/types";
+
+// redux-actions
 import signOutUserAction from "../redux/actions/user-actions/user-signout";
 import getUserDataAction from "../redux/actions/user-actions/user-getdata";
 import axios from "axios";

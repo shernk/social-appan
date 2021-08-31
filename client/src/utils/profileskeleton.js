@@ -42,4 +42,4 @@ ProfileSkeleton.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(theme.profileSkeleton)(ProfileSkeleton);
+export default withStyles(theme.profilesskeletion)(ProfileSkeleton);
