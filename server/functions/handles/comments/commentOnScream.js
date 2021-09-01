@@ -1,4 +1,7 @@
 const { db } = require("../admin-db");
+const {
+  createNotificationOnComment,
+} = require("../notifications/createNotificationOnComment");
 
 exports.commentOnScream = (req, res) => {
   if (req.body.body.trim() === "")
@@ -28,6 +31,7 @@ exports.commentOnScream = (req, res) => {
       });
     })
     .then(() => {
+      createNotificationOnComment(req, res);
       return db.collection("Comments").add(newComment);
     })
     .then(() => {
