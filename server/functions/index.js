@@ -34,7 +34,7 @@ const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
 const { uploadImage } = require("./handles/users/uploadImage");
 const { addUserDetails } = require("./handles/users/addUserDetails");
 const { getUserDetails } = require("./handles/users/getUserDetails");
-const { getOwnUserDetails } = require("./handles/users/getOwnUserDetails");
+const { getDataOfUser } = require("./handles/users/getDataOfUser");
 
 // Comments
 const { getAllComments } = require("./handles/comments/getAllComments");
@@ -70,7 +70,7 @@ app.delete("/likes", deleteAllLikes);
 // Users routes
 app.get("/users", getAllUserInfo);
 app.get("/user/:handle", fbAuth, getUserDetails);
-// app.get("/users/:hanlde/", fbAuth, getOwnUserDetails);
+app.get("/user", fbAuth, getDataOfUser);
 app.post("/signUp", signUp);
 app.post("/signIn", signIn);
 app.post("/user/image", fbAuth, uploadImage);

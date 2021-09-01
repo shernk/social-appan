@@ -1,9 +1,10 @@
 const { db } = require("../admin-db");
 
+// get user's data with own scream
 exports.getUserDetails = (req, res) => {
   let userData = {};
 
-  db.doc(`/Users/${req.user.handle}`)
+  db.doc(`/Users/${req.params.handle}`)
     .get()
     .then((doc) => {
       if (doc.exists) {

@@ -1,6 +1,7 @@
 const { db } = require("../admin-db");
 
-exports.getAuthenticatedUser = (req, res) => {
+// get single data that user have
+exports.getDataOfUser = (req, res) => {
   let userData = {};
 
   db.doc(`/Users/${req.user.handle}`)
@@ -20,24 +21,25 @@ exports.getAuthenticatedUser = (req, res) => {
         userData.likes.push(doc.data());
       });
       return db
-        .collection("Screams")
-        .where("userHandle", "==", req.user.handle)
+        .collection("Notifications")
+        .where("recipient", "==", req.user.handle)
         .orderBy("createdAt", "desc")
         .get();
     })
     .then((data) => {
-      userData.screams = [];
+      userData.notifications = [];
       data.forEach((doc) => {
-        userData.screams.push({
-          screamId: doc.id,
-          body: doc.data().body,
-          userHandle: doc.data().userHandle,
+        userData.notifications.push({
+          notificationId: doc.id,
+          screamId: doc.data().screamId,
+          sender: doc.data().sender,
+          recipient: doc.data().recipient,
           createdAt: doc.data().createdAt,
-          userImage: doc.data().userImage,
-          likeScreamCount: doc.data().likeScreamCount,
-          commentScreamCount: doc.data().commentScreamCount,
+          type: doc.data().type,
+          read: doc.data().read,
         });
       });
+      
       return res.json(userData);
     })
     .catch((err) => {
