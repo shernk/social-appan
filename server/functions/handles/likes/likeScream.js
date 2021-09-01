@@ -1,6 +1,6 @@
 const { db } = require("../admin-db");
 const {
-  createNotificationOnLike,
+  createNotification,
 } = require("../notifications/createNotificationsOnLike");
 
 exports.likeScream = (req, res) => {
@@ -52,7 +52,7 @@ exports.likeScream = (req, res) => {
             }
             
             // async created notification on like
-            createNotificationOnLike(req, res);
+            createNotification(req, res);
 
             likedScreamCount = ++screamData.likeScreamCount;
 
