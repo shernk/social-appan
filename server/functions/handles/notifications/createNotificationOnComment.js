@@ -1,5 +1,5 @@
 const functions = require("firebase-functions");
-const db = require("../handles/admin-db");
+const db = require("../admin-db");
 
 exports.createNotificationOnComment = functions.firestore
   .document("Comments/{id}")

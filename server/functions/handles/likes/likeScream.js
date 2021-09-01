@@ -1,4 +1,7 @@
 const { db } = require("../admin-db");
+const {
+  createNotificationOnLike,
+} = require("../notifications/createNotificationsOnLike");
 
 exports.likeScream = (req, res) => {
   let screamData = {};
@@ -18,7 +21,7 @@ exports.likeScream = (req, res) => {
       if (doc.exists) {
         screamData = doc.data();
         screamData.screamId = doc.id;
-
+      
         return likeDocument;
       } else {
         return res.status(404).json({ message: "Scream not found" });
@@ -47,6 +50,9 @@ exports.likeScream = (req, res) => {
                 likeScreamCount: likedScreamCount,
               });
             }
+            
+            // async created notification on like
+            createNotificationOnLike(req, res);
 
             likedScreamCount = ++screamData.likeScreamCount;
 

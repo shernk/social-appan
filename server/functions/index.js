@@ -83,4 +83,7 @@ app.post("/comment/:commentId", fbAuth, replyOnComment);
 app.delete("/comments", fbAuth, deleteAllComments);
 app.delete("/comment/:commentId", fbAuth, deleteComment);
 
+// Notifications routers
+// app.get("/notifications", getAllNotifications);
+
 exports.api = functions.https.onRequest(app);

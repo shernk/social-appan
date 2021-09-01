@@ -1,26 +1,29 @@
-const functions = require("firebase-functions");
-const { db } = require("../handles/admin-db");
+const { db } = require("../admin-db");
 
-exports.createNotificationOnLike = functions.firestore
-  .document("Likes/{id}")
-  .onCreate((snapshot) => {
-    return db
-      .doc(`/Screams/${snapshot.data().screamId}`)
-      .get()
-      .then((doc) => {
-        if (
-          doc.exists &&
-          doc.data().userHandle !== snapshot.data().userHandle
-        ) {
-          return db.doc(`/Notifications/${snapshot.id}`).set({
-            screamId: doc.id,
-            sender: snapshot.data().userHandle,
-            recipient: doc.data().userHandle,
-            type: "like",
-            read: false,
-            createdAt: new Date().toISOString(),
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  });
+exports.createNotificationOnLike = (req, res) => {
+  let screamData = {};
+
+  db.doc(`/Screams/${req.params.screamId}`)
+    .get()
+    .then((scream) => {
+      if (scream.exists) {
+        return (screamData = scream.data());
+      } else {
+        return res.status(404).json({ message: "Scream not found" });
+      }
+    })
+    .then(() => {
+      return db.collection("Notifications").add({
+        screamId: req.params.screamId,
+        sender: req.user.handle,
+        recipient: screamData.userHandle,
+        createdAt: new Date().toISOString(),
+        type: "like",
+        read: false,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err.code });
+    });
+};
