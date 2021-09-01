@@ -1,11 +1,22 @@
-const functions = require('firebase-functions');
 const { db } = require("../admin-db");
 
+exports.deleteNotificationOnLike = (req, res) => {
+  const likeDocument = db
+    .collection("Notifications")
+    .where("screamId", "==", req.params.screamId)
+    .where("sender", "==", req.user.handle)
+    .limit(1)
+    .get();
 
-exports.deleteNotificationOnLike = functions.firestore
-  .document('Likes/{id}')
-  .onDelete(snapshot => {
-    return db.doc(`/Notifications/${snapshot.id}`)
-      .delete()
-      .catch((err) => console.log(err));
-  })
+  db.doc(`Screams/${req.params.screamId}`)
+    .get()
+    .then(() => {
+      return likeDocument;
+    })
+    .then((data) => {
+      db.doc(`/Notifications/${data.docs[0].id}`).delete();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
