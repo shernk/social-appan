@@ -1,6 +1,6 @@
 const { db } = require("../admin-db");
 const {
-  createNotification,
+  createNotificationOnLike,
 } = require("../notifications/createNotificationsOnLike");
 
 exports.likeScream = (req, res) => {
@@ -21,7 +21,7 @@ exports.likeScream = (req, res) => {
       if (doc.exists) {
         screamData = doc.data();
         screamData.screamId = doc.id;
-      
+
         return likeDocument;
       } else {
         return res.status(404).json({ message: "Scream not found" });
@@ -50,9 +50,6 @@ exports.likeScream = (req, res) => {
                 likeScreamCount: likedScreamCount,
               });
             }
-            
-            // async created notification on like
-            createNotification(req, res);
 
             likedScreamCount = ++screamData.likeScreamCount;
 
@@ -61,6 +58,7 @@ exports.likeScream = (req, res) => {
             });
           })
           .then(() => {
+            createNotificationOnLike(req, res);
             return res.status(200).json(screamData);
           });
       } else {

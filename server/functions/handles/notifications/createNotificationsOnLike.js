@@ -13,7 +13,7 @@ exports.createNotificationOnLike = (req, res) => {
       }
     })
     .then(() => {
-      return db.collection("Notifications").add({
+      db.collection("Notifications").add({
         screamId: req.params.screamId,
         sender: req.user.handle,
         recipient: screamData.userHandle,

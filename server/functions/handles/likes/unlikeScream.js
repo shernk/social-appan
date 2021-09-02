@@ -1,6 +1,6 @@
 const { db } = require("../admin-db");
 const {
-  deleteNotificationOnLike,
+  deleteNotification,
 } = require("../notifications/deleteNotificationOnLike");
 
 exports.unlikeScream = (req, res) => {
@@ -56,7 +56,7 @@ exports.unlikeScream = (req, res) => {
             });
           })
           .then(() => {
-            deleteNotificationOnLike(req, res);
+            deleteNotification(req, res);
             return res.status(200).json(screamData);
           });
       }
