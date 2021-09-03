@@ -18,7 +18,7 @@ const usePostScream = (UI, postScreamAction, clearErrorsAction) => {
     };
 
     componentWillReceiveProps(UI);
-  });
+  }, [UI]);
 
   const handleOpen = () => {
     setIsOpen(true);

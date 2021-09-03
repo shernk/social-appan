@@ -15,7 +15,7 @@ const useCommentHandle = (screamId, submitCommentAction, UI) => {
     };
 
     componentWillRecieveProp(UI);
-  });
+  }, [UI]);
 
   const handleChange = (event) => {
     setBody({ [event.target.name]: event.target.value });

@@ -70,7 +70,7 @@ const EditDetails = ({ classes, credentials }) => {
 
   return (
     <Fragment>
-      <MyButton onClick={handleOpen} btnClassName={classes.button}>
+      <MyButton tip="Edit your profile" onClick={handleOpen} btnClassName={classes.button}>
         <EditIcon color="primary" />
       </MyButton>
       <Dialog>

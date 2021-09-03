@@ -9,18 +9,20 @@ import MyButton from "../../../utils/mybutton";
 import Typography from "@material-ui/core/Typography";
 import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import { Tooltip } from "@material-ui/core";
 
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
-import IconButton from "@material-ui/core/IconButton";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // Profiles
 import EditDetails from "./edit-detail";
+
+// styles
+import profileStyles from "../styles/styles";
+import { withStyles } from "@material-ui/styles";
 
 const ExistsProfile = ({
   classes,
@@ -90,18 +92,15 @@ const ExistsProfile = ({
           <CalendarToday color="primary" />{" "}
           <span>Joined {dayjs(credentials.createdAt).format("MMM YYYY")}</span>
         </div>
-        <MyButton tip="Logout" onClick={handleSignout}>
-          <KeyboardReturn color="primary" />
-        </MyButton>
-        <EditDetails classes={classes} credentials={credentials} />
+        <div className={classes.bottom}>
+          <MyButton tip="Sign out" onClick={handleSignout}>
+            <KeyboardReturn color="primary" />
+          </MyButton>
+          <EditDetails classes={classes} credentials={credentials} />
+        </div>
       </div>
-      <Tooltip title="SignOut" placement="top">
-        <IconButton onClick={handleSignout}>
-          <KeyboardReturn color="primary"></KeyboardReturn>
-        </IconButton>
-      </Tooltip>
     </Paper>
   );
 };
 
-export default ExistsProfile;
+export default withStyles(profileStyles)(ExistsProfile);

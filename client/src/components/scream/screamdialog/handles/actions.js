@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 const useScreamDialog = (screamId, openDialog, getScreamWithCommentsAction) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,11 @@ const useScreamDialog = (screamId, openDialog, getScreamWithCommentsAction) => {
   console.log("openDialog");
   console.log(openDialog);
 
+  const handleOpen = useCallback(() => {
+    setIsOpen(true);
+    getScreamWithCommentsAction(screamId);
+  }, [screamId, getScreamWithCommentsAction]);
+
   useEffect(() => {
     const componentDidMount = () => {
       if (openDialog) {
@@ -17,12 +22,9 @@ const useScreamDialog = (screamId, openDialog, getScreamWithCommentsAction) => {
     };
 
     componentDidMount();
-  });
+  }, [openDialog, handleOpen]);
 
-  const handleOpen = () => {
-    setIsOpen(true);
-    getScreamWithCommentsAction(screamId);
-  };
+  
 
   const handleClose = () => {
     setIsOpen(false);

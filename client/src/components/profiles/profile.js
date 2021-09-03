@@ -19,39 +19,23 @@ import uploadImageAction from "../../redux/actions/user-actions/user-uploadimage
 import ExistsProfile from "./profile/exists-profile";
 import NoneProfile from "./profile/none-profile";
 
+// handles
+import useProfilesHandles from "./handles/handles";
+
 const Profile = ({
   classes,
-  user: {
-    authenticated,
-    loading,
-    credentials: { handle, createdAt, userImageUrl, bio, website, location },
-  },
+  user: { authenticated, loading, credentials },
   signOutUserAction,
   uploadImageAction,
 }) => {
-  const credential = { handle, createdAt, userImageUrl, bio, website, location };
-
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", image, image.name);
-    uploadImageAction(formData);
-  };
-
-  const handleEditPicture = () => {
-    const fileInput = document.getElementById("imageInput");
-    fileInput.click();
-  };
-
-  const handleSignout = () => {
-    signOutUserAction();
-  };
+  const { handleEditPicture, handleImageChange, handleSignout } =
+    useProfilesHandles(signOutUserAction, uploadImageAction);
 
   return !loading ? (
     authenticated ? (
       <ExistsProfile
         classes={classes}
-        credentials={credential}
+        credentials={credentials}
         handleImageChange={handleImageChange}
         handleEditPicture={handleEditPicture}
         handleSignout={handleSignout}
