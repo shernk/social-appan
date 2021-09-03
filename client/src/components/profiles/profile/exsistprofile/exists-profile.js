@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 // Utils
-import MyButton from "../../../utils/mybutton";
+import MyButton from "../../../../utils/mybutton";
 
 // MUIs
+import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
@@ -18,11 +19,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // Profiles
-import EditDetails from "./edit-detail";
+import EditDetails from "../editprofile/edit-detail";
 
 // styles
-import profileStyles from "../styles/styles";
-import { withStyles } from "@material-ui/styles";
+import exsistProfileStyles from "./styles/exsistprofilestyles"
 
 const ExistsProfile = ({
   classes,
@@ -92,7 +92,7 @@ const ExistsProfile = ({
           <CalendarToday color="primary" />{" "}
           <span>Joined {dayjs(credentials.createdAt).format("MMM YYYY")}</span>
         </div>
-        <div className={classes.bottom}>
+        <div>
           <MyButton tip="Sign out" onClick={handleSignout}>
             <KeyboardReturn color="primary" />
           </MyButton>
@@ -103,4 +103,4 @@ const ExistsProfile = ({
   );
 };
 
-export default withStyles(profileStyles)(ExistsProfile);
+export default withStyles(exsistProfileStyles)(ExistsProfile);

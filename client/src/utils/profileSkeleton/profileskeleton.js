@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import NoImg from "../images/no-img.png";
-
-import theme from "../themes/theme";
+import NoImg from "../../images/no-img.png";
 
 // MUI
 import Paper from "@material-ui/core/Paper";
@@ -12,6 +10,9 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
+
+//styles
+import profileSkeletonStyles from "./styles/profileskeletonstyles";
 
 const ProfileSkeleton = ({classes}) => {
   return (
@@ -42,4 +43,4 @@ ProfileSkeleton.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(theme.profilesskeletion)(ProfileSkeleton);
+export default withStyles(profileSkeletonStyles)(ProfileSkeleton);

@@ -1,22 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// Themes
-import theme from "../../themes/theme";
+// utils
+import ProfileSkeleton from "../../utils/profileSkeleton/profileskeleton";
 
-// Utils
-import ProfileSkeleton from "../../utils/profileskeleton";
+// styles
+import profileStyles from './styles/profilestyles';
 
 // MUIs
 import withStyles from "@material-ui/core/styles/withStyles";
 
-//Redux
+// Redux
 import { connect } from "react-redux";
 import signOutUserAction from "../../redux/actions/user-actions/user-signout";
 import uploadImageAction from "../../redux/actions/user-actions/user-uploadimage";
 
 // Profiles
-import ExistsProfile from "./profile/exists-profile";
+import ExistsProfile from "./profile/exsistprofile/exists-profile";
 import NoneProfile from "./profile/none-profile";
 
 // handles
@@ -64,4 +64,4 @@ const mapDispatchToProps = { signOutUserAction, uploadImageAction };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(theme.styles)(Profile));
+)(withStyles(profileStyles)(Profile));

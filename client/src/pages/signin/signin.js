@@ -10,8 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-// theme
-import theme from "../../themes/theme";
+// styles
+import signInStyles from "./styles/signinstyles";
 
 // image
 import AppIcon from "../../images/icon.png";
@@ -115,4 +115,4 @@ const mapDispatchToProps = { signInUserAction };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(theme.styles)(SignIn));
+)(withStyles(signInStyles)(SignIn));

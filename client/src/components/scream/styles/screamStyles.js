@@ -22,7 +22,7 @@ const screamStyles = {
     top: "10%",
   },
   screamPost: {
-    ...theme,
+    ...theme.styles,
     submitButton: {
       position: "relative",
       float: "right",
@@ -38,7 +38,7 @@ const screamStyles = {
     },
   },
   screamDialog: {
-    // ...theme,
+    // ...theme.styles,
     profileImage: {
       maxWidth: 200,
       height: 200,
@@ -63,7 +63,7 @@ const screamStyles = {
     },
   },
   comments: {
-    ...theme,
+    ...theme.styles,
     commentImage: {
       maxWidth: "100%",
       height: 100,

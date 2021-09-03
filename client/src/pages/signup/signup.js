@@ -10,8 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-// theme
-import theme from "../../themes/theme";
+// styles
+import signUpStyles from "./styles/signupstyles";
 
 //image
 import AppIcon from "../../images/icon.png";
@@ -141,4 +141,4 @@ const mapActionsToProps = { signUpUserAction };
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(withStyles(theme.styles)(SignUp));
+)(withStyles(signUpStyles)(SignUp));

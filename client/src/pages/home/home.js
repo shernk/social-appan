@@ -9,7 +9,7 @@ import Scream from "../../components/scream/scream";
 import Profile from "../../components/profiles/profile";
 
 // utils
-import ScreamSkeleton from "../../utils/screamskeleton";
+import ScreamSkeleton from "../../utils/screamSkeleton/screamskeleton";
 
 // Redux
 import { connect } from "react-redux";

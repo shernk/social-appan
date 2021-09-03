@@ -1,7 +1,7 @@
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
-const color = {
-  palettes: {
+const themes = createMuiTheme({
+  palette: {
     primary: {
       light: "#33c9dc",
       main: "#00bcd4",
@@ -15,11 +15,7 @@ const color = {
       contrastText: "#fff",
     },
   },
-};
-
-const theme = createMuiTheme({
   styles: {
-    ...color,
     typography: {
       useNextVariants: true,
     },
@@ -37,7 +33,6 @@ const theme = createMuiTheme({
     },
     button: {
       marginTop: 20,
-      marginBottom: 20,
       position: "relative",
     },
     customError: {
@@ -103,67 +98,6 @@ const theme = createMuiTheme({
       },
     },
   },
-  profilesskeletion: {
-    ...color,
-    handle: {
-      height: 20,
-      backgroundColor: color.palettes.primary.main,
-      width: 60,
-      margin: "0 auto 7px auto",
-    },
-    fullLine: {
-      height: 15,
-      backgroundColor: "rgba(0,0,0,0.6)",
-      width: "100%",
-      marginBottom: 10,
-    },
-    halfLine: {
-      height: 15,
-      backgroundColor: "rgba(0,0,0,0.6)",
-      width: "50%",
-      marginBottom: 10,
-    },
-  },
-  screamskeleton: {
-    ...color,
-    card: {
-      display: "flex",
-      marginBottom: 20,
-    },
-    cardContent: {
-      width: "100%",
-      flexDirection: "column",
-      padding: 25,
-    },
-    cover: {
-      minWidth: 200,
-      objectFit: "cover",
-    },
-    handle: {
-      width: 60,
-      height: 18,
-      backgroundColor: color.palettes.primary.main,
-      marginBottom: 7,
-    },
-    date: {
-      height: 14,
-      width: 100,
-      backgroundColor: "rgba(0,0,0, 0.3)",
-      marginBottom: 10,
-    },
-    fullLine: {
-      height: 15,
-      width: "90%",
-      backgroundColor: "rgba(0,0,0, 0.6)",
-      marginBottom: 10,
-    },
-    halfLine: {
-      height: 15,
-      width: "50%",
-      backgroundColor: "rgba(0,0,0, 0.6)",
-      marginBottom: 10,
-    },
-  },
 });
 
-export default theme;
+export default themes;

@@ -11,8 +11,8 @@ import StaticProfile from "../../components/profiles/profile/static-profile";
 import Grid from "@material-ui/core/Grid";
 
 // utils
-import ScreamSkeleton from "../../utils/screamskeleton";
-import ProfileSkeleton from "../../utils/profileskeleton";
+import ScreamSkeleton from "../../utils/screamSkeleton/screamskeleton";
+import ProfileSkeleton from "../../utils/profileSkeleton/profileskeleton";
 
 // redux
 import { connect } from "react-redux";
