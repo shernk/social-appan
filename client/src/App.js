@@ -20,7 +20,6 @@ import Navbar from "./components/layouts/navbar/navbar";
 // Pages
 import Home from "./pages/home/home";
 import SignIn from "./pages/signin/signin";
-import SignOut from "./pages/signout/signout";
 import SignUp from "./pages/signup/signup";
 import User from "./pages/user/user";
 
@@ -45,7 +44,6 @@ function App() {
                 component={SignUp}
                 authenticated={authenticated}
               />
-              {/* <Route exact path="/home" component={SignOut} /> */}
               <Route exact path="/user/:handle" component={User} />
               <Route
                 exact

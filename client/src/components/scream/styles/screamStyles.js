@@ -1,6 +1,4 @@
-import theme from "../../../themes/theme";
-
-const screamStyles = {
+const screamStyles = (theme) => ({
   card: {
     display: "flex",
     position: "relative",
@@ -16,64 +14,6 @@ const screamStyles = {
   inline: {
     display: "inline-flex",
   },
-  deleteButton: {
-    position: "absolute",
-    left: "90%",
-    top: "10%",
-  },
-  screamPost: {
-    ...theme.styles,
-    submitButton: {
-      position: "relative",
-      float: "right",
-      marginTop: 10,
-    },
-    progressSpinner: {
-      position: "absolute",
-    },
-    closeButton: {
-      position: "absolute",
-      left: "91%",
-      top: "6%",
-    },
-  },
-  screamDialog: {
-    // ...theme.styles,
-    profileImage: {
-      maxWidth: 200,
-      height: 200,
-      borderRadius: "50%",
-      objectFit: "cover",
-    },
-    dialogContent: {
-      padding: 20,
-    },
-    closeButton: {
-      position: "absolute",
-      left: "90%",
-    },
-    expandButton: {
-      position: "absolute",
-      left: "90%",
-    },
-    spinnerDiv: {
-      textAlign: "center",
-      marginTop: 50,
-      marginBottom: 50,
-    },
-  },
-  comments: {
-    ...theme.styles,
-    commentImage: {
-      maxWidth: "100%",
-      height: 100,
-      objectFit: "cover",
-      borderRadius: "50%",
-    },
-    commentData: {
-      marginLeft: 20,
-    },
-  },
-};
+});
 
 export default screamStyles;

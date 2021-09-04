@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 // styles
-import screamStyles from "../styles/screamStyles";
+import commentStyles from "./styles/commenstyles";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -61,4 +61,4 @@ Comment.propTypes = {
   comments: PropTypes.array.isRequired,
 };
 
-export default withStyles(screamStyles.comments)(Comment);
+export default withStyles(commentStyles)(Comment);

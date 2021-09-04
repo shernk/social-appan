@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import MyButton from "../../../utils/mybutton";
 
 // styles
-import screamStyles from "../styles/screamStyles";
+import screamDialogStyles from "./styles/screamdialogstyles";
 
-// handle
-import useScreamDialog from "./handles/actions";
+// handles
+// import useScreamDialog from "./handles/scream-dialog";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -163,4 +163,4 @@ const mapActionsToProps = {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(withStyles(screamStyles.screamDialog)(ScreamDialog));
+)(withStyles(screamDialogStyles)(ScreamDialog));

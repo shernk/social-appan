@@ -1,5 +1,5 @@
 const screamSkeletonStyles = (theme) => ({
-  ...theme.styles.styles,
+  ...theme.styles,
   card: {
     display: "flex",
     marginBottom: 20,

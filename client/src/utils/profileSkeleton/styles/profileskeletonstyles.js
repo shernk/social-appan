@@ -1,5 +1,5 @@
-const profileSkeletionStyles = (theme) => ({
-  ...theme.styles.styles,
+const profileSkeletonStyles = (theme) => ({
+  ...theme.styles,
   handle: {
     height: 20,
     backgroundColor: theme.palette.primary.main,
@@ -20,4 +20,4 @@ const profileSkeletionStyles = (theme) => ({
   },
 });
 
-export default profileSkeletionStyles;
+export default profileSkeletonStyles;

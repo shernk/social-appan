@@ -13,7 +13,7 @@ import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import MyButton from "../../../utils/mybutton";
 
 // styles
-import screamStyles from "../styles/screamStyles";
+import deleteScreamStyles from "./styles/deletescreamstyles";
 
 // redux
 import { connect } from "react-redux";
@@ -68,4 +68,4 @@ const mapDispatchToProps = { deleteScreamsAction };
 export default connect(
   null,
   mapDispatchToProps
-)(withStyles(screamStyles.deleteButton)(DeleteScream));
+)(withStyles(deleteScreamStyles)(DeleteScream));

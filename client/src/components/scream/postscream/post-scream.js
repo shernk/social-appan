@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-// theme
-import screamStyles from "../styles/screamStyles";
+// styles
+import postScreamStyles from "./styles/postscreamstyles";
 
 // utils
 import MyButton from "../../../utils/mybutton";
@@ -22,7 +22,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import postScreamAction from "../../../redux/actions/scream-actions/scream-postscream";
 import clearErrorsAction from "../../../redux/actions/scream-actions/scream-clearerror";
-import usePostScream from "./handles/action";
+
+// handles
+import usePostScream from "./handles/post-scream";
 
 const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
   const {
@@ -53,9 +55,8 @@ const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
             <TextField
               name="body"
               type="text"
-              label="SCREAM!"
               multiline
-              rows="3"
+              rows="2"
               placeholder="Scream at your fellow apes"
               error={errors.body ? true : false}
               helperText={errors.body}
@@ -100,4 +101,4 @@ const mapDispatchToProps = { postScreamAction, clearErrorsAction };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(screamStyles.postScream)(PostScream));
+)(withStyles(postScreamStyles)(PostScream));

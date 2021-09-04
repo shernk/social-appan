@@ -32,7 +32,7 @@ const themes = createMuiTheme({
       margin: "10px auto 10px auto",
     },
     button: {
-      marginTop: 20,
+      paddingTop: 10,
       position: "relative",
     },
     customError: {
@@ -53,7 +53,7 @@ const themes = createMuiTheme({
       marginBottom: 20,
     },
     paper: {
-      padding: 20,
+      padding: 10,
     },
     profile: {
       "& .image-wrapper": {

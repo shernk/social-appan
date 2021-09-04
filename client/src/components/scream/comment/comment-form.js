@@ -78,4 +78,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(theme)(CommentForm));
+)(withStyles(theme.styles)(CommentForm));
