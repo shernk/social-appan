@@ -4,6 +4,9 @@ import { LOADING_UI, SET_SCREAM, STOP_LOADING_UI } from "../../types";
 const getScreamWithCommentsAction = (screamId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
 
+  console.log("getScreamWithCommentsAction");
+  console.log(screamId);
+
   axios
     .get(`/scream/${screamId}/withcomment`)
     .then((res) => {

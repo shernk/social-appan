@@ -56,20 +56,17 @@ const ScreamDialog = ({
   //   useScreamDialog(screamId, openDialog,getScreamWithCommentsAction);
   const [isOpen, setIsOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    const componentDidMount = () => {
-      if (openDialog) {
-        handleOpen();
-      }
-    };
-
-    componentDidMount();
-  });
-
   const handleOpen = () => {
     setIsOpen(true);
     getScreamWithCommentsAction(screamId);
   };
+
+  React.useEffect(() => {
+    if (openDialog) {
+      // setIsOpen(true);
+      getScreamWithCommentsAction(screamId);
+    }
+  }, [openDialog, screamId, getScreamWithCommentsAction]);
 
   const handleClose = () => {
     setIsOpen(false);
