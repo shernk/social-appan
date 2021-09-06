@@ -13,6 +13,7 @@ const screamStyles = (theme) => ({
   },
   inline: {
     display: "inline-flex",
+    marginLeft: -15,
   },
 });
 

@@ -18,7 +18,7 @@ const Comment = ({ classes, comments }) => {
         const { body, createdAt, userImageUrl, userHandle } = comment;
 
         return (
-          <Fragment>
+          <Fragment key={createdAt}>
             <Grid item sm={12}>
               <Grid container>
                 <Grid item sm={2}>
