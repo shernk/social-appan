@@ -23,7 +23,7 @@ const useCommentHandle = (screamId, submitCommentAction, UI) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    submitCommentAction(screamId, { body: body });
+    submitCommentAction(screamId, body);
   };
 
   return { body, errors, handleChange, handleSubmit };

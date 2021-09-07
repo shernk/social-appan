@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 
+// express
 const express = require("express");
 const app = express();
 
@@ -10,6 +11,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// firebase
 const firebaseConfig = require("../config");
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
@@ -49,8 +51,6 @@ const { deleteAllLikes } = require("./handles/likes/deleteAllLikes");
 // Auth
 const fbAuth = require("./util/fbAuth");
 
-// const commentsRouter = require('./routers/comments/comments')
-
 //------------------------------------------------//
 
 // Screams routes
@@ -59,16 +59,16 @@ app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment);
 app.get("/scream/:screamId/withlike", fbAuth, getScreamWithLike);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
-app.post("/createScream", fbAuth, createScream);
+app.post("/scream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
-app.delete("/screams", /* fbAuth, */ deleteAllScreams);
+app.delete("/screams", deleteAllScreams); // don't push to repo into master branch
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes
-app.delete("/likes", deleteAllLikes);
+app.delete("/likes", deleteAllLikes); // don't push to repo into master branch
 
 // Users routes
-app.get("/users", getAllUserInfo);
+app.get("/users", getAllUserInfo); // don't push to repo into master branch
 app.get("/user/:handle", fbAuth, getUserDetails);
 app.get("/user", fbAuth, getDataOfUser);
 app.post("/signUp", signUp);
@@ -77,13 +77,10 @@ app.post("/user/image", fbAuth, uploadImage);
 app.post("/user", fbAuth, addUserDetails);
 
 // Comments routes
-app.get("/comments", getAllComments);
+app.get("/comments", getAllComments); // don't push to repo into master branch
 app.get("/comment/:commentId", fbAuth, getComment);
 app.post("/comment/:commentId", fbAuth, replyOnComment);
 app.delete("/comments", fbAuth, deleteAllComments);
 app.delete("/comment/:commentId", fbAuth, deleteComment);
-
-// Notifications routers
-// app.get("/notifications", getAllNotifications);
 
 exports.api = functions.https.onRequest(app);

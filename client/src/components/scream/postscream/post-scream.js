@@ -24,12 +24,12 @@ import postScreamAction from "../../../redux/actions/scream-actions/scream-posts
 import clearErrorsAction from "../../../redux/actions/scream-actions/scream-clearerror";
 
 // handles
-import usePostScream from "./handles/post-scream";
+import usePostScream from "./handles/handle";
 
 const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
   const {
     isOpen,
-    errors,
+    err,
     handleOpen,
     handleClose,
     handleChange,
@@ -38,7 +38,7 @@ const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
 
   return (
     <Fragment>
-      <MyButton tip="Post a Scream!" onClick={handleOpen}>
+      <MyButton tip="Post Scream" onClick={handleOpen}>
         <AddIcon />
       </MyButton>
       <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
@@ -57,9 +57,9 @@ const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
               type="text"
               multiline
               rows="2"
-              placeholder="Scream at your fellow apes"
-              error={errors.body ? true : false}
-              helperText={errors.body}
+              placeholder="What is on your mind?"
+              error={err.body ? true : false}
+              helperText={err.body}
               className={classes.textField}
               onChange={handleChange}
               fullWidth
@@ -87,6 +87,7 @@ const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
 };
 
 PostScream.propTypes = {
+  classes: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
   postScreamAction: PropTypes.func.isRequired,
   clearErrorsAction: PropTypes.func.isRequired,

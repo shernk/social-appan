@@ -1,10 +1,10 @@
-const {db} = require('../admin-db');
+const { db } = require("../admin-db");
 
 exports.createScream = (req, res) => {
   if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Body must not be empty" });
   }
-  
+
   const newScream = {
     body: req.body.body,
     userHandle: req.user.handle,
@@ -16,8 +16,10 @@ exports.createScream = (req, res) => {
 
   db.collection("Screams")
     .add(newScream)
-    .then(() => {
-      res.json(newScream);
+    .then((doc) => {
+      const resScream = newScream;
+      resScream.screamId = doc.id;
+      res.json(resScream);
     })
     .catch((err) => {
       console.error(err);

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 const usePostScream = (UI, postScreamAction, clearErrorsAction) => {
   const [isOpen, setIsOpen] = useState(false);
   const [body, setBody] = useState("");
-  const [errors, setErrors] = useState({});
+  const [err, setErrors] = useState({});
 
   useEffect(() => {
     const componentWillReceiveProps = (UI) => {
@@ -27,7 +27,6 @@ const usePostScream = (UI, postScreamAction, clearErrorsAction) => {
   const handleClose = () => {
     clearErrorsAction();
     setIsOpen(false);
-    setErrors({});
   };
 
   const handleChange = (event) => {
@@ -36,12 +35,12 @@ const usePostScream = (UI, postScreamAction, clearErrorsAction) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postScreamAction({ body: body });
+    postScreamAction(body);
   };
 
   return {
     isOpen,
-    errors,
+    err,
     handleOpen,
     handleClose,
     handleChange,
