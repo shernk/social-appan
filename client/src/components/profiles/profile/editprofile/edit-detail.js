@@ -6,7 +6,7 @@ import MyButton from "../../../../utils/mybutton";
 
 // redux
 import { connect } from "react-redux";
-import editUserDetailsAction from "../../../../redux/actions/user-actions/user-editdetails";
+import editUserDetailsAction from "../../../../redux/actions/users/user-editdetails";
 
 // MUIs
 import Button from "@material-ui/core/Button";
@@ -16,7 +16,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
-
 
 const EditDetails = ({ classes, credentials }) => {
   const [states, setStates] = useState({ bio: "", website: "", location: "" });
@@ -67,7 +66,11 @@ const EditDetails = ({ classes, credentials }) => {
 
   return (
     <Fragment>
-      <MyButton tip="Edit your profile" onClick={handleOpen} btnClassName={classes.button}>
+      <MyButton
+        tip="Edit your profile"
+        onClick={handleOpen}
+        btnClassName={classes.button}
+      >
         <EditIcon color="primary" />
       </MyButton>
       <Dialog>
@@ -132,7 +135,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { editUserDetailsAction };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(EditDetails);

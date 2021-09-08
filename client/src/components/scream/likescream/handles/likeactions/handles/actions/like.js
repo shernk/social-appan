@@ -9,7 +9,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 // redux
 import { connect } from "react-redux";
-import likeScreamAction from "../../../../../../../redux/actions/scream-actions/scream-likescream";
+import likeScreamAction from "../../../../../../../redux/actions/screams/scream-likescream";
 
 const Like = ({ screamId, likeScreamAction }) => {
   const likescream = () => {

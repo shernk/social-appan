@@ -27,8 +27,8 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // Redux
 import { connect } from "react-redux";
-import getScreamWithCommentsAction from "../../../redux/actions/scream-actions/scream-getscreamwithcomments";
-import clearErrorsAction from "../../../redux/actions/scream-actions/scream-clearerror";
+import getScreamWithCommentsAction from "../../../redux/actions/screams/scream-getscreamwithcomments";
+import clearErrorsAction from "../../../redux/actions/screams/scream-clearerror";
 
 // component
 import LikeScream from "../likescream/like-button";

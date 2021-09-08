@@ -21,7 +21,7 @@ import useUserSignUp from "./handle/user-signup";
 
 // redux
 import { connect } from "react-redux";
-import signUpUserAction from "../../redux/actions/user-actions/user-signup";
+import signUpUserAction from "../../redux/actions/users/user-signup";
 
 const SignUp = ({ signUpUserAction, classes, UI }) => {
   const {

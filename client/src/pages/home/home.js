@@ -13,7 +13,7 @@ import ScreamSkeleton from "../../utils/screamSkeleton/screamskeleton";
 
 // Redux
 import { connect } from "react-redux";
-import getScreamsAction from "../../redux/actions/scream-actions/scream-getscreams";
+import getScreamsAction from "../../redux/actions/screams/scream-getscreams";
 
 const Home = ({ getScreamsAction, data: { screams, loading } }) => {
   useEffect(() => {

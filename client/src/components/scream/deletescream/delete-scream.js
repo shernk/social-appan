@@ -17,7 +17,7 @@ import deleteScreamStyles from "./styles/deletescreamstyles";
 
 // redux
 import { connect } from "react-redux";
-import deleteScreamsAction from "../../../redux/actions/scream-actions/scream-deletescream";
+import deleteScreamsAction from "../../../redux/actions/screams/scream-deletescream";
 import useDeleteHandle from "./handles/delete/actions";
 
 const DeleteScream = ({ classes, screamId, deleteScreamsAction }) => {

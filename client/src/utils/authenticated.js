@@ -6,8 +6,8 @@ import axios from "axios";
 import { SET_AUTHENTICATED } from "../redux/types";
 
 // redux-actions
-import signOutUserAction from "../redux/actions/user-actions/user-signout";
-import getUserDataAction from "../redux/actions/user-actions/user-getdata";
+import signOutUserAction from "../redux/actions/users/user-signout";
+import getUserDataAction from "../redux/actions/users/user-getdata";
 
 // redux
 import store from "../redux/stores";

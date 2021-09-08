@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 import ProfileSkeleton from "../../utils/profileSkeleton/profileskeleton";
 
 // styles
-import profileStyles from './styles/profilestyles';
+import profileStyles from "./styles/profilestyles";
 
 // MUIs
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // Redux
 import { connect } from "react-redux";
-import signOutUserAction from "../../redux/actions/user-actions/user-signout";
-import uploadImageAction from "../../redux/actions/user-actions/user-uploadimage";
+import signOutUserAction from "../../redux/actions/users/user-signout";
+import uploadImageAction from "../../redux/actions/users/user-uploadimage";
 
 // Profiles
 import ExistsProfile from "./profile/exsistprofile/exists-profile";

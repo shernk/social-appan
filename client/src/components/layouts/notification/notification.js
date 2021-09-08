@@ -9,7 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // Redux
 import { connect } from "react-redux";
-import markNotificationsRead from "../../../redux/actions/user-actions/user-markNotificationsRead";
+import markNotificationsRead from "../../../redux/actions/users/user-markNotificationsRead";
 
 // handle
 import useNotificationHandle from "./handle/handle";

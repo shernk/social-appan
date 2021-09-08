@@ -9,7 +9,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 
 // Redux
 import { connect } from "react-redux";
-import unlikeScreamAction from "../../../../../../../redux/actions/scream-actions/scream-unlikescream";
+import unlikeScreamAction from "../../../../../../../redux/actions/screams/scream-unlikescream";
 
 const Unlike = ({ screamId, unlikeScreamAction }) => {
   const unlikeScream = () => {

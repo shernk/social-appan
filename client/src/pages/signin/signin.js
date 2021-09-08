@@ -21,7 +21,7 @@ import useUserSignIn from "./handle/user-signin";
 
 // redux
 import { connect } from "react-redux";
-import signInUserAction from "../../redux/actions/user-actions/user-signin";
+import signInUserAction from "../../redux/actions/users/user-signin";
 
 const SignIn = ({ classes, signInUserAction, UI }) => {
   const {

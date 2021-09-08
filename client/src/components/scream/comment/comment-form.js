@@ -15,7 +15,7 @@ import useCommentHandle from "./handles/actions";
 
 // Redux
 import { connect } from "react-redux";
-import submitCommentAction from "../../../redux/actions/scream-actions/scream-submitcomment";
+import submitCommentAction from "../../../redux/actions/screams/scream-submitcomment";
 
 const CommentForm = ({
   classes,

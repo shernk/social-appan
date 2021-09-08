@@ -20,21 +20,15 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Redux
 import { connect } from "react-redux";
-import postScreamAction from "../../../redux/actions/scream-actions/scream-postscream";
-import clearErrorsAction from "../../../redux/actions/scream-actions/scream-clearerror";
+import postScreamAction from "../../../redux/actions/screams/scream-postscream";
+import clearErrorsAction from "../../../redux/actions/screams/scream-clearerror";
 
 // handles
 import usePostScream from "./handles/handle";
 
 const PostScream = ({ classes, UI, postScreamAction, clearErrorsAction }) => {
-  const {
-    isOpen,
-    err,
-    handleOpen,
-    handleClose,
-    handleChange,
-    handleSubmit,
-  } = usePostScream(UI, postScreamAction, clearErrorsAction);
+  const { isOpen, err, handleOpen, handleClose, handleChange, handleSubmit } =
+    usePostScream(UI, postScreamAction, clearErrorsAction);
 
   return (
     <Fragment>
