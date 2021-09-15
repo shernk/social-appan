@@ -26,7 +26,7 @@ import MyButton from "../../utils/mybutton";
 // component
 import LikeScream from "./likescream/like-button";
 import DeleteScream from "./deletescream/delete-scream";
-import ScreamDialog from './screamdialog/scream-dialog'
+import ScreamDialog from "./screamdialog/scream-dialog";
 
 const Scream = ({
   classes,
@@ -97,11 +97,14 @@ const Scream = ({
               <span>{commentScreamCount} Comments</span>
             )}
           </div>
+          <div>
             <ScreamDialog
               screamId={screamId}
               userHandle={userHandle}
               openDialog={openDialog}
+              authenticated={authenticated}
             />
+          </div>
         </div>
       </CardContent>
     </Card>

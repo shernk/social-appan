@@ -88,7 +88,7 @@ const SignIn = ({ classes, signInUserAction, UI }) => {
             </Button>
             <br />
             <small>
-              Don't have an account? Sign Up <Link to="/signUp">here</Link>
+              Don't have an account? Sign Up <Link to="/signup">here</Link>
             </small>
           </form>
         </Grid>

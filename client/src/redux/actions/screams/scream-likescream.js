@@ -2,12 +2,10 @@ import { LIKE_SCREAM } from "../../types";
 import axios from "axios";
 
 const likeScreamAction = (screamId) => (dispatch) => {
-  console.log('likeScreamAction');
-  console.log(screamId);
   axios
-  .get(`/scream/${screamId}/like`)
-  .then((res) => {
-      console.log(res)
+    .get(`/scream/${screamId}/like`)
+    .then((res) => {
+      console.log(res);
       dispatch({
         type: LIKE_SCREAM,
         payload: res.data,

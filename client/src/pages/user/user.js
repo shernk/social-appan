@@ -17,6 +17,8 @@ import ProfileSkeleton from "../../utils/profileSkeleton/profileskeleton";
 // redux
 import { connect } from "react-redux";
 import getUserDataHandleAction from "../../redux/actions/users/user-getdatauserhandle";
+
+// handle
 import useUserHandle from "./handle/user-handle";
 
 const User = ({ data: { loading, screams }, getUserDataHandleAction }) => {

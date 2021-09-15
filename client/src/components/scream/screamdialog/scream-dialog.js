@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
 // utils
@@ -10,20 +9,15 @@ import MyButton from "../../../utils/mybutton";
 import screamDialogStyles from "./styles/screamdialogstyles";
 
 // handles
-// import useScreamDialog from "./handles/scream-dialog";
+import useScreamDialog from "./handles/screamdialog";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
 import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
 // Icons
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
-import ChatIcon from "@material-ui/icons/Chat";
 
 // Redux
 import { connect } from "react-redux";
@@ -31,87 +25,25 @@ import getScreamWithCommentsAction from "../../../redux/actions/screams/scream-g
 import clearErrorsAction from "../../../redux/actions/screams/scream-clearerror";
 
 // component
-import LikeScream from "../likescream/like-button";
-import Comment from "../comment/comment";
-import CommentForm from "../comment/comment-form";
+import DialogMarkup from "./dialog/dialog";
 
 const ScreamDialog = ({
   classes,
+  screamId,
+  userHandle,
   openDialog,
-  UI: { loading },
-  scream: {
-    screamId,
-    body,
-    createdAt,
-    likeScreamCount,
-    commentScreamCount,
-    userImageUrl,
-    userHandle,
-    comments,
-  },
+  authenticated,
   getScreamWithCommentsAction,
   clearErrorsAction,
 }) => {
-  // const { isOpen, /*  oldPath, newPath, */ handleOpen, handleClose } =
-  //   useScreamDialog(screamId, openDialog,getScreamWithCommentsAction);
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-    getScreamWithCommentsAction(screamId);
-  };
-
-  React.useEffect(() => {
-    if (openDialog) {
-      // setIsOpen(true);
-      getScreamWithCommentsAction(screamId);
-    }
-  }, [openDialog, screamId, getScreamWithCommentsAction]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  const dialogMarkup = loading ? (
-    <div className={classes.spinnerDiv}>
-      <CircularProgress size={200} thickness={2} />
-    </div>
-  ) : (
-    <Grid container spacing={16}>
-      <Grid item sm={5}>
-        <img
-          src={userImageUrl}
-          alt="Profile"
-          className={classes.profileImage}
-        />
-      </Grid>
-      <Grid item sm={7}>
-        <Typography
-          component={Link}
-          color="primary"
-          variant="h5"
-          to={`/users/${userHandle}`}
-        >
-          @{userHandle}
-        </Typography>
-        <hr className={classes.invisibleSeparator} />
-        <Typography variant="body2" color="textSecondary">
-          {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
-        </Typography>
-        <hr className={classes.invisibleSeparator} />
-        <Typography variant="body1">{body}</Typography>
-        <LikeScream screamId={screamId} />
-        <span>{likeScreamCount} likes</span>
-        <MyButton tip="comments">
-          <ChatIcon color="primary" />
-        </MyButton>
-        <span>{commentScreamCount} comments</span>
-      </Grid>
-      <hr className={classes.visibleSeparator} />
-      <CommentForm screamId={screamId} />
-      <Comment comments={comments} />
-    </Grid>
-  );
+  const { isOpen, /*  oldPath, newPath, */ handleOpen, handleClose } =
+    useScreamDialog(
+      screamId,
+      openDialog,
+      authenticated,
+      getScreamWithCommentsAction,
+      clearErrorsAction
+    );
 
   return (
     <Fragment>
@@ -122,6 +54,7 @@ const ScreamDialog = ({
       >
         <UnfoldMore color="primary" />
       </MyButton>
+
       <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
         <MyButton
           tip="Close"
@@ -130,9 +63,12 @@ const ScreamDialog = ({
         >
           <CloseIcon />
         </MyButton>
-        <DialogContent className={classes.dialogContent}>
-          {dialogMarkup}
-        </DialogContent>
+
+        <DialogMarkup
+          screamParam={screamId}
+          userHandle={userHandle}
+          authenticated={authenticated}
+        />
       </Dialog>
     </Fragment>
   );
@@ -143,14 +79,9 @@ ScreamDialog.propTypes = {
   getScreamWithCommentsAction: PropTypes.func.isRequired,
   screamId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
-  scream: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  openDialog: PropTypes.bool.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  scream: state.data.scream,
-  UI: state.UI,
-});
 
 const mapActionsToProps = {
   getScreamWithCommentsAction,
@@ -158,6 +89,6 @@ const mapActionsToProps = {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapActionsToProps
 )(withStyles(screamDialogStyles)(ScreamDialog));

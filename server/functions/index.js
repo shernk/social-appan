@@ -53,31 +53,34 @@ const fbAuth = require("./util/fbAuth");
 
 //------------------------------------------------//
 
+//! change all scream route to default: /:userhandle/scream/:screamId
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment);
+app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment); //TODO: change route to scream/:screamId/comment
 app.get("/scream/:screamId/withlike", fbAuth, getScreamWithLike);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/scream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
-app.delete("/screams", deleteAllScreams); // don't push to repo into master branch
+app.delete("/screams", deleteAllScreams); //TODO: don't push to repo into master branch
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes
-app.delete("/likes", deleteAllLikes); // don't push to repo into master branch
+app.delete("/likes", deleteAllLikes); //TODO: don't push to repo into master branch
 
 // Users routes
-app.get("/users", getAllUserInfo); // don't push to repo into master branch
+app.get("/users", getAllUserInfo); //TODO: don't push to repo into master branch
 app.get("/user/:handle", fbAuth, getUserDetails);
 app.get("/user", fbAuth, getDataOfUser);
-app.post("/signUp", signUp);
-app.post("/signIn", signIn);
-app.post("/user/image", fbAuth, uploadImage);
-app.post("/user", fbAuth, addUserDetails);
+app.post("/signUp", signUp); //TODO: change route to /signup
+app.post("/signin", signIn);
+app.post("/user/image", fbAuth, uploadImage); //TODO: change route to :/handle/image
+app.post("/user", fbAuth, addUserDetails); //TODO: change route to :/handle/details
 
+//! understand each comment is as like scream(see twitter)
+//! change all scream route to default: /:userhandle/scream/:screamId
 // Comments routes
-app.get("/comments", getAllComments); // don't push to repo into master branch
+app.get("/comments", getAllComments); //TODO: don't push to repo into master branch
 app.get("/comment/:commentId", fbAuth, getComment);
 app.post("/comment/:commentId", fbAuth, replyOnComment);
 app.delete("/comments", fbAuth, deleteAllComments);

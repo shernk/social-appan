@@ -58,6 +58,7 @@ const Comment = ({ classes, comments }) => {
 };
 
 Comment.propTypes = {
+  classes: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
 };
 

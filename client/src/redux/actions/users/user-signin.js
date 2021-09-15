@@ -7,7 +7,7 @@ const signInUserAction = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
 
   axios
-    .post("/signIn", userData)
+    .post("/signin", userData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserDataAction());

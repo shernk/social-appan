@@ -24,7 +24,7 @@ exports.getScreamWithComment = (req, res) => {
       data.forEach((doc) => {
         screamData.comments.push(doc.data());
       });
-      
+
       return res.status(200).json(screamData);
     })
     .catch((err) => {
