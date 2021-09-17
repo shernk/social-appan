@@ -22,6 +22,10 @@ const screamDialogStyles = (theme) => ({
     marginTop: 50,
     marginBottom: 50,
   },
+  inline: {
+    display: "inline-flex",
+    marginLeft: -15,
+  },
 });
 
 export default screamDialogStyles;

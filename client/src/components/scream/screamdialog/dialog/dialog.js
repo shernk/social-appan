@@ -39,7 +39,11 @@ const DialogMarkup = ({
     comments,
   },
 }) => {
-  return loading && !authenticated ? (
+  console.log("dialogmarkup");
+  //!BUG: comments is undefined
+  console.log(comments);
+  console.log(loading);
+  return (loading && !authenticated) ? (
     <div>
       <NoneProfile classes={classes} />
     </div>
@@ -54,28 +58,55 @@ const DialogMarkup = ({
           />
         </Grid>
         <Grid item sm={7}>
-          <Typography
-            component={Link}
-            color="primary"
-            variant="h5"
-            to={`/users/${userHandle}`}
-          >
-            @{userHandle}
-          </Typography>
+          <div>
+            <Typography
+              component={Link}
+              color="primary"
+              variant="h5"
+              to={`/users/${userHandle}`}
+            >
+              @{userHandle}
+            </Typography>
+          </div>
+
           <hr className={classes.invisibleSeparator} />
-          <Typography variant="body2" color="textSecondary">
-            {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
-          </Typography>
+
+          <div>
+            <Typography variant="body2" color="textSecondary">
+              {dayjs(createdAt).format("h:mm a MMMM DD YYYY")}
+            </Typography>
+          </div>
+
           <hr className={classes.invisibleSeparator} />
-          <Typography variant="body1">{body}</Typography>
-          <LikeScream screamId={screamId} />
-          <span>{likeScreamCount} likes</span>
-          <MyButton tip="comments">
-            <ChatIcon color="primary" />
-          </MyButton>
-          <span>{commentScreamCount} comments</span>
+
+          <div>
+            <Typography variant="body1">{body}</Typography>
+          </div>
+
+          <div className={classes.inline}>
+            <div>
+              <LikeScream screamId={screamId} />
+              {likeScreamCount <= 1 ? (
+                <span>{likeScreamCount} Like</span>
+              ) : (
+                <span>{likeScreamCount} Likes</span>
+              )}
+            </div>
+            <div>
+              <MyButton tip="comments">
+                <ChatIcon color="primary" />
+              </MyButton>
+              {commentScreamCount <= 1 ? (
+                <span>{commentScreamCount} Comment</span>
+              ) : (
+                <span>{commentScreamCount} Comments</span>
+              )}
+            </div>
+          </div>
         </Grid>
+
         <hr className={classes.visibleSeparator} />
+
         <CommentForm screamId={screamId} />
         <Comment comments={comments} />
       </Grid>

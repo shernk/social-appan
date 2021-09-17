@@ -74,7 +74,7 @@ const Scream = ({
         </div>
         <div>
           <Typography variant="body2" color="textSecondary">
-            {dayjs(createdAt).fromNow()}
+            {dayjs(createdAt).format("h:mm a MMMM DD YYYY")}
           </Typography>
           <Typography variant="body1">{body}</Typography>
         </div>

@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 // utils
 import MyButton from "../../../utils/mybutton";
@@ -9,7 +8,7 @@ import MyButton from "../../../utils/mybutton";
 import screamDialogStyles from "./styles/screamdialogstyles";
 
 // handles
-import useScreamDialog from "./handles/screamdialog";
+import useScreamDialog from "./dialog/handles/screamdialog";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -63,9 +62,8 @@ const ScreamDialog = ({
         >
           <CloseIcon />
         </MyButton>
-
         <DialogMarkup
-          screamParam={screamId}
+          screamId={screamId}
           userHandle={userHandle}
           authenticated={authenticated}
         />
