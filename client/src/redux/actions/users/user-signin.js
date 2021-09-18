@@ -13,7 +13,7 @@ const signInUserAction = (userData, history) => (dispatch) => {
       dispatch(getUserDataAction());
       dispatch({ type: CLEAR_ERRORS });
 
-      history.push("/");
+      history.push("/home");
     })
     .catch((err) => {
       dispatch({

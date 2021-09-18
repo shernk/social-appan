@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -31,7 +31,8 @@ function App() {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path={["/", "/home"]} component={Home} />
+              <Route exact path="/" component={() => <Redirect to="/home" />} />
+              <Route exact path={"/home"} component={Home} />
               <AuthRoute
                 exact
                 path="/signin"
@@ -45,11 +46,7 @@ function App() {
                 authenticated={authenticated}
               />
               <Route exact path="/:handle" component={User} />
-              <Route
-                exact
-                path="/:handle/scream/:screamId"
-                component={User}
-              />
+              <Route exact path="/:handle/scream/:screamId" component={User} />
             </Switch>
           </div>
         </Router>

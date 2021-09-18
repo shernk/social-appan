@@ -9,6 +9,8 @@ const useUserHandle = (getUserDataHandleAction) => {
 
   useEffect(() => {
     const { screamId, handle } = params;
+    console.log(screamId)
+    console.log(handle);
     if (screamId) {
       setScreamIdParam(screamId);
     }

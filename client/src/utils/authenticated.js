@@ -19,7 +19,7 @@ const authenticated = () => {
     if (decodeToken.exp * 1000 < Date.now()) {
       store.dispatch(signOutUserAction());
 
-      window.location.href = "/login";
+      window.location.href = "/signin";
     } else {
       store.dispatch({ type: SET_AUTHENTICATED });
       axios.defaults.headers.common["Authorization"] = token;

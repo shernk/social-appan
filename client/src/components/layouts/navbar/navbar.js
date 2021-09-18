@@ -25,7 +25,7 @@ const Navbar = ({ authenticated }) => {
         {authenticated ? (
           <Fragment>
             <PostScream />
-            <Link to="/">
+            <Link to="/home">
               <MyButton tip="Home">
                 <HomeIcon />
               </MyButton>
@@ -34,7 +34,7 @@ const Navbar = ({ authenticated }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <Button component={Link} to="/">
+            <Button component={Link} to="/home">
               home
             </Button>
             <Button component={Link} to="/signin">

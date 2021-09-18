@@ -58,7 +58,7 @@ const ExistsProfile = ({
         <div className="profile-details">
           <MuiLink
             component={Link}
-            to={`/users/${credentials.handle}`}
+            to={`/user/${credentials.handle}`}
             color="primary"
             variant="h5"
           >
