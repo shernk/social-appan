@@ -35,7 +35,9 @@ const { signIn } = require("./handles/users/signIn");
 const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
 const { uploadImage } = require("./handles/users/uploadImage");
 const { addUserDetails } = require("./handles/users/addUserDetails");
-const { getUserDetails } = require("./handles/users/getUserDetails");
+const {
+  getUserOwnDetailWithScream,
+} = require("./handles/users/getUserOwnDetailWithScream");
 const { getDataOfUser } = require("./handles/users/getDataOfUser");
 
 // Comments
@@ -70,12 +72,12 @@ app.delete("/likes", deleteAllLikes); //TODO: don't push to repo into master bra
 
 // Users routes
 app.get("/users", getAllUserInfo); //TODO: don't push to repo into master branch
-app.get("/user/:handle", fbAuth, getUserDetails);
-app.get("/user", fbAuth, getDataOfUser);
-app.post("/signUp", signUp); //TODO: change route to /signup
+app.get("/:handle", fbAuth, getUserOwnDetailWithScream);
+app.get("/:handle/data", fbAuth, getDataOfUser);
+app.post("/signUp", signUp);
 app.post("/signin", signIn);
-app.post("/user/image", fbAuth, uploadImage); //TODO: change route to :/handle/image
-app.post("/user", fbAuth, addUserDetails); //TODO: change route to :/handle/details
+app.post("/:handle/image", fbAuth, uploadImage);
+app.post("/:handle/profile", fbAuth, addUserDetails);
 
 //! understand each comment is as like scream(see twitter)
 //! change all scream route to default: /:userhandle/scream/:screamId

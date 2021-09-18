@@ -1,19 +1,21 @@
 const { db } = require("../admin-db");
 
-// get user's data with own scream
-exports.getUserDetails = (req, res) => {
+// get each user info and their scream
+exports.getUserOwnDetailWithScream = (req, res) => {
   let userData = {};
+
+  const screamDoc = db
+    .collection("Screams")
+    .where("userHandle", "==", req.user.handle)
+    .orderBy("createdAt", "desc")
+    .get();
 
   db.doc(`/Users/${req.params.handle}`)
     .get()
     .then((doc) => {
       if (doc.exists) {
         userData.user = doc.data();
-        return db
-          .collection("Screams")
-          .where("userHandle", "==", req.user.handle)
-          .orderBy("createdAt", "desc")
-          .get();
+        return screamDoc;
       } else {
         return res.status(404).json({ errror: "User not found" });
       }

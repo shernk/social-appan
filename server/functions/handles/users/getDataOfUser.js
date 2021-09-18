@@ -1,18 +1,26 @@
 const { db } = require("../admin-db");
 
-// get single data that user have
+// get all data except scream data
 exports.getDataOfUser = (req, res) => {
   let userData = {};
+
+  const likeDoc = db
+    .collection("Likes")
+    .where("userHandle", "==", req.user.handle)
+    .get();
+
+  const notiDoc = db
+    .collection("Notifications")
+    .where("recipient", "==", req.user.handle)
+    .orderBy("createdAt", "desc")
+    .get();
 
   db.doc(`/Users/${req.user.handle}`)
     .get()
     .then((doc) => {
       if (doc.exists) {
         userData.credentials = doc.data();
-        return db
-          .collection("Likes")
-          .where("userHandle", "==", req.user.handle)
-          .get();
+        return likeDoc;
       }
     })
     .then((data) => {
@@ -20,11 +28,7 @@ exports.getDataOfUser = (req, res) => {
       data.forEach((doc) => {
         userData.likes.push(doc.data());
       });
-      return db
-        .collection("Notifications")
-        .where("recipient", "==", req.user.handle)
-        .orderBy("createdAt", "desc")
-        .get();
+      return notiDoc;
     })
     .then((data) => {
       userData.notifications = [];
@@ -39,7 +43,7 @@ exports.getDataOfUser = (req, res) => {
           read: doc.data().read,
         });
       });
-      
+
       return res.json(userData);
     })
     .catch((err) => {
