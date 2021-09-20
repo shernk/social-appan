@@ -6,7 +6,7 @@ exports.getUserOwnDetailWithScream = (req, res) => {
 
   const screamDoc = db
     .collection("Screams")
-    .where("userHandle", "==", req.user.handle)
+    .where("userHandle", "==", req.params.handle)
     .orderBy("createdAt", "desc")
     .get();
 
