@@ -1,11 +1,11 @@
 import axios from "axios";
 import { LOADING_USER, SET_USER } from "../../types";
 
-const getUserDataAction = () => (dispatch) => {
+const getUserDetailsAction = (handle) => (dispatch) => {
   dispatch({ type: LOADING_USER });
 
   axios
-    .get("/user")
+    .get(`/${handle}/data`)
     .then((res) => {
       dispatch({
         type: SET_USER,
@@ -15,4 +15,4 @@ const getUserDataAction = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export default getUserDataAction;
+export default getUserDetailsAction;

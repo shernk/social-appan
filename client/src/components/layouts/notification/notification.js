@@ -9,12 +9,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // Redux
 import { connect } from "react-redux";
-import markNotificationsRead from "../../../redux/actions/users/user-markNotificationsRead";
+import markNotificationsRead from "../../../redux/actions/users/user-marknotificationread";
 
 // handle
-import useNotificationHandle from "./handle/handle";
-import notificationsIcon from "./handle/notificationsIcon";
-import notificationsMarkup from "./handle/notificationsMarkup";
+import useNotificationHandle from "./handles/notification";
+import notificationsIcon from "./components/notificationsIcon";
+import notificationsMarkup from "./components/notificationsMarkup";
 
 const Notifications = ({ notifications, markNotificationsRead }) => {
   const { anchorEl, handleOpen, handleClose, onMenuOpened } =

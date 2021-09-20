@@ -23,7 +23,14 @@ import useUserSignIn from "./handle/user-signin";
 import { connect } from "react-redux";
 import signInUserAction from "../../redux/actions/users/user-signin";
 
-const SignIn = ({ classes, signInUserAction, UI }) => {
+const SignIn = ({
+  classes,
+  user: {
+    credentials: { handle },
+  },
+  signInUserAction,
+  UI,
+}) => {
   const {
     email,
     password,
@@ -31,7 +38,7 @@ const SignIn = ({ classes, signInUserAction, UI }) => {
     handleSubmit,
     handleChangeEmail,
     handleChangePassword,
-  } = useUserSignIn(signInUserAction, UI);
+  } = useUserSignIn(handle, signInUserAction, UI);
 
   return (
     <>

@@ -1,18 +1,20 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import { useParams } from "react-router";
 
 // redux-types
 import { SET_AUTHENTICATED } from "../redux/types";
 
 // redux-actions
 import signOutUserAction from "../redux/actions/users/user-signout";
-import getUserDataAction from "../redux/actions/users/user-getdata";
+import getUserDataAction from "../redux/actions/screams/scream-getuserdata";
 
 // redux
 import store from "../redux/stores";
 
-const authenticated = () => {
+const useAuthenticated = () => {
+  const { handle } = useParams();
   const token = localStorage.FBIdToken;
   if (token) {
     const decodeToken = jwtDecode(token);
@@ -23,11 +25,11 @@ const authenticated = () => {
     } else {
       store.dispatch({ type: SET_AUTHENTICATED });
       axios.defaults.headers.common["Authorization"] = token;
-      store.dispatch(getUserDataAction());
+      store.dispatch(getUserDataAction(handle));
     }
   }
 
   return JSON.stringify("Token is Brokened");
 };
 
-export default authenticated;
+export default useAuthenticated;

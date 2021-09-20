@@ -1,11 +1,11 @@
 import { LOADING_DATA, SET_SCREAMS } from "../../types";
 import axios from "axios";
 
-const getUserDataHandleAction = (userHandle) => (dispatch) => {
+const getUserDataAction = (handle) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
 
   axios
-    .get(`/user/${userHandle}`)
+    .get(`/${handle}`)
     .then((res) => {
       dispatch({
         type: SET_SCREAMS,
@@ -15,9 +15,9 @@ const getUserDataHandleAction = (userHandle) => (dispatch) => {
     .catch(() => {
       dispatch({
         type: SET_SCREAMS,
-        payload: [],
+        payload: null,
       });
     });
 };
 
-export default getUserDataHandleAction;
+export default getUserDataAction;

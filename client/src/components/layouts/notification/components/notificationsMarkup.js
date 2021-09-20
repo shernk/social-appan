@@ -14,7 +14,7 @@ const notificationsMarkup = (notifications, handleClose) => {
   dayjs.extend(relativeTime);
 
   const NoNoti = (
-    <MenuItem onClick={handleClose}>You have no notifications yet</MenuItem>
+    <MenuItem onClick={handleClose}>You have none notification</MenuItem>
   );
 
   const existedNoti = notifications.map((noti) => {

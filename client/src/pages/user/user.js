@@ -16,14 +16,15 @@ import ProfileSkeleton from "../../utils/profileSkeleton/profileskeleton";
 
 // redux
 import { connect } from "react-redux";
-import getUserDataHandleAction from "../../redux/actions/users/user-getdatauserhandle";
+import getUserDataAction from "../../redux/actions/screams/scream-getuserdata";
 
 // handle
-import useUserHandle from "./handle/user-handle";
+import useUserHandle from "./handle/user";
 
-const User = ({ data: { loading, screams }, getUserDataHandleAction }) => {
-  const { screamIdParam, profile } = useUserHandle(getUserDataHandleAction);
+const User = ({ data: { loading, screams }, getUserDataAction }) => {
+  const { screamIdParam, profile } = useUserHandle(getUserDataAction);
 
+  console.log("User page");
   console.log(screamIdParam);
   console.log(profile);
 
@@ -52,7 +53,7 @@ const User = ({ data: { loading, screams }, getUserDataHandleAction }) => {
   );
 
   return (
-    <Grid container spacing={16}>
+    <Grid container spacing={1}>
       <Grid item sm={8} xs={12}>
         {screamsMarkup}
       </Grid>
@@ -68,7 +69,7 @@ const User = ({ data: { loading, screams }, getUserDataHandleAction }) => {
 };
 
 User.propTypes = {
-  getUserDataHandleAction: PropTypes.func.isRequired,
+  getUserDataAction: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 
@@ -76,6 +77,6 @@ const mapStateToProps = (state) => ({
   data: state.data,
 });
 
-const mapDispatchToProps = { getUserDataHandleAction };
+const mapDispatchToProps = { getUserDataAction };
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);

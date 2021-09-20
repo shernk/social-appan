@@ -20,7 +20,7 @@ import ExistsProfile from "./profile/exsistprofile/exists-profile";
 import NoneProfile from "./profile/none-profile";
 
 // handles
-import useProfilesHandles from "./handles/handles";
+import useProfilesHandles from "./handles/profile";
 
 const Profile = ({
   classes,

@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
 // theme
-import theme from "../../../themes/theme";
+import themes from "../../../themes/theme";
 
 // MUI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -19,19 +19,19 @@ import CalendarToday from "@material-ui/icons/CalendarToday";
 
 const StaticProfile = ({
   classes,
-  profile: { handle, createdAt, userImageUrl, bio, website, location },
+  profile: { handle, createdAt, imageUrl, bio, website, location },
 }) => {
   return (
     <Paper className={classes.paper}>
       <div className={classes.profile}>
         <div className="image-wrapper">
-          <img src={userImageUrl} alt="profile" className="profile-image" />
+          <img src={imageUrl} alt="profile" className="profile-image" />
         </div>
         <hr />
         <div className="profile-details">
           <MuiLink
             component={Link}
-            to={`/user/${handle}`}
+            to={`/${handle}`}
             color="primary"
             variant="h5"
           >
@@ -69,4 +69,4 @@ StaticProfile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(theme)(StaticProfile);
+export default withStyles(themes.styles)(StaticProfile);

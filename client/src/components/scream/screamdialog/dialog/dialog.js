@@ -49,7 +49,7 @@ const DialogMarkup = ({
     </div>
   ) : (
     <DialogContent className={classes.dialogContent}>
-      <Grid container spacing={16}>
+      <Grid container spacing={1}>
         <Grid item sm={5}>
           <img
             src={userImageUrl}

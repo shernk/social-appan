@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const useUserSignIn = (signInUserAction, UI) => {
+const useUserSignIn = (handle, signInUserAction, UI) => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ const useUserSignIn = (signInUserAction, UI) => {
     event.preventDefault();
 
     const userData = { email, password };
-    signInUserAction(userData, history);
+    signInUserAction(userData, handle, history);
   };
 
   useEffect(() => {
