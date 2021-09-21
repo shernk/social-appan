@@ -6,16 +6,16 @@ exports.getDataOfUser = (req, res) => {
 
   const likeDoc = db
     .collection("Likes")
-    .where("userHandle", "==", req.params.handle)
+    .where("userHandle", "==", req.user.handle)
     .get();
 
   const notiDoc = db
     .collection("Notifications")
-    .where("recipient", "==", req.params.handle)
+    .where("recipient", "==", req.user.handle)
     .orderBy("createdAt", "desc")
     .get();
 
-  db.doc(`/Users/${req.params.handle}`)
+  db.doc(`/Users/${req.user.handle}`)
     .get()
     .then((doc) => {
       if (doc.exists) {
