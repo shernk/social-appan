@@ -33,7 +33,7 @@ const Comment = ({ classes, comments }) => {
                     <Typography
                       variant="h5"
                       component={Link}
-                      to={`users/${userHandle}`}
+                      to={`/${userHandle}`}
                       color="primary"
                     >
                       {userHandle}

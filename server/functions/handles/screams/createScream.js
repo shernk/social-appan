@@ -1,7 +1,7 @@
 const { db } = require("../admin-db");
 
 exports.createScream = (req, res) => {
-  if (req.body.body.trim() === "") {
+  if (!(req.body.body || "").trim()) {
     return res.status(400).json({ body: "Body must not be empty" });
   }
 
