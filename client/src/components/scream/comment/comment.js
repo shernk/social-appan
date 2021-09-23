@@ -17,10 +17,6 @@ const Comment = ({ classes, comments }) => {
       {comments.map((comment, index) => {
         const { body, createdAt, userImage, userHandle } = comment;
 
-        console.log("comment");
-        console.log(body);
-        console.log(userImage);
-
         return (
           <Fragment key={createdAt}>
             <Grid item sm={12}>
