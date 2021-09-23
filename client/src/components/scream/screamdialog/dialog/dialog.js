@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ChatIcon from "@material-ui/icons/Chat";
 import DialogContent from "@material-ui/core/DialogContent";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // styles
 import screamDialogStyles from "../styles/screamdialogstyles";
@@ -39,14 +40,16 @@ const DialogMarkup = ({
     comments,
   },
 }) => {
-  console.log("dialogmarkup");
-  //!BUG: comments is undefined
-  console.log(comments);
-  console.log(loading);
-  return (loading && !authenticated) ? (
-    <div>
-      <NoneProfile classes={classes} />
-    </div>
+  return loading ? (
+    !authenticated ? (
+      <div>
+        <NoneProfile classes={classes} />
+      </div>
+    ) : (
+      <div className={classes.spinnerDiv}>
+        <CircularProgress size={200} thickness={2} />
+      </div>
+    )
   ) : (
     <DialogContent className={classes.dialogContent}>
       <Grid container spacing={1}>
@@ -63,7 +66,7 @@ const DialogMarkup = ({
               component={Link}
               color="primary"
               variant="h5"
-              to={`/users/${userHandle}`}
+              to={`/${userHandle}`}
             >
               @{userHandle}
             </Typography>
@@ -107,8 +110,12 @@ const DialogMarkup = ({
 
         <hr className={classes.visibleSeparator} />
 
-        <CommentForm screamId={screamId} />
-        <Comment comments={comments} />
+        {authenticated && (
+          <>
+            <CommentForm screamId={screamId} />
+            <Comment comments={comments} />
+          </>
+        )}
       </Grid>
     </DialogContent>
   );

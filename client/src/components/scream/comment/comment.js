@@ -15,7 +15,11 @@ const Comment = ({ classes, comments }) => {
   return (
     <Grid container>
       {comments.map((comment, index) => {
-        const { body, createdAt, userImageUrl, userHandle } = comment;
+        const { body, createdAt, userImage, userHandle } = comment;
+
+        console.log("comment");
+        console.log(body);
+        console.log(userImage);
 
         return (
           <Fragment key={createdAt}>
@@ -23,7 +27,7 @@ const Comment = ({ classes, comments }) => {
               <Grid container>
                 <Grid item sm={2}>
                   <img
-                    src={userImageUrl}
+                    src={userImage}
                     alt="comment"
                     className={classes.commentImage}
                   />
