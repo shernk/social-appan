@@ -11,7 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import theme from "../../../themes/theme";
 
 // handle
-import useCommentHandle from "./handles/actions";
+import useCommentHandle from "./handles/comment";
 
 // Redux
 import { connect } from "react-redux";

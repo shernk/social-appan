@@ -8,9 +8,9 @@ exports.createNotificationOnComment = (req, res) => {
     .then((scream) => {
       if (scream.exists) {
         return (screamData = scream.data());
-      } else {
-        return res.status(404).json({ message: "Scream not found" });
       }
+
+      return res.status(404).json({ message: "Scream not found" });
     })
     .then(() => {
       return db.collection("Notifications").add({

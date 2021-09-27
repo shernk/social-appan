@@ -24,10 +24,12 @@ let db = {
     {
       userHandle: "user",
       screamId: "kdjsfgdksuufhgkdsufky",
+      userId: "jasdasdibasdasd",
       body: "nice one mate!",
       createdAt: "2019-03-15T10:59:52.798Z",
       likeCommentCount: 5,
-      commentCount: 3,
+      replyCommentCount: 0,
+      userImage: "req.user.imageUrl",
     },
   ],
   notifications: [
@@ -41,8 +43,8 @@ let db = {
     },
   ],
 };
+
 const userInfo = {
-  // Redux data
   credentials: {
     userId: "N43KJ5H43KJHREW4J5H3JWMERHB",
     email: "user@email.com",
