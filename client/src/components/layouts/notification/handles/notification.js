@@ -4,6 +4,8 @@ const useNotificationHandle = (notifications, markNotificationsRead) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpen = (event) => {
+    console.log("event.target");
+    console.log(event.target);
     setAnchorEl(event.target);
   };
 

@@ -50,7 +50,7 @@ const Scream = ({
 
   const deleteButton =
     authenticated && userHandle === handle ? (
-      <DeleteScream screamId={screamId}></DeleteScream>
+      <DeleteScream screamId={screamId} />
     ) : null;
 
   return (

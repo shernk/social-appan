@@ -35,14 +35,14 @@ const ScreamDialog = ({
   getScreamWithCommentsAction,
   clearErrorsAction,
 }) => {
-  const { isOpen, /*  oldPath, newPath, */ handleOpen, handleClose } =
-    useScreamDialog(
-      screamId,
-      openDialog,
-      authenticated,
-      getScreamWithCommentsAction,
-      clearErrorsAction
-    );
+  const { isOpen, handleOpen, handleClose } = useScreamDialog(
+    screamId,
+    userHandle,
+    openDialog,
+    authenticated,
+    getScreamWithCommentsAction,
+    clearErrorsAction
+  );
 
   return (
     <Fragment>

@@ -9,6 +9,7 @@ const useUserHandle = (getUserDataAction) => {
 
   useEffect(() => {
     const { screamId, handle } = params;
+    console.log("user handle");
     console.log(screamId);
     console.log(handle);
     if (screamId) {

@@ -34,11 +34,9 @@ const User = ({ data: { loading, screams }, getUserDataAction }) => {
       ))
     : screams.map((scream) => {
         if (scream.screamId !== screamIdParam) {
-          return <Scream key={scream.screamId} scream={scream}></Scream>;
+          return <Scream key={scream.screamId} scream={scream} />;
         } else {
-          return (
-            <Scream key={scream.screamId} scream={scream} openDialog></Scream>
-          );
+          return <Scream key={scream.screamId} scream={scream} openDialog />;
         }
       });
 

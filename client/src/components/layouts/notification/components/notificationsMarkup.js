@@ -18,7 +18,7 @@ const notificationsMarkup = (notifications, handleClose) => {
   );
 
   const existedNoti = notifications.map((noti) => {
-    const verb = noti.type === "like" ? "liked" : "commentd on";
+    const verb = noti.type === "like" ? "liked" : "commented on";
     const time = dayjs(noti.createdAt).fromNow();
     const iconColor = noti.read ? "primary" : "secondary";
     const iconType =
@@ -35,7 +35,7 @@ const notificationsMarkup = (notifications, handleClose) => {
           component={Link}
           color="default"
           variant="body1"
-          to={`/users/${noti.recipient}/scream/${noti.screamId}`}
+          to={`/${noti.recipient}/scream/${noti.screamId}`}
         >
           {noti.sender} {verb} your scream {time}
         </Typography>
