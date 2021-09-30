@@ -29,9 +29,7 @@ const User = ({ data: { loading, screams }, getUserDataAction }) => {
   console.log(profile);
 
   const exsistedScream = !screamIdParam
-    ? screams.map((scream) => (
-        <Scream key={scream.screamId} scream={scream}></Scream>
-      ))
+    ? screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
     : screams.map((scream) => {
         if (scream.screamId !== screamIdParam) {
           return <Scream key={scream.screamId} scream={scream} />;

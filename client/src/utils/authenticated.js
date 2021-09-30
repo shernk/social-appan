@@ -8,7 +8,7 @@ import { SET_AUTHENTICATED } from "../redux/types";
 
 // redux-actions
 import signOutUserAction from "../redux/actions/users/user-signout";
-import getUserDataAction from "../redux/actions/screams/scream-getuserdata";
+import getUserDetailsAction from "../redux/actions/users/user-getuserdetail";
 
 // redux
 import store from "../redux/stores";
@@ -25,7 +25,7 @@ const useAuthenticated = () => {
     } else {
       store.dispatch({ type: SET_AUTHENTICATED });
       axios.defaults.headers.common["Authorization"] = token;
-      store.dispatch(getUserDataAction(handle));
+      store.dispatch(getUserDetailsAction(handle));
     }
   }
 
