@@ -1,7 +1,6 @@
-const { admin } = require("../admin-db");
-const { v4: uuidv4 } = require("uuid");
-const { config } = require("process");
-uuidv4();
+const { admin, db } = require("../admin-db");
+const { v4: uuid_v4 } = require("uuid");
+const config = require("../../../config");
 
 exports.uploadImage = (req, res) => {
   const Busboy = require("busboy");
@@ -13,12 +12,9 @@ exports.uploadImage = (req, res) => {
 
   let imageFileName;
   let imageToBeUploaded = {};
-  let generatedToken = uuidv4();
+  let generatedToken = uuid_v4();
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
-    // console.log(
-    //   `File [${fieldname}] filename: ${filename}, encoding: ${encoding}, mimetype: ${mimetype}`
-    // );
     if (mimetype !== "image/png" && mimetype !== "image/jpeg") {
       return res.status(400).json({ error: "Wrong file type submitted!" });
     }
@@ -26,11 +22,13 @@ exports.uploadImage = (req, res) => {
     // my.image.png => ['my', 'image', 'png']
     const imageExtension = filename.split(".")[filename.split(".").length - 1];
 
-    // random name of an image created 
+    // random name of an image created
     // Ex: 32756238461724837.png
-    imageFileName = `${Math.round(
-      Math.random() * 1000000000000
-    ).toString()}.${imageExtension}`;
+    // imageFileName = `${Math.round(
+    //   Math.random() * 1000000000000
+    // ).toString()}.${imageExtension}`;
+
+    imageFileName = filename;
 
     const filepath = path.join(os.tmpdir(), imageFileName);
     imageToBeUploaded = { filepath, mimetype };
@@ -41,7 +39,7 @@ exports.uploadImage = (req, res) => {
   busboy.on("finish", () => {
     admin
       .storage()
-      .bucket(config.storageBucket)
+      .bucket()
       .upload(imageToBeUploaded.filepath, {
         resumable: false,
         metadata: {
@@ -54,7 +52,9 @@ exports.uploadImage = (req, res) => {
       })
       .then(() => {
         // Appen Token to URL
-        const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/${imageFileName}?alt=media&token=${generatedToken}`;
+        const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media&token=${generatedToken}`;
+
+        console.log(imageUrl);
 
         return db.doc(`/Users/${req.user.handle}`).update({ imageUrl });
       })

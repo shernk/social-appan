@@ -22,7 +22,7 @@ import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 import EditDetails from "../editprofile/edit-detail";
 
 // styles
-import exsistProfileStyles from "./styles/exsistprofilestyles"
+import exsistProfileStyles from "./styles/exsistprofilestyles";
 
 const ExistsProfile = ({
   classes,
@@ -47,7 +47,7 @@ const ExistsProfile = ({
             onChange={handleImageChange}
           />
           <MyButton
-            tip="Edit profile picture"
+            tip="Edit picture"
             onClick={handleEditPicture}
             btnClassName="button"
           >

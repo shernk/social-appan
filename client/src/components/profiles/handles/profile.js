@@ -1,5 +1,14 @@
 const useProfilesHandles = (signOutUserAction, uploadImageAction) => {
   const handleImageChange = (event) => {
+    if (
+      !event ||
+      !event.target ||
+      !event.target.files ||
+      event.target.files.length === 0
+    ) {
+      return;
+    }
+    
     const image = event.target.files[0];
     const formData = new FormData();
     formData.append("image", image, image.name);

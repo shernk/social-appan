@@ -21,20 +21,24 @@ const EditDetails = ({ classes, credentials }) => {
   const [states, setStates] = useState({ bio: "", website: "", location: "" });
   const [open, setOpen] = useState(false);
 
-  function mapUserDetailsToState(credentials) {
+  useEffect(() => {
+    mapUserDetailsToState(credentials);
+  }, [credentials, open]);
+
+  const mapUserDetailsToState = (credentials) => {
     const bio = credentials.bio ? credentials.bio : "";
     const website = credentials.website ? credentials.website : "";
     const location = credentials.location ? credentials.location : "";
 
-    return () => {
-      setStates((states) => ({
-        ...states,
-        bio: bio,
-        website: website,
-        location: location,
-      }));
-    };
-  }
+    // return () => {
+    setStates((states) => ({
+      ...states,
+      bio: bio,
+      website: website,
+      location: location,
+    }));
+    // };
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,21 +64,17 @@ const EditDetails = ({ classes, credentials }) => {
     handleClose();
   };
 
-  useEffect(() => {
-    mapUserDetailsToState(credentials);
-  }, [credentials, open]);
-
   return (
     <Fragment>
       <MyButton
-        tip="Edit your profile"
+        tip="Edit profile"
         onClick={handleOpen}
         btnClassName={classes.button}
       >
         <EditIcon color="primary" />
       </MyButton>
       <Dialog>
-        <DialogTitle>Edit your details</DialogTitle>
+        <DialogTitle>Edit profile</DialogTitle>
         <DialogContent>
           <form>
             <TextField
@@ -93,7 +93,7 @@ const EditDetails = ({ classes, credentials }) => {
               name="website"
               tpye="text"
               label="Website"
-              placeholder="Your personal/professinal website"
+              placeholder="Your personal website"
               className={classes.textField}
               value={states.website}
               onChange={handleChange}
@@ -103,7 +103,7 @@ const EditDetails = ({ classes, credentials }) => {
               name="location"
               tpye="text"
               label="Location"
-              placeholder="Where you live"
+              placeholder="Where do you live?"
               className={classes.textField}
               value={states.location}
               onChange={handleChange}
