@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment} from "react";
 import PropTypes from "prop-types";
 
 // util
@@ -16,53 +16,21 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
+import useEditProfileHandle from "./handle/editprofilehandle";
 
-const EditDetails = ({ classes, credentials }) => {
-  const [states, setStates] = useState({ bio: "", website: "", location: "" });
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    mapUserDetailsToState(credentials);
-  }, [credentials, open]);
-
-  const mapUserDetailsToState = (credentials) => {
-    const bio = credentials.bio ? credentials.bio : "";
-    const website = credentials.website ? credentials.website : "";
-    const location = credentials.location ? credentials.location : "";
-
-    // return () => {
-    setStates((states) => ({
-      ...states,
-      bio: bio,
-      website: website,
-      location: location,
-    }));
-    // };
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-    mapUserDetailsToState(credentials);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleChange = (event) => {
-    setStates({ [event.target.name]: event.target.value });
-  };
-
-  const handleSubmit = () => {
-    const userDetails = {
-      bio: states.bio,
-      website: states.website,
-      location: states.location,
-    };
-
-    editUserDetailsAction(userDetails);
-    handleClose();
-  };
+const EditDetails = ({ classes, credentials, editUserDetailsAction }) => {
+  const {
+    open,
+    bio,
+    website,
+    location,
+    handleSubmit,
+    handleChangeBio,
+    handleChangeLocation,
+    handleChangeWebsite,
+    handleOpen,
+    handleClose,
+  } = useEditProfileHandle(credentials, editUserDetailsAction);
 
   return (
     <Fragment>
@@ -73,7 +41,7 @@ const EditDetails = ({ classes, credentials }) => {
       >
         <EditIcon color="primary" />
       </MyButton>
-      <Dialog>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit profile</DialogTitle>
         <DialogContent>
           <form>
@@ -81,12 +49,11 @@ const EditDetails = ({ classes, credentials }) => {
               name="bio"
               type="text"
               label="Bio"
-              multiline
               rows="3"
-              placeholder="A short bio about yourself"
+              placeholder="Bio"
               className={classes.textField}
-              value={states.bio}
-              onChange={handleChange}
+              value={bio}
+              onChange={handleChangeBio}
               fullWidth
             />
             <TextField
@@ -95,8 +62,8 @@ const EditDetails = ({ classes, credentials }) => {
               label="Website"
               placeholder="Your personal website"
               className={classes.textField}
-              value={states.website}
-              onChange={handleChange}
+              value={website}
+              onChange={handleChangeWebsite}
               fullWidth
             />
             <TextField
@@ -105,14 +72,14 @@ const EditDetails = ({ classes, credentials }) => {
               label="Location"
               placeholder="Where do you live?"
               className={classes.textField}
-              value={states.location}
-              onChange={handleChange}
+              value={location}
+              onChange={handleChangeLocation}
               fullWidth
             />
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleSubmit} color="primary">

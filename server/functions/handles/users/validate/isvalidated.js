@@ -1,5 +1,5 @@
 exports.isEmpty = (prop) => {
-  if (prop.trim() === "") return true;
+  if (!(prop || "").trim() === "") return true;
   else return false;
 };
 
