@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SUBMIT_COMMENT } from "../../types";
+import { SUBMIT_COMMENT, SET_ERRORS } from "../../types";
 
 // action
 import clearErrorsAction from "./scream-clearerror";
@@ -16,7 +16,10 @@ const submitCommentAction = (screamId, commentData) => (dispatch) => {
       dispatch(clearErrorsAction());
     })
     .catch((err) => {
-      console.log(err);
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
     });
 };
 

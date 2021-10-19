@@ -32,7 +32,7 @@ const CommentForm = ({
 
   return authenticated ? (
     <Grid item sm={12} style={{ textAlign: "center" }}>
-      <form onSubmit={handleSubmit}>
+      <form id="e" onSubmit={handleSubmit}>
         <TextField
           name="body"
           type="text"
