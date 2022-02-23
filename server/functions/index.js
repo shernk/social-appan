@@ -1,8 +1,11 @@
 const functions = require("firebase-functions");
+const fbAuth = require("./util/fbAuth");
 
-// express
 const express = require("express");
 const app = express();
+
+const cors = require("cors");
+app.use(cors());
 
 // CORS
 app.use((req, res, next) => {
@@ -49,9 +52,6 @@ const { deleteComment } = require("./handles/comments/deleteComment");
 
 // Likes
 const { deleteAllLikes } = require("./handles/likes/deleteAllLikes");
-
-// Auth
-const fbAuth = require("./util/fbAuth");
 
 //------------------------------------------------//
 
