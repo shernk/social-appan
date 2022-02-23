@@ -13,6 +13,10 @@ import getUserDetailsAction from "../redux/actions/users/user-getuserdetail";
 // redux
 import store from "../redux/stores";
 
+// because proxy only works in development(already have added in package.json)
+// added this URL to be actually tell axios is always send request to this URL 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 const useAuthenticated = () => {
   const { handle } = useParams();
   const token = localStorage.FBIdToken;
