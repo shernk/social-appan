@@ -24,7 +24,7 @@ const CommentForm = ({
   UI,
   submitCommentAction,
 }) => {
-  const { body, errors, handleChange, handleSubmit } = useCommentHandle(
+  const { body, errors, handleChange, handleSubmit, clearInput } = useCommentHandle(
     screamId,
     submitCommentAction,
     UI
@@ -34,6 +34,7 @@ const CommentForm = ({
     <Grid item sm={12} style={{ textAlign: "center" }}>
       <form id="e" onSubmit={handleSubmit}>
         <TextField
+          id="input"
           name="body"
           type="text"
           label="Comment on scream"
@@ -49,6 +50,7 @@ const CommentForm = ({
           variant="contained"
           color="primary"
           className={classes.button}
+          onClick={clearInput}
         >
           Submit
         </Button>

@@ -7,10 +7,8 @@ const useCommentHandle = (screamId, submitCommentAction, UI) => {
   useEffect(() => {
     const componentWillRecieveProp = (UI) => {
       if (UI.errors) {
+        console.log("UI.errors", UI.errors);
         setErrors(UI.errors);
-      }
-      if (!UI.errors && !UI.loading) {
-        setBody("");
       }
     };
 
@@ -18,18 +16,23 @@ const useCommentHandle = (screamId, submitCommentAction, UI) => {
   }, [UI]);
 
   const handleChange = (event) => {
-    // setBody({ [event.target.name]: event.target.value });
-    setBody(event.target.value );
+    setBody({ [event.target.name]: event.target.value });
   };
-
-  console.log(body);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     submitCommentAction(screamId, body);
+
+    // after submit reset error and comment
+    setErrors("");
+    setBody("")
   };
 
-  return { body, errors, handleChange, handleSubmit };
+  const clearInput = () => {
+    document.getElementById('input').value='';
+  }
+
+  return { body, errors, handleChange, handleSubmit, clearInput };
 };
 
 export default useCommentHandle;

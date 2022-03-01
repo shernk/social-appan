@@ -4,7 +4,7 @@ const {
 } = require("../notifications/createNotificationOnComment");
 
 exports.commentOnScream = (req, res) => {
-  if (!(req.body.body || "").trim()) {
+  if (req.body.body === ("" || undefined)) {
     return res.status(400).json({ comment: "Must not be empty" });
   }
 
@@ -29,8 +29,8 @@ exports.commentOnScream = (req, res) => {
 
       let commentScreamCount = doc.data().commentScreamCount;
 
-      if(newComment.body) {
-        commentScreamCount = doc.data().commentScreamCount;
+      if (newComment.body) {
+        commentScreamCount = ++doc.data().commentScreamCount;
       }
 
       return scream.update({
