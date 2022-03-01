@@ -18,8 +18,11 @@ const useCommentHandle = (screamId, submitCommentAction, UI) => {
   }, [UI]);
 
   const handleChange = (event) => {
-    setBody(event.target.value);
+    // setBody({ [event.target.name]: event.target.value });
+    setBody(event.target.value );
   };
+
+  console.log(body);
 
   const handleSubmit = (event) => {
     event.preventDefault();

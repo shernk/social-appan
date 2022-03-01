@@ -26,7 +26,12 @@ exports.commentOnScream = (req, res) => {
       if (!doc.exists) {
         return res.status(404).json({ error: "Scream not found" });
       }
-      let commentScreamCount = ++doc.data().commentScreamCount;
+
+      let commentScreamCount = doc.data().commentScreamCount;
+
+      if(newComment.body) {
+        commentScreamCount = doc.data().commentScreamCount;
+      }
 
       return scream.update({
         commentScreamCount: commentScreamCount,

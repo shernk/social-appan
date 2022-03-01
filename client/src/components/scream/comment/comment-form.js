@@ -39,7 +39,7 @@ const CommentForm = ({
           label="Comment on scream"
           error={errors.comment ? true : false}
           helperText={errors.comment}
-          value={body}
+          value={body.value}
           onChange={handleChange}
           fullWidth
           className={classes.textField}
