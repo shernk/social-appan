@@ -5,7 +5,9 @@ const screamStyles = (theme) => ({
     marginBottom: 15,
   },
   image: {
-    minWidth: 200,
+    minWidth: 180,
+    borderRadius: "50%",
+    margin: 5,
   },
   content: {
     padding: 25,

@@ -14,6 +14,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// upload image
+app.set("view engine", "ejs");
+
 // firebase
 const firebaseConfig = require("../config");
 const firebase = require("firebase");
@@ -37,6 +40,7 @@ const { signUp } = require("./handles/users/signUp");
 const { signIn } = require("./handles/users/signIn");
 const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
 const { uploadImage } = require("./handles/users/uploadImage");
+const { upload } = require("./handles/users/upload");
 const { addUserDetails } = require("./handles/users/addUserDetails");
 const {
   getUserOwnDetailWithScream,
@@ -76,7 +80,7 @@ app.get("/:handle", fbAuth, getUserOwnDetailWithScream);
 app.get("/:handle/data", fbAuth, getDataOfUser);
 app.post("/signUp", signUp);
 app.post("/signin", signIn);
-app.post("/:handle/image", fbAuth, uploadImage);
+app.post("/:handle/image", fbAuth, upload);
 app.post("/:handle/profile", fbAuth, addUserDetails);
 
 //! understand each comment is as like scream(see twitter)

@@ -10,13 +10,17 @@ const useProfilesHandles = (signOutUserAction, uploadImageAction) => {
     }
     
     const image = event.target.files[0];
+    console.log("image: ",image)
+    console.log(event.target.files[0].name)
     const formData = new FormData();
-    formData.append("image", image, image.name);
-    uploadImageAction(formData);
+    const data = formData.append("image", image, image.name);
+    console.log("formData: ", data)
+    uploadImageAction(data);
   };
 
   const handleEditPicture = () => {
     const fileInput = document.getElementById("imageInput");
+    console.log("file input:", fileInput);
     fileInput.click();
   };
 

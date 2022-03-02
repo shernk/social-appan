@@ -1,20 +1,20 @@
 const { admin, db } = require("../admin-db");
 const { v4: uuid_v4 } = require("uuid");
 const config = require("../../../config");
+const busboy = require("busboy");
+const path = require("path");
+const os = require("os");
+const fs = require("fs");
 
 exports.uploadImage = (req, res) => {
-  const Busboy = require("busboy");
-  const path = require("path");
-  const os = require("os");
-  const fs = require("fs");
 
-  const busboy = new Busboy({ headers: req.headers });
+  const bb = new busboy({ headers: req.headers });
 
   let imageFileName;
   let imageToBeUploaded = {};
   let generatedToken = uuid_v4();
 
-  busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+  bb.on("file", (fieldname, file, filename, encoding, mimetype) => {
     if (mimetype !== "image/png" && mimetype !== "image/jpeg") {
       return res.status(400).json({ error: "Wrong file type submitted!" });
     }
@@ -36,7 +36,7 @@ exports.uploadImage = (req, res) => {
     file.pipe(fs.createWriteStream(filepath));
   });
 
-  busboy.on("finish", () => {
+  bb.on("finish", () => {
     admin
       .storage()
       .bucket()
@@ -69,5 +69,5 @@ exports.uploadImage = (req, res) => {
 
   // The raw bytes of the upload will be in req.rawBody.
   // Send it to busboy, and get a callback when it's finished.
-  busboy.end(req.rawBody);
+  bb.end(req.rawBody);
 };
