@@ -1,6 +1,6 @@
 const { admin, db } = require("../admin-db");
 const { v4: uuid_v4 } = require("uuid");
-const config = require("../../../config");
+const config = require("../../config");
 const path = require("path");
 const os = require("os");
 const fs = require("fs");

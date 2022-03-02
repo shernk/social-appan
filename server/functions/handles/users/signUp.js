@@ -1,6 +1,6 @@
 const { db } = require("../admin-db");
 const { validateSignUp } = require("./validate/validation");
-const firebaseConfig = require("../../../config");
+const firebaseConfig = require("../../config");
 const firebase = require("firebase");
 
 exports.signUp = (req, res) => {

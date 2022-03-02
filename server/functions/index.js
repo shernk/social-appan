@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 // firebase
-const firebaseConfig = require("../config");
+const firebaseConfig = require("./config");
 const firebase = require("firebase");
 firebase.initializeApp(firebaseConfig);
 
