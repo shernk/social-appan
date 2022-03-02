@@ -14,7 +14,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import signInStyles from "./styles/signinstyles";
 
 // image
-import AppIcon from "../../images/icon.png";
+import AppIcon from "../../images/chat.png";
 
 // custom hook
 import useUserSignIn from "./handle/user-signin";
