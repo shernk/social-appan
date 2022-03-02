@@ -17,6 +17,9 @@ app.use((req, res, next) => {
 // upload image
 app.set("view engine", "ejs");
 
+// deploy
+app.use(express.static("public"));
+
 // firebase
 const firebaseConfig = require("../config");
 const firebase = require("firebase");
@@ -39,8 +42,8 @@ const { deleteAllScreams } = require("./handles/screams/deleteAllScreams");
 const { signUp } = require("./handles/users/signUp");
 const { signIn } = require("./handles/users/signIn");
 const { getAllUserInfo } = require("./handles/users/getAllUserInfo");
-const { uploadImage } = require("./handles/users/uploadImage");
-const { upload } = require("./handles/users/upload");
+// const { uploadImage } = require("./handles/users/uploadImage");
+// const { upload } = require("./handles/users/upload");
 const { addUserDetails } = require("./handles/users/addUserDetails");
 const {
   getUserOwnDetailWithScream,
@@ -62,25 +65,25 @@ const { deleteAllLikes } = require("./handles/likes/deleteAllLikes");
 //! change all scream route to default: /:userhandle/scream/:screamId
 // Screams routes
 app.get("/screams", getAllScreams);
-app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment); //TODO: change route to scream/:screamId/comment
+app.get("/scream/:screamId/withcomment", fbAuth, getScreamWithComment);
 app.get("/scream/:screamId/withlike", fbAuth, getScreamWithLike);
 app.get("/scream/:screamId/like", fbAuth, likeScream);
 app.get("/scream/:screamId/unlike", fbAuth, unlikeScream);
 app.post("/scream", fbAuth, createScream);
 app.post("/scream/:screamId/comment", fbAuth, commentOnScream);
-app.delete("/screams", deleteAllScreams); //TODO: don't push to repo into master branch
+app.delete("/screams", deleteAllScreams);
 app.delete("/scream/:screamId", fbAuth, deleteScream);
 
 // Likes
-app.delete("/likes", deleteAllLikes); //TODO: don't push to repo into master branch
+app.delete("/likes", deleteAllLikes);
 
 // Users routes
-app.get("/users", getAllUserInfo); //TODO: don't push to repo into master branch
+app.get("/users", getAllUserInfo);
 app.get("/:handle", fbAuth, getUserOwnDetailWithScream);
 app.get("/:handle/data", fbAuth, getDataOfUser);
 app.post("/signUp", signUp);
 app.post("/signin", signIn);
-app.post("/:handle/image", fbAuth, upload);
+// app.post("/:handle/image", fbAuth, upload);
 app.post("/:handle/profile", fbAuth, addUserDetails);
 
 //! understand each comment is as like scream(see twitter)
